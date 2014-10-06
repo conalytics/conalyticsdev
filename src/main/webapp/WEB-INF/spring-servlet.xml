@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+	http://www.springframework.org/schema/context  
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<!-- telling container to take care of annotations stuff -->
+	<context:annotation-config />
+	<!-- declaring base package -->
+	<context:component-scan base-package="com.conalytics" />
+
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+
+
+	<!-- adding view resolver to show jsp's on browser -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+	</bean>
+	
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/layouts/layouts.xml</value>
+				<value>/WEB-INF/layouts/views.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- declare beans -->
+	<bean id="userDao" class="com.conalytics.dao.UserDaoImpl" />
+	<bean id="userService" class="com.conalytics.services.UserServiceImpl" />
+	<bean id="autoDao" class="com.conalytics.dao.AutoDaoImpl" />
+	<bean id="autoService" class="com.conalytics.services.AutoServiceImpl" />
+
+	<!-- declare datasource bean -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<!-- <property name="url" value="jdbc:mysql://50.63.244.197:3306/conalyticsdev" />
+		<property name="username" value="conalyticsdev" />
+		<property name="password" value="Cona!ytics2014" /> -->
+		
+		<property name="url" value="jdbc:mysql://localhost:3306/conalyticsdev" />
+		<property name="username" value="root" />
+		<property name="password" value="password" />
+	</bean>
+</beans>
