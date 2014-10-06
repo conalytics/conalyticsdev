@@ -7,14 +7,14 @@ import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.core.io.ClassPathResource;
 
 public class Menu {
-	public static String getMenuItems() {
+	public static String getMenuItems() throws IOException {
 		JSONParser parser = new JSONParser();
 		String menuItems = null;
 		try {
-
-			Object obj = parser.parse(new FileReader("c:/tmp/menu_json.txt"));
+			Object obj = parser.parse(new FileReader(new ClassPathResource("menu_json.txt").getFile()));
 			JSONArray jsonObject = (JSONArray) obj;
 			menuItems = jsonObject.toJSONString();
 		} catch (FileNotFoundException e) {
@@ -23,12 +23,7 @@ public class Menu {
 			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}
+		} 
 		return menuItems;
 	}
-
-	public static void main(String[] args) {
-		System.out.println(getMenuItems());
-	}
-
 }
