@@ -30,6 +30,9 @@
 <link
 	href="<c:url value="/resources/css/jquery.multilevelpushmenu_brown.css"/>"
 	rel="stylesheet">
+<link href="<c:url value="/resources/css/jquery.dataTables.css"/>" 
+	rel="stylesheet">
+	
 <link href="<c:url value="/resources/css/expandcollapse.css"/>"
 	rel="stylesheet">
 <script type="text/javascript"
@@ -40,9 +43,12 @@
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <script
 	src="<c:url value="/resources/js/jquery.multilevelpushmenu.min.js" />"></script>
+	<script
+	src="<c:url value="/resources/js/jquery.dataTables.min.js" />"></script>
 
 <script>
 	$(document).ready(function() {
+		$('#conTable').dataTable();
 		$('#menu').multilevelpushmenu({
 			menu :
 <%=Menu.getMenuItems(request.getContextPath())%>
