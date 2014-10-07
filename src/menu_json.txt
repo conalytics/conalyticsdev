@@ -77,12 +77,12 @@
                       {
                         "name": "Add Companyr",
                         "icon": "fa fa-university",
-                        "link": "#"
+                        "link": "_APP_CONTEXT_/registerCompany"
                       },
                       {
                         "name": "Company List",
                         "icon": "fa fa-list",
-                        "link": "#"
+                        "link": "_APP_CONTEXT_/getCompanyList"
                       }
                     ]
                   }

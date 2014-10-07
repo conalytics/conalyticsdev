@@ -43,6 +43,8 @@
 	<bean id="userService" class="com.conalytics.services.UserServiceImpl" />
 	<bean id="autoDao" class="com.conalytics.dao.AutoDaoImpl" />
 	<bean id="autoService" class="com.conalytics.services.AutoServiceImpl" />
+	<bean id="companyDao" class="com.conalytics.dao.CompanyDaoImpl" />
+	<bean id="companyService" class="com.conalytics.services.CompanyServiceImpl" />
 
 	<!-- declare datasource bean -->
 	<bean id="dataSource"

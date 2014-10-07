@@ -16,6 +16,10 @@
 	    <put-attribute name="body"	value="/WEB-INF/views/autoList.jsp" />
 	</definition>
 	
+	<definition name="companyList" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/companyList.jsp" />
+	</definition>
+	
 	<definition name="registerAuto" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/registerAuto.jsp" />
 	</definition>
