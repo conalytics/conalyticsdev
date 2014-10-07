@@ -25,10 +25,10 @@
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.min.css">
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <link
-	href="<c:url value="/resources/css/jquery.multilevelpushmenu_red.css"/>"
+	href="<c:url value="/resources/css/jquery.multilevelpushmenu_brown.css"/>"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/expandcollapse.css"/>"
 	rel="stylesheet">
@@ -44,7 +44,9 @@
 <script>
 	$(document).ready(function() {
 		$('#menu').multilevelpushmenu({
-			menu : <%=Menu.getMenuItems()%>	,
+			menu :
+<%=Menu.getMenuItems(request.getContextPath())%>
+	,
 			containersToPush : [ $('#pushobj') ],
 			// Just for fun also changing the look of the menu
 			wrapperClass : 'mlpm_w',
@@ -52,7 +54,7 @@
 		});
 		$('ul li').each(function(i) {
 			if ($(this).attr('id')) {
-				var aLink = $("a",this);
+				var aLink = $("a", this);
 				if (aLink) {
 					aLink.click(function() {
 						location.href = aLink.attr('href');
@@ -60,7 +62,7 @@
 				}
 			}
 		});
-		
+
 	});
 </script>
 </head>
@@ -69,12 +71,14 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 	<div id="pushobj">
-		<center>
-			<h1>Conalytics</h1>
-		</center>
-		<br>
-		<tiles:insertAttribute name="body" />
+		<div style="background: #926738; height: 100%;">
+			<tiles:insertAttribute name="header" />
+		</div>
+		<div style="background-color: #E3CEB5; min-height: 583px;">
+			<tiles:insertAttribute name="body" />
+		</div>
 	</div>
+
 	<div id="menu"></div>
 
 </body>

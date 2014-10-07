@@ -1,6 +1,6 @@
 [
   {
-    "title": "Conalytics",
+    "title": "Menu",
     "id": "menuID",
     "icon": "fa fa-reorder",
     "items": [
@@ -16,30 +16,48 @@
             "items": [
               {
                 "name": "Vehicles",
-                "icon": "fa fa-phone",
+                "icon": "fa fa-car",
                 "link": "#",
                 "items": [
                   {
                     "title": "Vehicles",
-					"link": "#"
+                    "icon": "fa fa-car",
+                    "link": "#",
                     "items": [
                       {
                         "name": "Add Vehicle",
-						"id": "registerAutoLink"
-                        "link": "http://localhost:8080/conalyticsdev/registerAuto"
+                        "icon": "fa fa-bus",
+                        "id": "registerAutoLink",
+                        "link": "_APP_CONTEXT_/registerAuto"
                       },
                       {
                         "name": "Vehicle List",
-						"icon": "fa fa-phone",
-						"id": "getAutoListLink"
-						"link": "http://localhost:8080/conalyticsdev/getAutoList",
-                      },
+                        "icon": "fa fa-list",
+                        "id": "getAutoListLink",
+                        "link": "_APP_CONTEXT_/getAutoList"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "City",
+                "icon": "fa fa-building",
+                "link": "#",
+                "items": [
+                  {
+                    "title": "City",
+                    "icon": "fa fa-building",
+                    "link": "#",
+                    "items": [
                       {
-                        "name": "Performance Crusher",
+                        "name": "Add City",
+                        "icon": "fa fa-building",
                         "link": "#"
                       },
                       {
-                        "name": "Futuristic Experience",
+                        "name": "City List",
+                        "icon": "fa fa-list",
                         "link": "#"
                       }
                     ]
@@ -47,33 +65,23 @@
                 ]
               },
               {
-                "name": "Televisions",
-                "icon": "fa fa-desktop",
+                "name": "Company",
+                "icon": "fa fa-university",
                 "link": "#",
                 "items": [
                   {
-                    "title": "Televisions",
-                    "icon": "fa fa-desktop",
+                    "title": "Company",
+                    "icon": "fa fa-university",
                     "link": "#",
                     "items": [
                       {
-                        "name": "Flat Super Screen",
+                        "name": "Add Companyr",
+                        "icon": "fa fa-university",
                         "link": "#"
                       },
                       {
-                        "name": "Gigantic LED",
-                        "link": "#"
-                      },
-                      {
-                        "name": "Power Eater",
-                        "link": "#"
-                      },
-                      {
-                        "name": "3D Experience",
-                        "link": "#"
-                      },
-                      {
-                        "name": "Classic Comfort",
+                        "name": "Company List",
+                        "icon": "fa fa-list",
                         "link": "#"
                       }
                     ]
@@ -81,29 +89,71 @@
                 ]
               },
               {
-                "name": "Cameras",
-                "icon": "fa fa-camera-retro",
+                "name": "Parts",
+                "icon": "fa fa-wrench",
                 "link": "#",
                 "items": [
                   {
-                    "title": "Cameras",
-                    "icon": "fa fa-camera-retro",
+                    "title": "Parts",
+                    "icon": "fa fa-wrench",
                     "link": "#",
                     "items": [
                       {
-                        "name": "Smart Shot",
+                        "name": "Add Part",
+                        "icon": "fa fa-wrench",
                         "link": "#"
                       },
                       {
-                        "name": "Power Shooter",
+                        "name": "Part List",
+                        "icon": "fa fa-list",
+                        "link": "#"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Shops",
+                "icon": "fa fa-shopping-cart",
+                "link": "#",
+                "items": [
+                  {
+                    "title": "Shops",
+                    "icon": "fa fa-shopping-cart",
+                    "link": "#",
+                    "items": [
+                      {
+                        "name": "Add Shop",
+                        "icon": "fa fa-shopping-cart",
                         "link": "#"
                       },
                       {
-                        "name": "Easy Photo Maker",
+                        "name": "Shop List",
+                        "icon": "fa fa-list",
+                        "link": "#"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "States",
+                "icon": "fa fa-envelope",
+                "link": "#",
+                "items": [
+                  {
+                    "title": "States",
+                    "icon": "fa fa-envelope",
+                    "link": "#",
+                    "items": [
+                      {
+                        "name": "Add State",
+                        "icon": "fa fa-envelope",
                         "link": "#"
                       },
                       {
-                        "name": "Super Pixel",
+                        "name": "States List",
+                        "icon": "fa fa-list",
                         "link": "#"
                       }
                     ]
