@@ -11,8 +11,8 @@ public interface AutoDao {
 
 	public void updateData(Auto auto);
 
-	public void deleteData(String id);
+	public void deleteData(Double id);
 
-	public Auto getAuto(String id);
+	public Auto getAuto(Double id);
 
 }

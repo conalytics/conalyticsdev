@@ -55,7 +55,7 @@ public class AutoPageController {
 	}
 
 	@RequestMapping("editAuto")
-	public ModelAndView editAuto(@RequestParam String id,
+	public ModelAndView editAuto(@RequestParam Double id,
 			@ModelAttribute Auto auto) {
 
 		auto = autoService.getAuto(id);
@@ -73,7 +73,7 @@ public class AutoPageController {
 	}
 
 	@RequestMapping("deleteAuto")
-	public String deleteAuto(@RequestParam String id) {
+	public String deleteAuto(@RequestParam Double id) {
 		System.out.println("id = " + id);
 		autoService.deleteData(id);
 		return "redirect:/getAutoList";

@@ -52,3 +52,8 @@ td {
 			</c:forEach>
 			</tbody>
 		</table>
+<script>
+function updateMenuSelection() {
+	$( '#menu' ).multilevelpushmenu( 'expand' , 'Vehicles' );
+}
+</script>		

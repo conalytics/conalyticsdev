@@ -75,3 +75,8 @@ td {
 			</form:form>
 		</div>
 	</center>
+<script>
+function updateMenuSelection() {
+	$( '#menu' ).multilevelpushmenu( 'expand' , 'Vehicles' );
+}
+</script>	

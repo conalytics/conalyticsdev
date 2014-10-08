@@ -12,16 +12,30 @@
 	    <put-attribute name="body"	value="/WEB-INF/views/personList.jsp" />
 	</definition>
 	
+	<!-- AUTO -->
 	<definition name="autoList" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/autoList.jsp" />
 	</definition>
 	
+	<definition name="registerAuto" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/registerAuto.jsp" />
+	</definition>
+	
+	<definition name="editAuto" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/editAuto.jsp" />
+	</definition>
+	
+	<!-- COMPANY -->
 	<definition name="companyList" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/companyList.jsp" />
 	</definition>
 	
-	<definition name="registerAuto" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/registerAuto.jsp" />
+	<definition name="registerCompany" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/registerCompany.jsp" />
+	</definition>
+	
+		<definition name="editCompany" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/editCompany.jsp" />
 	</definition>
 	
 </tiles-definitions>

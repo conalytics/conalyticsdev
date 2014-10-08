@@ -58,7 +58,13 @@
 			wrapperClass : 'mlpm_w',
 			menuInactiveClass : 'mlpm_inactive'
 		});
-		$('ul li').each(function(i) {
+		updateMenuLinks();
+		updateMenuSelection();
+		
+	});
+
+	function updateMenuLinks() {
+		$('#menu li').each(function(i) {
 			if ($(this).attr('id')) {
 				var aLink = $("a", this);
 				if (aLink) {
@@ -67,9 +73,7 @@
 					});
 				}
 			}
-		});
-
-	});
+		});}
 </script>
 </head>
 <body>

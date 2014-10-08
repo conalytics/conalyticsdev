@@ -45,7 +45,7 @@ public class AutoDaoImpl implements AutoDao {
 	}
 
 	@Override
-	public void deleteData(String id) {
+	public void deleteData(Double id) {
 		String sql = "delete from AUTO where auto_id=" + id;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(sql);
@@ -72,9 +72,9 @@ public class AutoDaoImpl implements AutoDao {
 	}
 
 	@Override
-	public Auto getAuto(String id) {
+	public Auto getAuto(Double id) {
 		List<Auto> autoList = new ArrayList<Auto>();
-		String sql = "select * from AUTO where auto_id= " + id;
+		String sql = "select * from AUTO where auto_id= " + id.doubleValue();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		autoList = jdbcTemplate.query(sql, new AutoRowMapper());
 		return autoList.get(0);

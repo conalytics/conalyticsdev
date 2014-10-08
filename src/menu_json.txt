@@ -75,13 +75,15 @@
                     "link": "#",
                     "items": [
                       {
-                        "name": "Add Companyr",
+                        "name": "Add Company",
                         "icon": "fa fa-university",
+                        "id": "registerCompanyLink",
                         "link": "_APP_CONTEXT_/registerCompany"
                       },
                       {
                         "name": "Company List",
                         "icon": "fa fa-list",
+                        "id": "getCompanyListLink",
                         "link": "_APP_CONTEXT_/getCompanyList"
                       }
                     ]

@@ -24,13 +24,13 @@ public class AutoServiceImpl implements AutoService {
 	}
 
 	@Override
-	public void deleteData(String id) {
+	public void deleteData(Double id) {
 		autodao.deleteData(id);
 		
 	}
 
 	@Override
-	public Auto getAuto(String id) {
+	public Auto getAuto(Double id) {
 		return autodao.getAuto(id);
 	}
 
