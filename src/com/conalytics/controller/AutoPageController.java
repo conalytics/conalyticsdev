@@ -1,5 +1,6 @@
 package com.conalytics.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.conalytics.domain.Auto;
+import com.conalytics.domain.Company;
 import com.conalytics.services.AutoService;
+import com.conalytics.services.CompanyService;
 
 @Controller
 @SessionAttributes("currentMenuItem")
@@ -22,6 +25,9 @@ public class AutoPageController {
 	@Autowired
 	AutoService autoService;
 
+	@Autowired
+	CompanyService companyService;
+	
 	@RequestMapping("home")
 	public ModelAndView home(@ModelAttribute Auto auto) {
 		return new ModelAndView("mainMenu");
@@ -34,7 +40,12 @@ public class AutoPageController {
 	
 	@RequestMapping("registerAuto")
 	public ModelAndView registerAuto(@ModelAttribute Auto auto) {
-		ModelAndView modelAndView = new ModelAndView("registerAuto");
+		Map<Double, String> companyMap = new HashMap<Double, String>();
+		List<Company> companyList = companyService.getCompanyList();
+		for(Company company : companyList) {
+			companyMap.put(company.getCompanyId(), company.getCompanyName());
+		}
+		ModelAndView modelAndView = new ModelAndView("registerAuto", "companyMap", companyMap);
 		modelAndView.addObject("currentMenuItem", "Add Vehicle");
 		return modelAndView;
 	}

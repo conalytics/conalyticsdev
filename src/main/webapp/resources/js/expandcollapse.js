@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	// HTML markup implementation, overlap mode
 	$( '#menu' ).multilevelpushmenu({
-		containersToPush: [$( '#pushobj' )],
+		containersToPush: [$( '#conBody' )],
 
 		// Just for fun also changing the look of the menu
 		wrapperClass: 'mlpm_w',

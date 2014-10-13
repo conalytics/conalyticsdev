@@ -4,12 +4,16 @@
 	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-	<definition name="index" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/index.jsp" />
+<definition name="userList" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/userList.jsp" />
 	</definition>
-
-	<definition name="personList" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/personList.jsp" />
+	
+	<definition name="registerUser" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/register.jsp" />
+	</definition>
+	
+	<definition name="editUser" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/edit.jsp" />
 	</definition>
 	
 	<!-- AUTO -->

@@ -1,41 +1,19 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<style>
-body {
-	font-size: 20px;
-	color: teal;
-	font-family: Calibri;
-}
-
-td {
-	font-size: 15px;
-	color: black;
-	width: 100px;
-	height: 22px;
-	text-align: left;
-}
-
-.heading {
-	font-size: 18px;
-	color: white;
-	font: bold;
-	background-color: orange;
-	border: thick;
-}
-</style>
 	<center>
-		<br /> <br /> <br /> <b>Add NeW Vehicle</b> <br />
-		<br />
 		<div>
 			<form:form method="post" action="/insertAuto" modelAttribute="auto">
-				<table>
+				<table cellspacing="0" width="100%">
 					<tr>
 						<td>AUTO_ID</td>
 						<TD><form:input path="autoId" /></td>
 					</tr>
 					<tr>
 						<td>COMPANY_ID</td>
-						<TD><form:input path="companyId" /></td>
+						<TD> <form:select path="companyId">
+								<form:options items="${companyMap}" />
+						</form:select>
+						</td>
 
 					</tr>
 					<tr>
@@ -78,5 +56,6 @@ td {
 <script>
 function updateMenuSelection() {
 	$( '#menu' ).multilevelpushmenu( 'expand' , 'Vehicles' );
+	$('#currentAction').text('Add New Vehicle');
 }
 </script>	

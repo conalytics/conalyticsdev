@@ -28,7 +28,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <div id="pushobj">
+        <div id="conBody">
             <h1>this is application body</h1>
         </div>
         <div id="menu">
