@@ -1,61 +1,67 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<center>
-		<div>
-			<form:form method="post" action="/insertAuto" modelAttribute="auto">
-				<table cellspacing="0" width="100%">
-					<tr>
-						<td>AUTO_ID</td>
-						<TD><form:input path="autoId" /></td>
-					</tr>
-					<tr>
-						<td>COMPANY_ID</td>
-						<TD> <form:select path="companyId">
-								<form:options items="${companyMap}" />
-						</form:select>
-						</td>
+<center>
+	<form:form method="post" class="idealforms" autocomplete="off" action="/insertAuto" modelAttribute="auto">
+		<div style="width: 100%;">
 
-					</tr>
-					<tr>
-						<td>AUTO_NAME</td>
-						<TD><form:input path="autoName" /></td>
+			<div style="float: left; width: 49%;">
+				<div class="field">
+					<label class="main">Auto Id:</label>
+					<form:input path="autoId" />
+					<span class="error"></span>
+				</div>
+				<div class="idealforms-field-select-one">
+					<label class="main">Company:</label>
+					<form:select path="companyId">
+						<form:options items="${companyMap}" />
+					</form:select>
+					<span class="error"></span>
+				</div>
+				<div class="field">
+					<label class="main">Auto Name</label>
+					<form:input path="autoName" />
+					<span class="error"></span>
+				</div>
 
-					</tr>
-					<tr>
-						<td>AUTO_DESC</td>
-						<TD><form:input path="autoDesc" /></td>
+				<div class="field">
+					<label class="main">Auto Desc</label>
+					<form:input path="autoDesc" />
+					<span class="error"></span>
+				</div>
+			</div>
+			<div style="float: right; width: 50%; margin-left: 10px;">
+				<div class="field">
+					<label class="main">Model</label>
+					<form:input path="model" />
 
-					</tr>
-					<tr>
-						<td>MODEL</td>
-						<TD><form:input path="model" /></td>
+					<span class="error"></span>
+				</div>
 
-					</tr>
-					<tr>
-						<td>VERSION</td>
-						<TD><form:input path="version" /></td>
+				<div class="field">
+					<label class="main">Version</label>
+					<form:input path="version" />
+					<span class="error"></span>
+				</div>
 
-					</tr>
-					<tr>
-						<td>YEAR_BUILT</td>
-						<TD><form:input path="yearBuilt" /></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td><input type="submit" value="Save" /></td>
-					</tr>
-					<tr>
-
-						<td colspan="2"><a href="getAutoList">Click Here to See Auto
-								List</a></td>
-					</tr>
-				</table>
-			</form:form>
+				<div class="field">
+					<label class="main">Year Built</label>
+					<form:input path="yearBuilt" />
+					<span class="error"></span>
+				</div>
+			</div>
+			<div>
+				<div class="field button">
+					<label class="main">&nbsp;</label>
+					<button type="submit">Submit</button>
+				</div>
+			</div>
 		</div>
-	</center>
+
+	</form:form>
+</center>
 <script>
-function updateMenuSelection() {
-	$( '#menu' ).multilevelpushmenu( 'expand' , 'Vehicles' );
-	$('#currentAction').text('Add New Vehicle');
-}
-</script>	
+	function updateMenuSelection() {
+		$('#menu').multilevelpushmenu('expand', 'Vehicles');
+		$('#currentAction').text('Add New Vehicle');
+	}
+</script>
