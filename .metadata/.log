@@ -1,0 +1,82 @@
+!SESSION 2014-10-07 11:45:17.753 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_02
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.jboss.jbds.product.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.jboss.jbds.product.product
+
+!ENTRY org.eclipse.jface 2 0 2014-10-07 13:02:05.070
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-10-07 13:02:05.070
+!MESSAGE A conflict occurred for ALT+CTRL+P:
+Binding(ALT+CTRL+P,
+	ParameterizedCommand(Command(org.jboss.tools.maven.ui.commands.selectMavenProfileCommand,Maven Profiles Selection,
+		,
+		Category(org.eclipse.ui.category.window,Window,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6581a654,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+CTRL+P,
+	ParameterizedCommand(Command(org.eclipse.m2e.profiles.ui.commands.selectMavenProfileCommand,Select Maven Profiles,
+		,
+		Category(org.eclipse.ui.category.window,Window,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@22cf08dc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.jboss.tools.maven.profiles.ui 1 0 2014-10-07 13:02:18.679
+!MESSAGE Found org.eclipse.m2e.profiles.ui, removing conflicting binding for org.jboss.tools.maven.ui.commands.selectMavenProfileCommand
+
+!ENTRY org.eclipse.egit.ui 2 0 2014-10-07 13:02:19.552
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2014-10-07 13:02:19.552
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\ptoleti'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.fusesource.ide.jvmmonitor.tools 4 0 2014-10-07 13:02:51.169
+!MESSAGE Update timer canceled.
+!STACK 1
+org.fusesource.ide.jvmmonitor.core.JvmCoreException: sun.jvmstat.monitor.MonitoredHost cannot be found by org.fusesource.ide.jvmmonitor.tools_7.2.1.v20140613-0455-H79-Final
+	at org.fusesource.ide.jvmmonitor.internal.tools.Tools.invokeGetMonitoredHost(Tools.java:130)
+	at org.fusesource.ide.jvmmonitor.internal.tools.JvmAttachHandler.updatesActiveJvms(JvmAttachHandler.java:102)
+	at org.fusesource.ide.jvmmonitor.internal.tools.JvmAttachHandler$1.run(JvmAttachHandler.java:82)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+Caused by: java.lang.ClassNotFoundException: sun.jvmstat.monitor.MonitoredHost cannot be found by org.fusesource.ide.jvmmonitor.tools_7.2.1.v20140613-0455-H79-Final
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:501)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at org.fusesource.ide.jvmmonitor.internal.tools.Tools.invokeGetMonitoredHost(Tools.java:125)
+	... 4 more
+!SUBENTRY 1 org.fusesource.ide.jvmmonitor.core 4 0 2014-10-07 13:02:51.169
+!MESSAGE sun.jvmstat.monitor.MonitoredHost cannot be found by org.fusesource.ide.jvmmonitor.tools_7.2.1.v20140613-0455-H79-Final
+!STACK 0
+java.lang.ClassNotFoundException: sun.jvmstat.monitor.MonitoredHost cannot be found by org.fusesource.ide.jvmmonitor.tools_7.2.1.v20140613-0455-H79-Final
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:501)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at org.fusesource.ide.jvmmonitor.internal.tools.Tools.invokeGetMonitoredHost(Tools.java:125)
+	at org.fusesource.ide.jvmmonitor.internal.tools.JvmAttachHandler.updatesActiveJvms(JvmAttachHandler.java:102)
+	at org.fusesource.ide.jvmmonitor.internal.tools.JvmAttachHandler$1.run(JvmAttachHandler.java:82)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
