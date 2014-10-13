@@ -47,6 +47,9 @@
 	
 	<bean id="companyDao" class="com.conalytics.dao.CompanyDaoImpl" />
 	<bean id="companyService" class="com.conalytics.services.CompanyServiceImpl" />
+	
+	<bean id="partDao" class="com.conalytics.dao.PartDaoImpl" />
+	<bean id="partService" class="com.conalytics.services.PartServiceImpl" />
 
 	<!-- declare datasource bean -->
 	<bean id="dataSource"

@@ -42,4 +42,17 @@
 	    <put-attribute name="body"	value="/WEB-INF/views/editCompany.jsp" />
 	</definition>
 	
+	<!-- PART -->
+	<definition name="partList" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/partList.jsp" />
+	</definition>
+	
+	<definition name="registerPart" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/registerPart.jsp" />
+	</definition>
+	
+		<definition name="editPart" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/editPart.jsp" />
+	</definition>
+	
 </tiles-definitions>

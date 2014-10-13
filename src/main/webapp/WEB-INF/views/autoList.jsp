@@ -4,15 +4,15 @@
 		<table  id="conTable"  class="display" cellspacing="0" width="100%">
 		 <thead>
 			<tr>
-				<th >AUTO_ID </td>
-				<th >COMPANY_ID </td>
-				<th >AUTO_NAME  </td>
-				<th >AUTO_DESC  </td>
-				<th >MODEL  </td>
-				<th >VERSION  </td>
-				<th >YEAR_BUILT </td>
-				<th >Edit</td>
-				<th >Delete</td>
+				<th >AUTO_ID </th>
+				<th >COMPANY_ID </th>
+				<th >AUTO_NAME  </th>
+				<th >AUTO_DESC  </th>
+				<th >MODEL  </th>
+				<th >VERSION  </th>
+				<th >YEAR_BUILT </th>
+				<th >Edit</th>
+				<th >Delete</th>
 			</tr>
 			</thead>
 			<tbody>

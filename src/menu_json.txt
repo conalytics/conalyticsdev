@@ -103,12 +103,14 @@
                       {
                         "name": "Add Part",
                         "icon": "fa fa-wrench",
-                        "link": "#"
+                         "id": "registerPartLink",
+                        "link": "_APP_CONTEXT_/registerPart"
                       },
                       {
                         "name": "Part List",
                         "icon": "fa fa-list",
-                        "link": "#"
+                        "id": "getPartListLink",
+                        "link": "_APP_CONTEXT_/getPartList"
                       }
                     ]
                   }
