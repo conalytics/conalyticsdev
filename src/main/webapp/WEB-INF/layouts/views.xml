@@ -54,5 +54,30 @@
 		<definition name="editPart" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/editPart.jsp" />
 	</definition>
+		<!-- CITY -->
+		
+		<definition name="cityList" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/cityList.jsp" />
+	</definition>
 	
+	<definition name="registerCity" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/registerCity.jsp" />
+	</definition>
+	
+	<definition name="editCity" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/editCity.jsp" />
+	</definition>
+		<!-- STATE -->
+		
+		<definition name="stateList" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/stateList.jsp" />
+	</definition>
+	
+	<definition name="registerState" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/registerState.jsp" />
+	</definition>
+	
+	<definition name="editState" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/editState.jsp" />
+	</definition>		
 </tiles-definitions>
