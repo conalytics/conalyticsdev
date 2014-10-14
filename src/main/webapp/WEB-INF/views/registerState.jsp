@@ -35,7 +35,7 @@
 </center>
 <script>
 	function updateMenuSelection() {
-		$('#menu').multilevelpushmenu('expand', 'State');
+		$('#menu').multilevelpushmenu('expand', 'States');
 		$('#currentAction').text('Add State');
 	}
 </script>

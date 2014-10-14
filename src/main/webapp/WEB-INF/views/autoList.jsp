@@ -1,21 +1,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-	<center>
-		<table  id="conTable"  class="display" cellspacing="0" width="100%">
-		 <thead>
+<center>
+	<table id="conTable" class="display" cellspacing="0" width="100%">
+		<thead>
 			<tr>
-				<th >AUTO ID </th>
-				<th >COMPANY NAME </th>
-				<th >AUTO NAME  </th>
-				<th >AUTO DESC  </th>
-				<th >MODEL  </th>
-				<th >VERSION  </th>
-				<th >YEAR BUILT </th>
-				<th >Edit</th>
-				<th >Delete</th>
+				<th>AUTO ID</th>
+				<th>COMPANY NAME</th>
+				<th>AUTO NAME</th>
+				<th>AUTO DESC</th>
+				<th>MODEL</th>
+				<th>VERSION</th>
+				<th>YEAR BUILT</th>
+				<th>Edit</th>
+				<th>Delete</th>
 			</tr>
-			</thead>
-			<tbody>
+		</thead>
+		<tbody>
 			<c:forEach var="auto" items="${autoList}">
 				<tr>
 					<td>${auto.autoId}</td>
@@ -29,12 +28,12 @@
 					<td><a href="deleteAuto?id=${auto.autoId}">Delete</a></td>
 				</tr>
 			</c:forEach>
-			</tbody>
-		</table>
+		</tbody>
+	</table>
 </center>
 <script>
-function updateMenuSelection() {
-	$( '#menu' ).multilevelpushmenu( 'expand' , 'Vehicles' );
-	$('#currentAction').text('Vehicles List');
-}
-</script>		
+	function updateMenuSelection() {
+		$('#menu').multilevelpushmenu('expand', 'Vehicles');
+		$('#currentAction').text('Vehicles List');
+	}
+</script>

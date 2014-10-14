@@ -53,11 +53,13 @@
                       {
                         "name": "Add City",
                         "icon": "fa fa-building",
-                        "link": "#"
+                        "id": "registerCityLink",
+                        "link": "_APP_CONTEXT_/registerCity"
                       },
                       {
                         "name": "City List",
                         "icon": "fa fa-list",
+                        "id": "getCityListLink",
                         "link": "_APP_CONTEXT_/getCityList"
                       }
                     ]
@@ -153,11 +155,13 @@
                       {
                         "name": "Add State",
                         "icon": "fa fa-envelope",
-                        "link": "#"
+                        "id": "registerStateLink",
+                        "link": "_APP_CONTEXT_/registerState"
                       },
                       {
                         "name": "States List",
                         "icon": "fa fa-list",
+                        "id": "getStateListLink",
                         "link": "_APP_CONTEXT_/getStateList"
                       }
                     ]
