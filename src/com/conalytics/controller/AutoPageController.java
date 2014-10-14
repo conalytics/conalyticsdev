@@ -1,6 +1,5 @@
 package com.conalytics.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +45,6 @@ public class AutoPageController {
 			companyMap.put(company.getCompanyId(), company.getCompanyName());
 		}
 		ModelAndView modelAndView = new ModelAndView("registerAuto", "companyMap", companyMap);
-		modelAndView.addObject("currentMenuItem", "Add Vehicle");
 		return modelAndView;
 	}
 

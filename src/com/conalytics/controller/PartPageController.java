@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.conalytics.domain.Auto;
 import com.conalytics.domain.Part;
+import com.conalytics.services.AutoService;
 import com.conalytics.services.PartService;
 
 @Controller
@@ -21,11 +23,22 @@ public class PartPageController {
 
 	@Autowired
 	PartService partService;
+	
+	@Autowired
+	AutoService autoService;
 
 	@RequestMapping("registerPart")
 	public ModelAndView registerPart(@ModelAttribute Part part) {
-		ModelAndView modelAndView = new ModelAndView("registerPart");
-		return modelAndView;
+		return new ModelAndView("registerPart", "autoMap", getAutoList());
+	}
+
+	private Map<Double, String> getAutoList() {
+		Map<Double, String> autoMap = new HashMap<Double, String>();
+		List<Auto> autoList = autoService.getAutoList();
+		for(Auto auto : autoList) {
+			autoMap.put(auto.getAutoId(), auto.getAutoName());
+		}
+		return autoMap;
 	}
 
 	@RequestMapping("insertPart")
@@ -39,18 +52,19 @@ public class PartPageController {
 	public ModelAndView getPartLIst() {
 		List<Part> partList = partService.getPartList();
 		ModelAndView modelAndView = new ModelAndView("partList", "partList", partList);
-		modelAndView.addObject("currentMenuItem", "Vehicle List");
 		return modelAndView;
 	}
 
 	@RequestMapping("editPart")
-	public ModelAndView editPart(@RequestParam Double id,
-			@ModelAttribute Part part) {
-
+	public ModelAndView editPart(@RequestParam Double id, @ModelAttribute Part part) {
 		part = partService.getPart(id);
 		Map<String, Object> map = new HashMap<String, Object>();
-			map.put("part", part);
-		return new ModelAndView("editPart", "map", map);
+		map.put("part", part);
+
+		ModelAndView modelAndView = new ModelAndView("editPart");
+		modelAndView.addObject("autoMap", getAutoList());
+		modelAndView.addObject("map", map);
+		return modelAndView;
 
 	}
 
