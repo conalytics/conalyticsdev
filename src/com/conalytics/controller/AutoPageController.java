@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +29,8 @@ public class AutoPageController {
 	@Autowired
 	CompanyService companyService;
 	
+	
+	
 	@RequestMapping("home")
 	public ModelAndView home(@ModelAttribute Auto auto) {
 		return new ModelAndView("mainMenu");
@@ -39,13 +43,17 @@ public class AutoPageController {
 	
 	@RequestMapping("registerAuto")
 	public ModelAndView registerAuto(@ModelAttribute Auto auto) {
+		ModelAndView modelAndView = new ModelAndView("registerAuto", "companyMap", getCompanyMap());
+		return modelAndView;
+	}
+
+	private Map<Double, String> getCompanyMap() {
 		Map<Double, String> companyMap = new HashMap<Double, String>();
 		List<Company> companyList = companyService.getCompanyList();
 		for(Company company : companyList) {
 			companyMap.put(company.getCompanyId(), company.getCompanyName());
 		}
-		ModelAndView modelAndView = new ModelAndView("registerAuto", "companyMap", companyMap);
-		return modelAndView;
+		return companyMap;
 	}
 
 	@RequestMapping("insertAuto")
@@ -70,7 +78,10 @@ public class AutoPageController {
 		auto = autoService.getAuto(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 			map.put("auto", auto);
-		return new ModelAndView("editAuto", "map", map);
+		ModelAndView modelAndView = new ModelAndView("editAuto");
+		modelAndView.addObject("map", map);
+		modelAndView.addObject("companyMap", getCompanyMap());
+		return modelAndView;
 
 	}
 

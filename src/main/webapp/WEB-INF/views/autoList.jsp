@@ -4,13 +4,13 @@
 		<table  id="conTable"  class="display" cellspacing="0" width="100%">
 		 <thead>
 			<tr>
-				<th >AUTO_ID </th>
-				<th >COMPANY_ID </th>
-				<th >AUTO_NAME  </th>
-				<th >AUTO_DESC  </th>
+				<th >AUTO ID </th>
+				<th >COMPANY NAME </th>
+				<th >AUTO NAME  </th>
+				<th >AUTO DESC  </th>
 				<th >MODEL  </th>
 				<th >VERSION  </th>
-				<th >YEAR_BUILT </th>
+				<th >YEAR BUILT </th>
 				<th >Edit</th>
 				<th >Delete</th>
 			</tr>
@@ -19,7 +19,7 @@
 			<c:forEach var="auto" items="${autoList}">
 				<tr>
 					<td>${auto.autoId}</td>
-					<td>${auto.companyId}</td>
+					<td>${auto.companyName}</td>
 					<td>${auto.autoName }</td>
 					<td>${auto.autoDesc }</td>
 					<td>${auto.model }</td>

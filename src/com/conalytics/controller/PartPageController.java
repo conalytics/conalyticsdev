@@ -62,11 +62,13 @@ public class PartPageController {
 		map.put("part", part);
 
 		ModelAndView modelAndView = new ModelAndView("editPart");
-		modelAndView.addObject("autoMap", getAutoList());
+		modelAndView.addObject("autoList", autoService.getAutoList());
 		modelAndView.addObject("map", map);
 		return modelAndView;
 
 	}
+	
+	
 
 	@RequestMapping("updatePart")
 	public String updatePart(@ModelAttribute Part part) {

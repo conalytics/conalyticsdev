@@ -37,7 +37,9 @@ public class AutoDaoImpl implements AutoDao {
 	public List<Auto> getAutoList() {
 		List autoList = new ArrayList();
 
-		String sql = "select * from AUTO";
+		String sql = "SELECT AUTO_ID, C.COMPANY_ID, C.COMPANY_NAME,  AUTO_NAME ,  AUTO_DESC ,  MODEL ,  VERSION ,  YEAR_BUILT "
+					+ "FROM AUTO A, COMPANY C "
+					+ "WHERE A.COMPANY_ID = C.COMPANY_ID";
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		autoList = jdbcTemplate.query(sql, new AutoRowMapper());
@@ -74,7 +76,10 @@ public class AutoDaoImpl implements AutoDao {
 	@Override
 	public Auto getAuto(Double id) {
 		List<Auto> autoList = new ArrayList<Auto>();
-		String sql = "select * from AUTO where auto_id= " + id.doubleValue();
+		String sql =  "SELECT AUTO_ID, C.COMPANY_ID, C.COMPANY_NAME,  AUTO_NAME ,  AUTO_DESC ,  MODEL ,  VERSION ,  YEAR_BUILT "
+				+ "FROM AUTO A, COMPANY C "
+				+ "WHERE A.COMPANY_ID = C.COMPANY_ID"
+				+ " and auto_id= " + id.doubleValue();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		autoList = jdbcTemplate.query(sql, new AutoRowMapper());
 		return autoList.get(0);

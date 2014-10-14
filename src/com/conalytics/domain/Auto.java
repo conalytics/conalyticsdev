@@ -6,6 +6,8 @@ public class Auto implements java.io.Serializable {
 	private Double autoId;
 
 	private Double companyId;
+	
+	private String companyName;
 
 	private String autoName;
 
@@ -39,6 +41,14 @@ public class Auto implements java.io.Serializable {
 
 	public void setCompanyId(Double companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public String getAutoName() {

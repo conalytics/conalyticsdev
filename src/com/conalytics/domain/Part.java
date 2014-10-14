@@ -26,6 +26,15 @@ public class Part implements java.io.Serializable {
 	private String color;
 	
 	private Double msrp;
+	
+	private Part selectedPart = null;
+	public Part getSelectedPart(){
+		 return this.selectedPart;
+		}
+
+		public void setSelectedPart(Part newSelectedPart){
+		this.selectedPart=newSelectedPart;
+		}
 
 	
 

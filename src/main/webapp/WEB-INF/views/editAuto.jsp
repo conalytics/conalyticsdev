@@ -10,8 +10,11 @@
 					
 					<tr>
 						<td>COMPANY_ID</td>
-						<TD><form:input path="companyId"
-								value="${map.auto.companyId}" /></td>
+						<TD>
+						<form:select path="companyId">
+							<form:options items="${companyMap}" />
+						</form:select>
+						</td>
 
 					</tr>
 					<tr>

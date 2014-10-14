@@ -16,11 +16,12 @@ public class AutoExtractor implements ResultSetExtractor<Auto> {
 		Auto auto = new Auto();
 		auto.setAutoId(resultSet.getDouble(1));
 		auto.setCompanyId(resultSet.getDouble(2));
-		auto.setAutoName(resultSet.getString(3));
-		auto.setAutoDesc(resultSet.getString(4));
-		auto.setModel(resultSet.getString(5));
-		auto.setVersion(resultSet.getString(6));
-		auto.setYearBuilt(resultSet.getDouble(7));
+		auto.setCompanyName(resultSet.getString(3));
+		auto.setAutoName(resultSet.getString(4));
+		auto.setAutoDesc(resultSet.getString(5));
+		auto.setModel(resultSet.getString(6));
+		auto.setVersion(resultSet.getString(7));
+		auto.setYearBuilt(resultSet.getDouble(8));
 		return auto;
 	}
 
