@@ -4,80 +4,93 @@
 	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-<definition name="userList" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/userList.jsp" />
+	<definition name="userList" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/userList.jsp" />
 	</definition>
-	
+
 	<definition name="registerUser" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/register.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/register.jsp" />
 	</definition>
-	
+
 	<definition name="editUser" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/edit.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/edit.jsp" />
 	</definition>
-	
+
 	<!-- AUTO -->
 	<definition name="autoList" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/autoList.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/autoList.jsp" />
 	</definition>
-	
+
 	<definition name="registerAuto" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/registerAuto.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/registerAuto.jsp" />
 	</definition>
-	
+
 	<definition name="editAuto" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/editAuto.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/editAuto.jsp" />
 	</definition>
-	
+
 	<!-- COMPANY -->
 	<definition name="companyList" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/companyList.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/companyList.jsp" />
 	</definition>
-	
+
 	<definition name="registerCompany" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/registerCompany.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/registerCompany.jsp" />
 	</definition>
-	
-		<definition name="editCompany" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/editCompany.jsp" />
+
+	<definition name="editCompany" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/editCompany.jsp" />
 	</definition>
-	
+
 	<!-- PART -->
 	<definition name="partList" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/partList.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/partList.jsp" />
 	</definition>
-	
+
 	<definition name="registerPart" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/registerPart.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/registerPart.jsp" />
 	</definition>
-	
-		<definition name="editPart" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/editPart.jsp" />
+
+	<definition name="editPart" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/editPart.jsp" />
 	</definition>
-		<!-- CITY -->
-		
-		<definition name="cityList" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/cityList.jsp" />
+	<!-- CITY -->
+
+	<definition name="cityList" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/cityList.jsp" />
 	</definition>
-	
+
 	<definition name="registerCity" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/registerCity.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/registerCity.jsp" />
 	</definition>
-	
+
 	<definition name="editCity" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/editCity.jsp" />
-	</definition>
-		<!-- STATE -->
-		
-		<definition name="stateList" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/stateList.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/editCity.jsp" />
 	</definition>
 	
+	<!-- STATE -->
+	<definition name="stateList" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/stateList.jsp" />
+	</definition>
+
 	<definition name="registerState" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/registerState.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/registerState.jsp" />
+	</definition>
+
+	<definition name="editState" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/editState.jsp" />
 	</definition>
 	
-	<definition name="editState" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/editState.jsp" />
-	</definition>		
+	<!-- SHOP -->
+	<definition name="shopList" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/shopList.jsp" />
+	</definition>
+
+	<definition name="registerShop" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/registerShop.jsp" />
+	</definition>
+
+	<definition name="editShop" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/editShop.jsp" />
+	</definition>	
 </tiles-definitions>

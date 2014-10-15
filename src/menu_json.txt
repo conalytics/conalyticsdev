@@ -105,7 +105,7 @@
                       {
                         "name": "Add Part",
                         "icon": "fa fa-wrench",
-                         "id": "registerPartLink",
+                        "id": "registerPartLink",
                         "link": "_APP_CONTEXT_/registerPart"
                       },
                       {
@@ -131,12 +131,14 @@
                       {
                         "name": "Add Shop",
                         "icon": "fa fa-shopping-cart",
-                        "link": "#"
+                        "id": "registerShopLink",
+                        "link": "_APP_CONTEXT_/registerShop"
                       },
                       {
                         "name": "Shop List",
                         "icon": "fa fa-list",
-                        "link": "#"
+                        "id": "getshopListLink",
+                        "link": "_APP_CONTEXT_/getShopList"
                       }
                     ]
                   }
