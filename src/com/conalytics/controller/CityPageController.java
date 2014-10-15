@@ -24,6 +24,8 @@ public class CityPageController {
 
 	@Autowired
 	CityService cityService;
+
+	@Autowired
     StateService stateService;
 	@RequestMapping("registerCity")
 	public ModelAndView registerCity(@ModelAttribute City city) {
@@ -31,7 +33,7 @@ public class CityPageController {
 		Map<Double, String> stateMap = new HashMap<Double, String>();
 		List<State> stateList = stateService.getStateList();
 		for(State state : stateList) {
-			stateMap.put(state.getId(), state.getStateDesc());
+		stateMap.put(state.getId(), state.getStateDesc());
 		}
 		ModelAndView modelAndView = new ModelAndView("registerCity", "stateMap", stateMap);
 		

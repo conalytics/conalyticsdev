@@ -1,7 +1,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <center>
-	<form:form method="post" class="idealforms" autocomplete="off" action="/insertAuto" modelAttribute="auto">
+	<form:form method="post" class="idealforms" autocomplete="off" action="/insertCity" modelAttribute="city">
 		<div style="width: 100%;">
 
 			<div style="float: left; width: 49%;">
@@ -30,13 +30,7 @@
 					<form:input path="districtDesc" />
 					<span class="error"></span>
 				</div>
-				<div class="idealforms-field-select-one">
-					<label class="main">State:</label>
-					<form:select path="id">
-						<form:options items="${stateMap}" />
-					</form:select>
-					<span class="error"></span>
-				</div>
+
 				<div class="field">
 					<label class="main">Zip Code</label>
 					<form:input path="zipCode" />

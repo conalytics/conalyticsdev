@@ -49,9 +49,10 @@ public class StateDaoImpl implements StateDao {
 		jdbcTemplate.update(
 				sql,
 				new Object[] { 
-						state.getId(),
+
 						state.getStateDesc(),
-						state.getStateABB()
+						state.getStateABB(),
+						state.getId()
 							});
     
 	}
