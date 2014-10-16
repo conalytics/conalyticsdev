@@ -17,15 +17,15 @@
 				</div>
 				<div class="field">
 					<label class="main">City Code:</label>
-					<form:input path="cityABB" />
+					<form:input path="cityCode" />
 					<span class="error"></span>
 				</div>
-				<div class="idealforms-field-select-one">
+				<div class="field">
 					<label class="main">District ID:</label>
 					<form:input path="districtID" />
 					<span class="error"></span>
 				</div>
-				<div class="idealforms-field-select-one">
+				<div class="field">
 					<label class="main">District:</label>
 					<form:input path="districtDesc" />
 					<span class="error"></span>

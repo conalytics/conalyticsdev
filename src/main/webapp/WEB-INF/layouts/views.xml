@@ -4,6 +4,11 @@
 	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
+	<definition name="conalyticsHomePage" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/conalyticsHomePage.jsp" />
+	</definition>
+	
 	<definition name="userList" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/userList.jsp" />
 	</definition>
@@ -67,7 +72,7 @@
 	<definition name="editCity" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/editCity.jsp" />
 	</definition>
-	
+
 	<!-- STATE -->
 	<definition name="stateList" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/stateList.jsp" />
@@ -80,7 +85,7 @@
 	<definition name="editState" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/editState.jsp" />
 	</definition>
-	
+
 	<!-- SHOP -->
 	<definition name="shopList" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/shopList.jsp" />
@@ -92,5 +97,5 @@
 
 	<definition name="editShop" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/editShop.jsp" />
-	</definition>	
+	</definition>
 </tiles-definitions>

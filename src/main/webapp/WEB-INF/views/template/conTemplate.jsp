@@ -62,7 +62,17 @@
 			// Just for fun also changing the look of the menu
 			wrapperClass : 'mlpm_w',
 			menuInactiveClass : 'mlpm_inactive',
-			mode: 'cover'
+			mode: 'cover',
+			onTitleItemClick: function() {
+		        // $("#templateForm").submit();
+	        },
+	        onBackItemClick: function() {
+            var title = arguments[1].find( 'h2:first' ).text();
+				if(title =='Master Data') {
+				      $("#templateForm").submit();
+				}
+           
+        	}
 		});
 		updateMenuLinks();
 		updateMenuSelection();
@@ -99,7 +109,8 @@
 	</div>
 	<div id="menu"></div>
 	
-
+<form:form method="post" action="home" id="templateForm">
+</form:form>
 	
 
 </body>

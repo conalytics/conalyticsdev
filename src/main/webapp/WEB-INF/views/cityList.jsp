@@ -5,7 +5,7 @@
 			<tr>
 				<th>CITY ID</th>
 				<th>CITY DESC</th>
-				<th>CITY ABB</th>
+				<th>CITY Code</th>
 				<th>DISTRICT ID</th>
 				<th>DISTRICT DESC</th>
 				<th>STATE ID</th>
@@ -20,7 +20,7 @@
 				<tr>
 					<td>${city.cityId}</td>
 					<td>${city.cityDesc}</td>
-					<td>${city.cityABB }</td>
+					<td>${city.cityCode }</td>
 					<td>${city.districtID }</td>
 					<td>${city.districtDesc }</td>
 					<td>${city.stateID }</td>

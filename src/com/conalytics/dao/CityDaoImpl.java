@@ -27,7 +27,7 @@ public class CityDaoImpl implements CityDao {
 				new Object[] { 
 						city.getCityId(),
 						city.getCityDesc(),
-						city.getCityABB(),
+						city.getCityCode(),
 						city.getDistrictID(),
 						city.getDistrictDesc(),
 						city.getStateID(),
@@ -55,7 +55,7 @@ public class CityDaoImpl implements CityDao {
 				sql,
 				new Object[] { 
 						city.getCityDesc(),
-						city.getCityABB(),
+						city.getCityCode(),
 						city.getDistrictID(),
 						city.getDistrictDesc(),
 						city.getStateID(),

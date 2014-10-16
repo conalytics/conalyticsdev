@@ -8,7 +8,7 @@ public class City implements java.io.Serializable {
 
 	private String cityDesc;
 
-	private String cityABB;
+	private String cityCode;
 
 	private Double districtID;
 	
@@ -51,14 +51,14 @@ public class City implements java.io.Serializable {
 
 
 
-	public String getCityABB() {
-		return cityABB;
+	public String getCityCode() {
+		return cityCode;
 	}
 
 
 
-	public void setCityABB(String cityABB) {
-		this.cityABB = cityABB;
+	public void setCityCode(String citycode) {
+		this.cityCode = citycode;
 	}
 
 
@@ -126,7 +126,7 @@ public class City implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "City [cityId=" + cityId + ", cityDesc=" + cityDesc
-				+ ", cityABB=" + cityABB + ", districtID=" + districtID
+				+ ", citycode=" + cityCode + ", districtID=" + districtID
 				+ ", districtDesc=" + districtDesc + ", stateID=" + stateID
 				+ ", stateDesc=" + stateDesc + ", zipCode=" + zipCode + "]";
 	}

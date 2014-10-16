@@ -57,16 +57,19 @@
 	<bean id="stateDao" class="com.conalytics.dao.StateDaoImpl" />
 	<bean id="stateService" class="com.conalytics.services.StateServiceImpl" />
 	
+	<bean id="shopDao" class="com.conalytics.dao.ShopDaoImpl" />
+	<bean id="shopService" class="com.conalytics.services.ShopServiceImpl" />
+	
 	<!-- declare datasource bean -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-			<!-- <property name="url" value="jdbc:mysql://50.63.244.197:3306/conalyticsdev" />
+		<property name="url" value="jdbc:mysql://50.63.244.197:3306/conalyticsdev" />
 		<property name="username" value="conalyticsdev" />
-		<property name="password" value="Cona!ytics2014" />-->
+		<property name="password" value="Cona!ytics2014" />
 		
-	<property name="url" value="jdbc:mysql://localhost:3306/conalyticsdev" />
+	<!-- <property name="url" value="jdbc:mysql://localhost:3306/conalyticsdev" />
 		<property name="username" value="root" />
-		<property name="password" value="mysql" /> 
+		<property name="password" value="password" /> --> 
 	</bean>
 </beans>

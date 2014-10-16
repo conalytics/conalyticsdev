@@ -16,7 +16,7 @@ public class CityExtractor implements ResultSetExtractor<City> {
 		City city = new City();
 		city.setCityId(resultSet.getDouble(1));
 		city.setCityDesc(resultSet.getString(2));
-		city.setCityABB(resultSet.getString(3));
+		city.setCityCode(resultSet.getString(3));
 		city.setDistrictID(resultSet.getDouble(4));
 		city.setDistrictDesc(resultSet.getString(5));
 		city.setStateID(resultSet.getDouble(6));
