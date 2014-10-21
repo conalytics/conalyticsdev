@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.conalytics.domain.Company;
-import com.conalytics.jdbc.AutoRowMapper;
 import com.conalytics.jdbc.CompanyRowMapper;
 
 public class CompanyDaoImpl implements CompanyDao {

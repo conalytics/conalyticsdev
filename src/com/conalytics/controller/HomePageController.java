@@ -21,6 +21,7 @@ public class HomePageController {
 	@Autowired
 	UserService userService;
 
+	@SuppressWarnings("rawtypes")
 	@RequestMapping("/register")
 	public ModelAndView registerUser(@ModelAttribute User user) {
 

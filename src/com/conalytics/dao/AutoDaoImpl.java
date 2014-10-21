@@ -34,6 +34,7 @@ public class AutoDaoImpl implements AutoDao {
 
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Auto> getAutoList() {
 		List autoList = new ArrayList();
 

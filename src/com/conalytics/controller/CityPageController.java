@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.conalytics.domain.City;
-import com.conalytics.domain.Company;
 import com.conalytics.domain.State;
 import com.conalytics.services.CityService;
 import com.conalytics.services.StateService;

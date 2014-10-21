@@ -4,12 +4,12 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-    <definition name="DefaultTemplate" template="/WEB-INF/views/template/conTemplate.jsp">
+    <definition name="DefaultTemplate" template="/views/template/conTemplate.jsp">
 		<put-attribute name="title" 	value="Home" />
-		<put-attribute name="header" 	value="/WEB-INF/views/template/header.jsp" />
-		<put-attribute name="menu" 		value="/WEB-INF/views/template/menu.jsp" />
+		<put-attribute name="header" 	value="/views/template/header.jsp" />
+		<put-attribute name="menu" 		value="/views/template/menu.jsp" />
 		<put-attribute name="body" 		value="" />
-		<put-attribute name="footer" 	value="/WEB-INF/views/template/footer.jsp" />
+		<put-attribute name="footer" 	value="/views/template/footer.jsp" />
 	</definition>
 	
 </tiles-definitions>
