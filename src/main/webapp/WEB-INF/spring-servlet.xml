@@ -59,7 +59,10 @@
 	
 	<bean id="shopDao" class="com.conalytics.dao.ShopDaoImpl" />
 	<bean id="shopService" class="com.conalytics.services.ShopServiceImpl" />
-	
+
+	<bean id="claimDao" class="com.conalytics.dao.ClaimDaoImpl" />
+	<bean id="claimService" class="com.conalytics.services.ClaimServiceImpl" />
+		
 	<!-- declare datasource bean -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

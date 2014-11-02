@@ -98,4 +98,16 @@
 	<definition name="editShop" extends="DefaultTemplate">
 		<put-attribute name="body" value="/views/editShop.jsp" />
 	</definition>
+	
+		<!-- CLAIM -->
+	<definition name="claimList" extends="DefaultTemplate">
+		<put-attribute name="body" value="/views/claimList.jsp" />
+	</definition>
+	<definition name="registerClaim" extends="DefaultTemplate">
+		<put-attribute name="body" value="/views/registerClaim.jsp" />
+	</definition>
+	
+	<definition name="workOnClaim" extends="DefaultTemplate">
+		<put-attribute name="body" value="/views/workOnClaim.jsp" />
+	</definition>	
 </tiles-definitions>

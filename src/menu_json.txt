@@ -175,21 +175,25 @@
         ]
       },
       {
-        "name": "Magazines",
+        "name": "Claims",
         "icon": "fa fa-book",
         "link": "#",
         "items": [
           {
-            "title": "Magazines",
+            "title": "Claims",
             "icon": "fa fa-book",
             "items": [
               {
-                "name": "National Geographics",
-                "link": "#"
+                "name": "Claim List",
+                "icon": "fa fa-list",
+                "id": "getClaimListLink",
+                "link": "_APP_CONTEXT_/getClaimList"
               },
               {
-                "name": "Scientific American",
-                "link": "#"
+                "name": "Add Claim",
+                "icon": "fa fa-envelope",
+                "id": "registerClaimLink",
+                "link": "_APP_CONTEXT_/registerClaim"
               },
               {
                 "name": "The Spectator",
