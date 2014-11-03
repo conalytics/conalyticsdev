@@ -62,6 +62,9 @@
 
 	<bean id="claimDao" class="com.conalytics.dao.ClaimDaoImpl" />
 	<bean id="claimService" class="com.conalytics.services.ClaimServiceImpl" />
+
+	<bean id="repairDao" class="com.conalytics.dao.RepairDaoImpl" />
+	<bean id="repairService" class="com.conalytics.services.RepairServiceImpl" />
 		
 	<!-- declare datasource bean -->
 	<bean id="dataSource"

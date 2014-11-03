@@ -14,8 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
+
 import com.conalytics.domain.Claim;
+import com.conalytics.domain.Repair;
 import com.conalytics.services.ClaimService;
+import com.conalytics.services.RepairService;
 
 
 @Controller
@@ -24,6 +28,9 @@ public class ClaimPageController {
 
 	@Autowired
 	ClaimService claimService;
+	
+	@Autowired
+	RepairService repairService;
 
 
 	@RequestMapping("registerClaim")
@@ -84,8 +91,14 @@ public class ClaimPageController {
 		claim = claimService.getClaimbyId(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 			map.put("claim", claim);
+			
+			List<Repair> repairList = repairService.getRepairList(id);
+			
 		ModelAndView modelAndView = new ModelAndView("workOnClaim");
 		modelAndView.addObject("map", map);
+		modelAndView.addObject("repairList", repairList);
+		System.out.println("in work on claim view "+repairList.size());
+		
 		return modelAndView;
 
 	}
