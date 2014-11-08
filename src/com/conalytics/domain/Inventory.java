@@ -16,13 +16,17 @@ public class Inventory implements java.io.Serializable {
 	private double STD_HRLY_PART_LABOR_RATE;
 	
 	//non table data
-	private double distance;
+	private String distance;
 	
 	
-	public double getDistance() {
+
+
+	public String getDistance() {
 		return distance;
 	}
-
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
 	public double getSHOP_PART_ID() {
 		return SHOP_PART_ID;
 	}

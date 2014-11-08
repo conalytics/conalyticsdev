@@ -21,8 +21,8 @@
 	</table>
 				</div>
 				
-				<div id="map-canvas" style="height: 200px; width: 70%; margin-top: 30px; position: absolute !important"></div>
-				<div id="secondDivistion" style="position: absolute !important; margin-top: 239px;">
+				<div id="map-canvas" style="height: 400px; width: 80%; margin-top: 30px; position: absolute !important"></div>
+				<div id="secondDivistion" style="position: absolute !important; margin-top: 500px;">
     
   
 		<table id="repairTable" class="display" cellspacing="0" width="100%">

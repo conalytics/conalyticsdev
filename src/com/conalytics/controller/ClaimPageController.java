@@ -171,12 +171,12 @@ public class ClaimPageController {
 		//proximity service
 		int radius =5;
 		List<Inventory> sourceParts = null;
-		
+		List<Shop> shopl= null;
 		for(int i=1; i<=5; i++)
 		{
 			
-			List<Shop> shopl=shopService.getShopListwithinGC(lat, lon, Integer.toString(radius));
-		
+			shopl=shopService.getShopListwithinGC(lat, lon, Integer.toString(radius));
+		        System.out.println(shopl.toString());
 				if(shopl.size() > 0)
 		        {
 					sourceParts = invService.getInventorybyShopList(shopl, partId);
@@ -188,6 +188,24 @@ public class ClaimPageController {
 				}
 				radius= radius * 10;
 				
+		}
+
+		for(int i=0; i<sourceParts.size();i++)
+		{
+		  Inventory inv = sourceParts.get(i);
+		 
+		  for(int j=0;j<shopl.size();j++)
+		  {
+			  Shop sl= shopl.get(j);
+			  String ds = shopl.get(j).getDistance();
+			  if(sl.getShopId() == inv.getSHOP_ID())
+			  {
+				  
+				  sourceParts.get(i).setDistance(ds);
+				  
+			  }
+		  }
+		  System.out.println("distance"+inv.getDistance());
 		}
 
 		//build inventory with shop information list object 
@@ -216,13 +234,39 @@ public class ClaimPageController {
 			map.put("claim", claim);
 			
 			List<Repair> repairList = repairService.getRepairList(ritem.getClaimId());
+				
+			ModelAndView modelAndView = new ModelAndView("workOnClaim");
+			modelAndView.addObject("map", map);
+			modelAndView.addObject("repairList", repairList);
+			System.out.println("in work on claim view with repairs "+repairList.size());
 			
-		ModelAndView modelAndView = new ModelAndView("workOnClaim");
-		modelAndView.addObject("map", map);
-		modelAndView.addObject("repairList", repairList);
-		System.out.println("in work on selectshop view "+repairList.size());
-		
-		return modelAndView;
+			//get list of assigned shops to repairs and show them on the screen.
+			List<String> geocodelist = new ArrayList<String>();
+			String jsongeocode="[";
+			for (int i = 0; i < repairList.size(); i++) {
+				Repair r=repairList.get(i);
+				System.out.println(r.toString());
+				System.out.println(r.getShopid());
+				String lat=shopService.getShopbyId(r.getShopid()).getGclat();
+	            String lon=shopService.getShopbyId(r.getShopid()).getGclong();
+				String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+"}";
+		        geocodelist.add(i, latlon);
+		        if(i < repairList.size()-1)
+		        {
+		        	jsongeocode=jsongeocode+latlon+",";
+		        }
+		        else
+		        {
+		        	jsongeocode=jsongeocode+latlon;
+		        }
+			}
+			jsongeocode=jsongeocode+"]";
+			System.out.println(jsongeocode);
+			modelAndView.addObject("jsongeocode", jsongeocode);
+			
+			return modelAndView;
+
+
 	}
 	
 }

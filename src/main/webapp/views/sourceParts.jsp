@@ -32,7 +32,8 @@
 				<th>Quantity</th>
 				<th>Price</th>
 				<th>Retail price</th>
-				<th>Source parts</th>
+				<th>Distance from Vehicle</th>
+				<th>Selection</th>
 
 			</tr>
 		</thead>
@@ -44,7 +45,8 @@
 					<td>${sp.QTY_AVAILABLE }</td>
 					<td>${sp.PRICE_PER_UNIT }</td>
 					<td>${sp.RTL_PRICE_PER_UNIT }</td>
-					<td><a href="selectShop?shopid=${sp.SHOP_ID}&repairid=${ritem.repairId}">select shop</a></td>
+					<td>${sp.distance} KM</td>
+					<td><a href="selectShop?shopid=${sp.SHOP_ID}&repairid=${ritem.repairId}">select this shop</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
