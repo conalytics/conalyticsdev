@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <center>
-	<table id="conTable" class="display" cellspacing="0" width="100%">
+<div id="firstDivistion" style="position: absolute !important;" >
+	<table id="conTable2" class="display" cellspacing="0" width="100%">
 
 		<tbody>
 
@@ -10,10 +12,19 @@
 					<td>VIN:${map.claim.VIN }</td>
 					<td>AUTO ID:${map.claim.modelId }</td>
 					<td>COLOR:${map.claim.color }</td>
-					<td>REPAIR LOCATION:${map.claim.shopId }</td>
+					<td>Vehicle City:${map.claim.location }<input id="address" type="hidden" value=${map.claim.location }>
+					<input id="shops" type="hidden" value='${jsongeocode}'>
+					</td>
 				</tr>
+				
 		</tbody>
 	</table>
+				</div>
+				
+				<div id="map-canvas" style="height: 200px; width: 70%; margin-top: 30px; position: absolute !important"></div>
+				<div id="secondDivistion" style="position: absolute !important; margin-top: 239px;">
+    
+  
 		<table id="repairTable" class="display" cellspacing="0" width="100%">
 		<thead>
 			<tr>
@@ -34,18 +45,22 @@
 					<td>${repair.partId}</td>
 					<td>${repair.partDesc }</td>
 					<td>${repair.quantity }</td>
-					<td><a href="editRepair?id=${repair.repairId}">Edit</a></td>
-					<td><a href="deleteRepair?id=${repair.repairId}">Delete</a></td>
-					<td><a href="sourceparts?id=${repair.repairId}">Source Parts</a></td>
+					<td><a href="editRepair?repairId=${repair.repairId}">Edit</a></td>
+					<td><a href="deleteRepair?repairId=${repair.repairId}">Delete</a></td>
+					<td><a href="sourceParts?repairId=${repair.repairId}">Source Parts</a></td>
 				</tr>
 			</c:forEach>
+			
+			 
 		</tbody>
 	</table>
-
+</div>
 </center>
 <script>
+//google.maps.event.addDomListener(window, 'load', setgmap);
 	function updateMenuSelection() {
-		$('#menu').multilevelpushmenu('expand', 'Claim');
+		setgmap();
+		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Claim List');
 	}
 </script>

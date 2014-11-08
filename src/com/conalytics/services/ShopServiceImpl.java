@@ -35,8 +35,15 @@ public class ShopServiceImpl implements ShopService {
 		shopDao.updateData(shop);
 	}
 
+	@Override
 	public List<Shop> getShopList() {
 		return shopDao.getShopList();
+	}
+
+	@Override
+	public List<Shop> getShopListwithinGC(String lat, String lon,String distanceinKM) {
+		// TODO Auto-generated method stub
+		return shopDao.getShopListwithinGC(lat, lon, distanceinKM);
 	}
 
 }

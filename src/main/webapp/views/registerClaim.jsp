@@ -1,7 +1,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <center>
-	<form:form method="post" class="idealforms" autocomplete="off" action="/insertClaim" modelAttribute="claim">
+	<form:form method="post" class="idealforms" autocomplete="off" action="/insertClaim" modelAttribute="claim" >
 		<div style="width: 100%;">
 
 			<div style="float: left; width: 49%;">
@@ -23,8 +23,8 @@
 				</div>
 
 			<div class="field">
-					<label class="main">Shop:</label>
-					<form:input path="shopId" />
+					<label class="main">Location:</label>
+					<form:input path="location" />
 					<span class="error"></span>
 				</div>
 			</div>
@@ -40,7 +40,9 @@
 </center>
 <script>
 	function updateMenuSelection() {
-		$('#menu').multilevelpushmenu('expand', 'Claim');
+		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Add New Claim');
 	}
+
+
 </script>

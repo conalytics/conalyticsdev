@@ -19,7 +19,7 @@ public class RepairDaoImpl implements RepairDao {
 	@Override
 	public void insertRepair(Repair repair) {
 
-		String sql = "INSERT INTO REPAIR_LIST (REPAIR_DESC, CLAIM_ID, PART_ID, PARTS_DESC, QUANTITY) VALUES ( ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO REPAIR_LIST (REPAIR_DESC, CLAIM_ID, PART_ID, PARTS_DESC, QUANTITY , SHOP_ID) VALUES ( ?, ?, ?, ?, ? , ?)";
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
@@ -30,7 +30,9 @@ public class RepairDaoImpl implements RepairDao {
 						repair.getClaimId(),
 						repair.getPartId(),
 						repair.getPartDesc(),
-						repair.getQuantity() });
+						repair.getQuantity(),
+						null
+				 });
 
 	}
 
@@ -61,7 +63,18 @@ public class RepairDaoImpl implements RepairDao {
 		
 	}
 
+	@Override
+	public void updateShopIdRepair(Double repairId, Double shopId) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE REPAIR_LIST set  SHOP_ID=? where ID = ?";
+		System.out.println(sql);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
+		jdbcTemplate.update(
+				sql,
+				new Object[] { shopId , repairId });
+		
+	}
 
 	@Override
 	public List<Repair> getRepairList(Double id) {
@@ -75,5 +88,17 @@ public class RepairDaoImpl implements RepairDao {
 		return repairList;
 	}
 
+	
+	@Override
+	public Repair getRepairListId(Double id) {
+		// TODO Auto-generated method stub
+		List<Repair> repairList = new ArrayList<Repair>();
+		String sql = "select * from REPAIR_LIST where ID=" + id.doubleValue();
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		repairList = jdbcTemplate.query(sql, new RepairRowMapper());
+		System.out.println(sql);
+		System.out.println(repairList.size());
+		return repairList.get(0);
+	}
 
 }

@@ -19,7 +19,7 @@ public class ClaimDaoImpl implements ClaimDao {
 	@Override
 	public void insertClaim(Claim claim) {
 
-		String sql = "INSERT INTO CLAIM (VIN, REPAIR_LOCATION_ID, AUTO_ID, COLOR, DATE) VALUES ( ?, ?, ?, ?, CURDATE())";
+		String sql = "INSERT INTO CLAIM (VIN, REPAIR_LOCATION_ID, AUTO_ID, COLOR, GCLAT,GCLONG , DATE) VALUES ( ?, ?, ?, ?, ?,?,CURDATE())";
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
@@ -27,9 +27,12 @@ public class ClaimDaoImpl implements ClaimDao {
 				sql,
 				new Object[] { 
 						claim.getVIN(),
-						claim.getShopId(),
+						claim.getLocation(),
 						claim.getModelId(),
-						claim.getColor() });
+						claim.getColor(),
+						claim.getGclat(),
+						claim.getGclong()
+						});
 
 	}
 
@@ -46,15 +49,20 @@ public class ClaimDaoImpl implements ClaimDao {
 	@Override
 	public void updateClaim(Claim claim) {
 
-		String sql = "UPDATE CLAIM set  VIN=?, REPAIR_LOCATION_ID=?, AUTO_ID=? where CLAIM_ID = ?";
+		String sql = "UPDATE CLAIM set  VIN=?, REPAIR_LOCATION_ID=?, AUTO_ID=?, COLOR=? ,GCLAT=?, GCLONG=? where CLAIM_ID = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		jdbcTemplate.update(
 				sql,
 				new Object[] { 
 						claim.getVIN(),
-						claim.getShopId(),
-						claim.getModelId() });
+						claim.getLocation(),
+						claim.getModelId(),
+						claim.getColor(),
+						claim.getGclat(),
+						claim.getGclong(),
+						claim.getClaimId()
+						});
 
 	}
 

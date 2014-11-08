@@ -4,6 +4,7 @@ package com.conalytics.services;
 import java.util.List;
 
 
+
 import com.conalytics.domain.Shop;
 
 public interface ShopService {
@@ -17,4 +18,5 @@ public interface ShopService {
 	
 	public List<Shop> getShopList();
 
+	public List<Shop> getShopListwithinGC(String lat, String lon, String distanceinKM);
 }

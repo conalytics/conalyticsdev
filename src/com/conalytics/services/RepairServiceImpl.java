@@ -37,6 +37,18 @@ public class RepairServiceImpl implements RepairService {
 		// TODO Auto-generated method stub
 		return repairDao.getRepairList(id);
 	}
+
+	@Override
+	public Repair getRepairListbyId(Double id) {
+		// TODO Auto-generated method stub
+		return repairDao.getRepairListId(id);
+	}
+
+	@Override
+	public void updateShopIdRepair(Double repairId, Double shopId) {
+		repairDao.updateShopIdRepair(repairId, shopId);
+		
+	}
 	
 	
 	

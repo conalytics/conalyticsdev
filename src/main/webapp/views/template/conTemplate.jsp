@@ -50,7 +50,11 @@
 	src="<c:url value="/resources/js/jquery.dataTables.min.js" />"></script>
 <script
 	src="<c:url value="/resources/js/jquery.idealforms.min.js" />"></script>
+	
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&region=IN"></script>
 
+<script src="<c:url value="/resources/js/googlemapapi.js" />"></script>
+<script src="<c:url value="/resources/js/googlegeomap.js" />"></script>
 <script>
 	$(document).ready(function() {
 		

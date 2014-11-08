@@ -24,6 +24,9 @@ public class ShopExtractor implements ResultSetExtractor<Shop> {
 		shop.setEmail(resultSet.getString(8));
 		shop.setAddress(resultSet.getString(9));
 		shop.setStdHrlyLaborRate(resultSet.getDouble(10));
+		shop.setGclat(resultSet.getString(11));
+		shop.setGclong(resultSet.getString(12));
+		shop.setDistance(resultSet.getString(13));
 		return shop;
 	}
 

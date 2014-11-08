@@ -9,7 +9,8 @@
 				<th>AUTO ID</th>
 				<th>COLOR</th>
 				<th>REPAIR LOCATION</th>
-
+				<th>Edit</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,7 +21,7 @@
 					<td>${claim.VIN }</td>
 					<td>${claim.modelId }</td>
 					<td>${claim.color }</td>
-					<td>${claim.shopId }</td>
+					<td>${claim.location }</td>
 					<td><a href="editClaim?id=${claim.claimId}">Edit</a></td>
 					<td><a href="deleteClaim?id=${claim.claimId}">Delete</a></td>
 				</tr>
@@ -30,7 +31,7 @@
 </center>
 <script>
 	function updateMenuSelection() {
-		$('#menu').multilevelpushmenu('expand', 'Claim');
+		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Claim List');
 	}
 </script>

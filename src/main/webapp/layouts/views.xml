@@ -110,4 +110,7 @@
 	<definition name="workOnClaim" extends="DefaultTemplate">
 		<put-attribute name="body" value="/views/workOnClaim.jsp" />
 	</definition>	
+	<definition name="sourceParts" extends="DefaultTemplate">
+		<put-attribute name="body" value="/views/sourceParts.jsp" />
+	</definition>	
 </tiles-definitions>

@@ -13,6 +13,34 @@ public class Shop implements java.io.Serializable {
 	private String email;
 	private String address;
 	private Double stdHrlyLaborRate;
+	private String gclat;
+	private String gclong;
+	
+	public String getDistance() {
+		return distance;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+
+	private String distance;
+
+	public String getGclat() {
+		return gclat;
+	}
+
+	public void setGclat(String gclat) {
+		this.gclat = gclat;
+	}
+
+	public String getGclong() {
+		return gclong;
+	}
+
+	public void setGclong(String gclong) {
+		this.gclong = gclong;
+	}
 
 	public Shop() {
 	}

@@ -14,5 +14,9 @@ public interface RepairDao {
 	public void updateRepair(Repair repair);
 	
 	public  List<Repair> getRepairList(Double id);
+	
+	public Repair getRepairListId(Double id);
+
+	void updateShopIdRepair(Double repairId , Double shopId);
 
 }

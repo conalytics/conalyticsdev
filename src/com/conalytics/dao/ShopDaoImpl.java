@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 
 
+
 import com.conalytics.domain.Shop;
 import com.conalytics.jdbc.ShopRowMapper;
 
@@ -83,19 +84,48 @@ public class ShopDaoImpl implements ShopDao {
 	public Shop getShopbyId(Double id) {
 		// TODO Auto-generated method stub
 		List<Shop> shopList = new ArrayList<Shop>();
-		String sql = "select * from SHOP where SHOP_ID=" + id ;
+		String sql = "select *,null from SHOP where SHOP_ID=" + id ;
+		System.out.println(sql);
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		shopList = jdbcTemplate.query(sql, new ShopRowMapper());
 		return shopList.get(0);
 	}
 	
+	@Override
 	public List<Shop> getShopList() {
+		// TODO Auto-generated method stub
 		List<Shop> shopList = new ArrayList<Shop>();
-		String sql = "select * from SHOP" ;
+		String sql = "select *,null from SHOP" ;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		shopList = jdbcTemplate.query(sql, new ShopRowMapper());
 		return shopList;	
 	}
+	
+	
+	@Override
+	public List<Shop> getShopListwithinGC(String lat, String lon, String distanceinKM) {
+		List<Shop> shopList = new ArrayList<Shop>();
+		String sql = "select * ,"
+				 + " ATAN2( " 
+				 +        " SQRT( "
+				 +            "POW(COS(RADIANS("+lat+")) * "
+				 +                "SIN(RADIANS(GCLONG - "+lon+")),2) + "
+				 +             "POW(COS(RADIANS(GCLAT)) * SIN(RADIANS("+lat+")) - "
+				 + 				   "SIN(RADIANS(GCLAT)) * COS(RADIANS("+lat+")) * " 
+				 +                 "COS(RADIANS(GCLONG - "+lon+")), 2)), "
+				 +              "(SIN(RADIANS(GCLAT)) * SIN(RADIANS("+lat+")) + "
+				 +              "COS(RADIANS(GCLAT)) * COS(RADIANS("+lat+")) * "
+				 +              "COS(RADIANS(GCLONG -"+lon+"))) "
+				 +              ") * 6372.795 AS distance "
+				 + "from SHOP HAVING distance < "+  distanceinKM;
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		System.out.println(sql);
+		shopList = jdbcTemplate.query(sql, new ShopRowMapper());
+		return shopList;	
+	}
+
+
 
 
 }

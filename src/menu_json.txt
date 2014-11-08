@@ -182,6 +182,7 @@
           {
             "title": "Claims",
             "icon": "fa fa-book",
+            "link": "#",
             "items": [
               {
                 "name": "Claim List",

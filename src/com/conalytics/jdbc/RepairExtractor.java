@@ -21,6 +21,7 @@ public class RepairExtractor implements ResultSetExtractor<Repair> {
 		repair.setPartId(resultSet.getDouble(4));
 		repair.setPartDesc(resultSet.getString(5));
 		repair.setQuantity(resultSet.getDouble(6));
+		repair.setShopid(resultSet.getDouble(7));
        
 		
 		System.out.println(repair.toString());

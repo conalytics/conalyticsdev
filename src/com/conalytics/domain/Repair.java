@@ -13,7 +13,14 @@ public class Repair implements java.io.Serializable {
 	private Double partId;
 	private String partDesc;
 	private Double quantity;
+	private Double shopid;
 
+	public Double getShopid() {
+		return shopid;
+	}
+	public void setShopid(Double shopid) {
+		this.shopid = shopid;
+	}
 	public Double getRepairId() {
 		return repairId;
 	}

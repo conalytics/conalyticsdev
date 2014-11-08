@@ -15,5 +15,7 @@ public interface ShopDao {
 	public Shop getShopbyId(Double id);
 	
 	public List<Shop> getShopList();
+	
+	public List<Shop> getShopListwithinGC(String lat, String lon, String distanceinKM);
 
 }

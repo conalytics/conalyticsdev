@@ -13,5 +13,9 @@ public interface RepairService {
 	public void updateRepair(Repair repair);
 	
 	public  List<Repair> getRepairList(Double id);
+	
+	public Repair getRepairListbyId(Double id);
+	
+	public void updateShopIdRepair(Double repairId, Double shopId);
 
 }

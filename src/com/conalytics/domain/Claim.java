@@ -14,13 +14,47 @@ public class Claim implements java.io.Serializable {
 	
 	private Double modelId;
 
-	private Double shopId;
+	private String location;
 	
 	private String color;
 
 	private String date;
 	
+	private String gclat;
+	
+	private String gclong;
+	
 
+
+
+
+	@Override
+	public String toString() {
+		return "Claim [claimId=" + claimId + ", VIN=" + VIN + ", modelId="
+				+ modelId + ", location=" + location + ", color=" + color
+				+ ", date=" + date + ", gclat=" + gclat + ", gclong=" + gclong
+				+ "]";
+	}
+
+
+	public String getGclat() {
+		return gclat;
+	}
+
+
+	public void setGclat(String gclat) {
+		this.gclat = gclat;
+	}
+
+
+	public String getGclong() {
+		return gclong;
+	}
+
+
+	public void setGclong(String gclong) {
+		this.gclong = gclong;
+	}
 
 
 	public String getVIN() {
@@ -76,8 +110,8 @@ public class Claim implements java.io.Serializable {
 
 
 
-	public Double getShopId() {
-		return shopId;
+	public String getLocation() {
+		return location;
 	}
 
 
@@ -85,8 +119,8 @@ public class Claim implements java.io.Serializable {
 
 
 
-	public void setShopId(Double shopId) {
-		this.shopId = shopId;
+	public void setLocation(String loc) {
+		this.location = loc;
 	}
 
 
@@ -126,16 +160,7 @@ public class Claim implements java.io.Serializable {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Claim [claimId=" + claimId + ", VIN=" + VIN + ", modelId="
-				+ modelId + ", shopId=" + shopId + ", color=" + color
-				+ ", date=" + date + "]";
+
+
+	
 	}
-
-
-
-
-
-
-}

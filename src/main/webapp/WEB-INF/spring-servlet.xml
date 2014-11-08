@@ -65,6 +65,9 @@
 
 	<bean id="repairDao" class="com.conalytics.dao.RepairDaoImpl" />
 	<bean id="repairService" class="com.conalytics.services.RepairServiceImpl" />
+	
+	<bean id="inventoryDao" class="com.conalytics.dao.InventoryDaoImpl" />
+	<bean id="inventoryService" class="com.conalytics.services.InventoryServiceImpl" />
 		
 	<!-- declare datasource bean -->
 	<bean id="dataSource"
