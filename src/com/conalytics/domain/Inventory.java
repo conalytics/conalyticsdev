@@ -15,6 +15,7 @@ public class Inventory implements java.io.Serializable {
 	private double RTL_PRICE_PER_UNIT;
 	private double STD_HRLY_PART_LABOR_RATE;
 	
+	
 	//non table data
 	private String distance;
 	

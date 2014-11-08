@@ -14,6 +14,33 @@ public class Repair implements java.io.Serializable {
 	private String partDesc;
 	private Double quantity;
 	private Double shopid;
+	private Double cost;
+	private String shopName;
+	private String address;
+	
+	
+	public Double getCost() {
+		return cost;
+	}
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
+	
+	
 
 	public Double getShopid() {
 		return shopid;

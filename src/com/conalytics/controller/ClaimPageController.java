@@ -119,6 +119,14 @@ public class ClaimPageController {
 			
 			List<Repair> repairList = repairService.getRepairList(id);
 			
+			//get shop details / price to show on screen
+			
+			
+			
+			
+			
+			
+			
 		ModelAndView modelAndView = new ModelAndView("workOnClaim");
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("repairList", repairList);
@@ -131,6 +139,11 @@ public class ClaimPageController {
 			Repair r=repairList.get(i);
 			System.out.println(r.toString());
 			System.out.println(r.getShopid());
+			Shop shop= shopService.getShopbyId(r.getShopid());
+			String address = shop.getAddress();
+			String shopName = shop.getShopName();
+			repairList.get(i).setAddress(address);
+			repairList.get(i).setShopName(shopName);
 			String lat=shopService.getShopbyId(r.getShopid()).getGclat();
             String lon=shopService.getShopbyId(r.getShopid()).getGclong();
 			String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+"}";
@@ -247,6 +260,13 @@ public class ClaimPageController {
 				Repair r=repairList.get(i);
 				System.out.println(r.toString());
 				System.out.println(r.getShopid());
+				Shop shop= shopService.getShopbyId(r.getShopid());
+				String address = shop.getAddress();
+				String shopName = shop.getShopName();
+				repairList.get(i).setAddress(address);
+				repairList.get(i).setShopName(shopName);
+				
+				
 				String lat=shopService.getShopbyId(r.getShopid()).getGclat();
 	            String lon=shopService.getShopbyId(r.getShopid()).getGclong();
 				String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+"}";

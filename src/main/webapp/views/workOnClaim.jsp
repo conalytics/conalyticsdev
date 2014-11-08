@@ -35,6 +35,8 @@
 				<th>Edit</th>
 				<th>Delete</th>
 				<th>Source parts</th>
+				<th>Shop Name</th>
+				<th> Address </th>
 
 			</tr>
 		</thead>
@@ -48,6 +50,9 @@
 					<td><a href="editRepair?repairId=${repair.repairId}">Edit</a></td>
 					<td><a href="deleteRepair?repairId=${repair.repairId}">Delete</a></td>
 					<td><a href="sourceParts?repairId=${repair.repairId}">Source Parts</a></td>
+					<td>${repair.shopName}</td>
+					<td>${repair.address}</td>
+					
 				</tr>
 			</c:forEach>
 			
