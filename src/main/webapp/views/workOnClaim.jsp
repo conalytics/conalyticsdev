@@ -22,21 +22,27 @@
 				</div>
 				
 				<div id="map-canvas" style="height: 400px; width: 80%; margin-top: 30px; position: absolute !important"></div>
+				
 				<div id="secondDivistion" style="position: absolute !important; margin-top: 500px;">
     
-  
+          Total Retail Cost:${rpc}
+          Total Price Per Unit:${ppc}
 		<table id="repairTable" class="display" cellspacing="0" width="100%">
+		
 		<thead>
 			<tr>
 				<th>Repair Desc</th>
 				<th>Parts Id</th>
 				<th>Parts Desc</th>
-				<th>Quantity</th>
+				<th>Quantity Required</th>
 				<th>Edit</th>
 				<th>Delete</th>
 				<th>Source parts</th>
 				<th>Shop Name</th>
-				<th> Address </th>
+				<th>Address </th>
+				<th>Quantity Available</th>
+				<th>Price</th>
+				<th>Retail Price</th>
 
 			</tr>
 		</thead>
@@ -52,6 +58,9 @@
 					<td><a href="sourceParts?repairId=${repair.repairId}">Source Parts</a></td>
 					<td>${repair.shopName}</td>
 					<td>${repair.address}</td>
+					<td>${repair.quantityav}</td>
+					<td>${repair.shPPU }</td>
+					<td>${repair.shRPU }</td>
 					
 				</tr>
 			</c:forEach>

@@ -120,13 +120,8 @@ public class ClaimPageController {
 			List<Repair> repairList = repairService.getRepairList(id);
 			
 			//get shop details / price to show on screen
-			
-			
-			
-			
-			
-			
-			
+	    Double ppClaim_Cost=0.0;
+	    Double rpClaim_Cost=0.0;
 		ModelAndView modelAndView = new ModelAndView("workOnClaim");
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("repairList", repairList);
@@ -144,6 +139,15 @@ public class ClaimPageController {
 			String shopName = shop.getShopName();
 			repairList.get(i).setAddress(address);
 			repairList.get(i).setShopName(shopName);
+			
+			Inventory inv1 =invService.getInventorybyShopandPartId(r.getShopid(), r.getPartId());
+			repairList.get(i).setQuantityav(inv1.getQTY_AVAILABLE());
+			repairList.get(i).setShPPU(inv1.getPRICE_PER_UNIT());
+			repairList.get(i).setShRPU(inv1.getRTL_PRICE_PER_UNIT());
+			
+			ppClaim_Cost= ppClaim_Cost + (inv1.getPRICE_PER_UNIT()*repairList.get(i).getQuantity()) ;
+			rpClaim_Cost= rpClaim_Cost + (inv1.getRTL_PRICE_PER_UNIT()*repairList.get(i).getQuantity()) ;
+			
 			String lat=shopService.getShopbyId(r.getShopid()).getGclat();
             String lon=shopService.getShopbyId(r.getShopid()).getGclong();
 			String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+"}";
@@ -160,6 +164,8 @@ public class ClaimPageController {
 		jsongeocode=jsongeocode+"]";
 		System.out.println(jsongeocode);
 		modelAndView.addObject("jsongeocode", jsongeocode);
+		modelAndView.addObject("ppc", ppClaim_Cost);
+		modelAndView.addObject("rpc", rpClaim_Cost);
 		
 		return modelAndView;
 
@@ -239,9 +245,7 @@ public class ClaimPageController {
 		
 		//update shop id
 		repairService.updateShopIdRepair(repairid, shopid);
-		
-		
-		
+	
 		Claim claim = claimService.getClaimbyId(ritem.getClaimId());
 		Map<String, Object> map = new HashMap<String, Object>();
 			map.put("claim", claim);
@@ -253,6 +257,8 @@ public class ClaimPageController {
 			modelAndView.addObject("repairList", repairList);
 			System.out.println("in work on claim view with repairs "+repairList.size());
 			
+		    Double ppClaim_Cost=0.0;
+		    Double rpClaim_Cost=0.0;
 			//get list of assigned shops to repairs and show them on the screen.
 			List<String> geocodelist = new ArrayList<String>();
 			String jsongeocode="[";
@@ -265,7 +271,15 @@ public class ClaimPageController {
 				String shopName = shop.getShopName();
 				repairList.get(i).setAddress(address);
 				repairList.get(i).setShopName(shopName);
+				Inventory inv1 =invService.getInventorybyShopandPartId(r.getShopid(), r.getPartId());
+				repairList.get(i).setQuantityav(inv1.getQTY_AVAILABLE());
+				repairList.get(i).setShPPU(inv1.getPRICE_PER_UNIT());
+				repairList.get(i).setShRPU(inv1.getRTL_PRICE_PER_UNIT());
+		
 				
+				ppClaim_Cost= ppClaim_Cost + (inv1.getPRICE_PER_UNIT()*repairList.get(i).getQuantity()) ;
+				rpClaim_Cost= rpClaim_Cost + (inv1.getRTL_PRICE_PER_UNIT()*repairList.get(i).getQuantity()) ;
+		
 				
 				String lat=shopService.getShopbyId(r.getShopid()).getGclat();
 	            String lon=shopService.getShopbyId(r.getShopid()).getGclong();
@@ -283,6 +297,8 @@ public class ClaimPageController {
 			jsongeocode=jsongeocode+"]";
 			System.out.println(jsongeocode);
 			modelAndView.addObject("jsongeocode", jsongeocode);
+			modelAndView.addObject("ppc", ppClaim_Cost);
+			modelAndView.addObject("rpc", rpClaim_Cost);
 			
 			return modelAndView;
 

@@ -17,8 +17,28 @@ public class Repair implements java.io.Serializable {
 	private Double cost;
 	private String shopName;
 	private String address;
+	private Double quantityav;
+	private Double shPPU;
+	private Double shRPU;
 	
-	
+	public Double getQuantityav() {
+		return quantityav;
+	}
+	public void setQuantityav(Double quantityav) {
+		this.quantityav = quantityav;
+	}
+	public Double getShPPU() {
+		return shPPU;
+	}
+	public void setShPPU(Double shPPU) {
+		this.shPPU = shPPU;
+	}
+	public Double getShRPU() {
+		return shRPU;
+	}
+	public void setShRPU(Double shRPU) {
+		this.shRPU = shRPU;
+	}
 	public Double getCost() {
 		return cost;
 	}

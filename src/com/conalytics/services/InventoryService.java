@@ -16,6 +16,8 @@ public interface InventoryService {
 	public List<Inventory> getInventorybyPartId(Double partId);
 	
     public List<Inventory> getInventorybyShopList(List<Shop> shopl, Double partid);
+
+	Inventory getInventorybyShopandPartId(Double shopid, Double partid);
 	
 
 }

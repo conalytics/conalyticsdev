@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 
 
+
 import com.conalytics.domain.Inventory;
 import com.conalytics.domain.Shop;
 import com.conalytics.jdbc.InventoryRowMapper;
@@ -115,6 +116,17 @@ public class InventoryDaoImpl implements InventoryDao {
 			invList = jdbcTemplate.query(sql, new InventoryRowMapper());
 			return invList;
 	       }
+
+	@Override
+	public Inventory getInventorybyShopandPartId(Double shopId, Double partId) {
+		// TODO Auto-generated method stub
+		String sql ="select * from SHOP_PARTS_INFO where PART_ID= " + partId +" and SHOP_ID ="+shopId;
+        System.out.println(sql);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		List<Inventory> invList = new ArrayList<Inventory>();
+		invList = jdbcTemplate.query(sql, new InventoryRowMapper());
+		return invList.get(0);
+	}
 	
 
 	

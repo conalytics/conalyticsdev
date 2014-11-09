@@ -46,4 +46,10 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	
+	@Override
+	public Inventory getInventorybyShopandPartId(Double shopid,Double partid) {
+		// TODO Auto-generated method stub
+		return invdao.getInventorybyShopandPartId(shopid,partid);
+	}
+	
 }
