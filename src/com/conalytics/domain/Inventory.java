@@ -1,5 +1,9 @@
 package com.conalytics.domain;
 
+import java.sql.Blob;
+
+
+
 public class Inventory implements java.io.Serializable {
 
 	/**
@@ -14,14 +18,20 @@ public class Inventory implements java.io.Serializable {
 	private double PRICE_PER_UNIT;
 	private double RTL_PRICE_PER_UNIT;
 	private double STD_HRLY_PART_LABOR_RATE;
-	
-	
-	//non table data
+	private Blob image;
+		//non table data
 	private String distance;
 	
 	
 
 
+	public Blob getImage() {
+		return image;
+	}
+	public void setImage(Blob image) {
+		this.image = image;
+	}
+	
 	public String getDistance() {
 		return distance;
 	}

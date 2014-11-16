@@ -6,14 +6,18 @@
 		<div style="width: 100%;">
 
 			<div style="float: left; width: 49%;">
-				<div class="field">
-					<label class="main">SHOP ID:</label>
-					<form:input path="shopId" />
+				<div class="idealforms-field-select-one">
+					<label class="main">State*:</label>
+					<form:select path="stateId">
+						<form:options items="${stateMap}" />
+					</form:select>
 					<span class="error"></span>
 				</div>
-				<div class="field">
-					<label class="main">CITY ID:</label>
-					<form:input path="cityId" />
+				<div class="idealforms-field-select-one">
+					<label class="main">City*:</label>
+					<form:select path="cityId">
+						<form:options items="${cityMap}" />
+					</form:select>
 					<span class="error"></span>
 				</div>
 				<div class="field">
@@ -22,7 +26,7 @@
 					<span class="error"></span>
 				</div>
 				<div class="field">
-					<label class="main">SHOP NAME:</label>
+					<label class="main">SHOP NAME*:</label>
 					<form:input path="shopName" />
 					<span class="error"></span>
 				</div>
@@ -56,7 +60,7 @@
 					<span class="error"></span>
 				</div>
 				<div class="field">
-					<label class="main">ADDRESS:</label>
+					<label class="main">ADDRESS*:</label>
 					<form:input path="address" />
 					<span class="error"></span>
 				</div>

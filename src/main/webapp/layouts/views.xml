@@ -113,4 +113,7 @@
 	<definition name="sourceParts" extends="DefaultTemplate">
 		<put-attribute name="body" value="/views/sourceParts.jsp" />
 	</definition>	
+	<definition name="imageServer" >
+		<put-attribute name="body" value="/views/imageserver.jsp" />
+	</definition>
 </tiles-definitions>

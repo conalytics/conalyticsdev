@@ -40,6 +40,12 @@ public class PartServiceImpl implements PartService {
 		
 	}
 
+	@Override
+	public List<Part> getPartsdata() {
+		// TODO Auto-generated method stub
+		return 	partdao.getPartsdata();
+	}
+
 
 	
 }

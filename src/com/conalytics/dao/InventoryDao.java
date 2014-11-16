@@ -18,5 +18,9 @@ public interface InventoryDao {
 	public List<Inventory> getInventorybyShopList(List<Shop> shopl ,Double PartId);
 	
 	public Inventory getInventorybyShopandPartId(Double shopid,Double partid);
+	
+	public byte[] getImagebyInvId(Double invId);
+
+	public List<Inventory> getShopPartsdata();
 
 }

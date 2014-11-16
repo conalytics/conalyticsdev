@@ -14,4 +14,6 @@ public interface AutoService {
 	public Auto getAuto(Double id);
 
 	public void updateData(Auto auto);
+
+	public List<String> getAutoname(String query);
 }

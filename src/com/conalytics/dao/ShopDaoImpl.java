@@ -22,15 +22,14 @@ public class ShopDaoImpl implements ShopDao {
 	@Override
 	public void insertData(Shop shop) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO SHOP(SHOP_ID, CITY_ID, TOWN_MUNI, SHOP_NAME, SHOP_DESC, PHONE_NUMBER, WEBSITE, EMAIL, ADDRESS, STD_HRLY_LABOR_RATE) "
-				+ "VALUES  (?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+		String sql = "INSERT INTO SHOP( CITY_ID, TOWN_MUNI, SHOP_NAME, SHOP_DESC, PHONE_NUMBER, WEBSITE, EMAIL, ADDRESS, STD_HRLY_LABOR_RATE) "
+				+ "VALUES  ( ?, ?, ?, ?, ? ,?, ?, ?, ?)";
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		jdbcTemplate.update(
 				sql,
 				new Object[] { 
-						shop.getShopId(),
 						shop.getCityId(),
 						shop.getTownMuni(),
 						shop.getShopName(),

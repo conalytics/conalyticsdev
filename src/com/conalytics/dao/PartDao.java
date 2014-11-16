@@ -15,4 +15,6 @@ public interface PartDao {
 
 	public Part getPart(Double id);
 
+	public List<Part> getPartsdata();
+
 }

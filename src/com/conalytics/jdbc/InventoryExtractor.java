@@ -22,6 +22,7 @@ public class InventoryExtractor implements ResultSetExtractor<Inventory> {
 		invent.setPRICE_PER_UNIT(resultSet.getDouble(5));
 		invent.setRTL_PRICE_PER_UNIT(resultSet.getDouble(6));
 		invent.setSTD_HRLY_PART_LABOR_RATE(resultSet.getDouble(7));	
+		invent.setImage(resultSet.getBlob(8));
 		return invent;
 	}
 }

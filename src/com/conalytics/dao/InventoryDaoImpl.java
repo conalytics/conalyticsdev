@@ -1,5 +1,7 @@
 package com.conalytics.dao;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,10 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+
+
+
 
 
 
@@ -127,7 +133,44 @@ public class InventoryDaoImpl implements InventoryDao {
 		invList = jdbcTemplate.query(sql, new InventoryRowMapper());
 		return invList.get(0);
 	}
+
+	@Override
+	public byte[] getImagebyInvId(Double invId){
+		// TODO Auto-generated method stub
+		String sql ="select * from SHOP_PARTS_INFO where SHOP_PART_ID = " + invId; 
+        System.out.println(sql);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		List<Inventory> invList = new ArrayList<Inventory>();
+		invList = jdbcTemplate.query(sql, new InventoryRowMapper());
+		
+		byte[] imgData =null;
+		try {
+			Blob img =invList.get(0).getImage();
+			imgData = img.getBytes(1,(int)img.length());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return imgData;
+		
+	}
 	
+
+	
+	@Override
+	public List<Inventory> getShopPartsdata()
+	{
+		// TODO Auto-generated method stub
+		String sql ="select * from SHOP_PARTS_INFO"; 
+        System.out.println(sql);
+        System.out.println(sql);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		List<Inventory> invList = new ArrayList<Inventory>();
+		invList = jdbcTemplate.query(sql, new InventoryRowMapper());
+		return invList;		
+	
+	}
 
 	
 }	

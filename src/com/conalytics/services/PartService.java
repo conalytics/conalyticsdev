@@ -14,4 +14,6 @@ public interface PartService {
 	public Part getPart(Double id);
 
 	public void updateData(Part part);
+	
+	public List<Part> getPartsdata();
 }

@@ -193,11 +193,13 @@ public class ClaimPageController {
 		List<Shop> shopl= null;
 		for(int i=1; i<=5; i++)
 		{
-			
+			//check for shops within geocode location
 			shopl=shopService.getShopListwithinGC(lat, lon, Integer.toString(radius));
 		        System.out.println(shopl.toString());
 				if(shopl.size() > 0)
 		        {
+					
+					//check for shops inventory 
 					sourceParts = invService.getInventorybyShopList(shopl, partId);
 					if(sourceParts.size() > 0)
 					{
@@ -205,7 +207,7 @@ public class ClaimPageController {
 					}
 					
 				}
-				radius= radius * 10;
+				radius= radius + 50 ;
 				
 		}
 
@@ -301,8 +303,11 @@ public class ClaimPageController {
 			modelAndView.addObject("rpc", rpClaim_Cost);
 			
 			return modelAndView;
-
-
+	}
+	
+	@RequestMapping("imageServer")
+	public ModelAndView showImage() {
+		 return new ModelAndView("imageServer");
 	}
 	
 }

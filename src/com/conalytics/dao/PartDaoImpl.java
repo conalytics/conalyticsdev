@@ -8,7 +8,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.conalytics.domain.Inventory;
 import com.conalytics.domain.Part;
+import com.conalytics.jdbc.InventoryRowMapper;
 import com.conalytics.jdbc.PartRowMapper;
 
 public class PartDaoImpl implements PartDao {
@@ -87,6 +89,21 @@ public class PartDaoImpl implements PartDao {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		partList = jdbcTemplate.query(sql, new PartRowMapper());
 		return partList.get(0);
+	}
+	
+	
+	@Override
+	public List<Part> getPartsdata()
+	{
+		// TODO Auto-generated method stub
+		String sql ="select * from PARTS"; 
+        System.out.println(sql);
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		List<Part> invPart = new ArrayList<Part>();
+		invPart = jdbcTemplate.query(sql, new PartRowMapper());
+		return invPart;		
+	
 	}
 
 }
