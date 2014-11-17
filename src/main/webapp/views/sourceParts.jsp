@@ -48,7 +48,7 @@
 					<td>${sp.RTL_PRICE_PER_UNIT }</td>
 					<td>${sp.distance} KM</td>
 					<td><a href="selectShop?shopid=${sp.SHOP_ID}&repairid=${ritem.repairId}">select this shop</a></td>
-					<td><img src="imageServer?imgID=12" width="115" border="0"></td>
+					<td><img src="getUserImage/${sp.PART_ID}" height="100px" width="115px" border="0"></td>
 				</tr>
 			</c:forEach>
 		</tbody>

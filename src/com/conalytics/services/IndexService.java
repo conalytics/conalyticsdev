@@ -33,21 +33,7 @@ public class IndexService {
 	{
 		//StandardAnalyzer analyzer = new StandardAnalyzer();  
 		  
-		IndexWriter writer = new IndexWriter(jdbcDir, analyzer, true);  
 		
-		List<Part> lpart=null;
-		lpart=pService.getPartsdata();
-
-		for (int i = 0; i < lpart.size(); i++) {
-			Part pr=lpart.get(i); 
-	        Document d = new Document();  
-	        d.add(new Field("partId", pr.getPartId().toString(), Field.Store.YES, Field.Index.NO));  
-	        d.add(new Field("autoId", pr.getAutoId().toString(), Field.Store.YES, Field.Index.NO));  
-	        d.add(new Field("partName", pr.getPartName().toString(), Field.Store.YES, Field.Index.TOKENIZED)); 
-	        d.add(new Field("partDesc", pr.getPartDesc().toString(), Field.Store.YES,  Field.Index.TOKENIZED));  
-	        d.add(new Field("oemNumber", pr.getOemNumber().toString(), Field.Store.YES,  Field.Index.TOKENIZED));  
-	        writer.addDocument(d);  
-	    } 
 		  
 	}
 
