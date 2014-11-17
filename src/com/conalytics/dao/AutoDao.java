@@ -15,6 +15,6 @@ public interface AutoDao {
 
 	public Auto getAuto(Double id);
 
-	public List<Auto> getAutoDetails(int autoYear, String searchText);
+	public List<Auto> getAutoDetails(int autoYear);
 
 }

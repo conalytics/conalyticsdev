@@ -18,7 +18,7 @@
 				</div>
 				<div class="field">
 					<label class="main">Year:</label>
-					<form:input path="color" />
+					<input id="autoYear" value="2015" onblur="alert('change drop down');"/>
 					<span class="error"></span>
 				</div>
 				<div class="field">
@@ -49,7 +49,8 @@
 	function updateMenuSelection() {
 		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Add New Claim');
-		$.getJSON("<%=request.getContextPath()%>/getautoDetails/2015/Alto", function(data){
+		alert($('#autoYear').val());
+		$.getJSON("<%=request.getContextPath()%>/getautoDetails/" + $('#autoYear').val(), function(data){
 			$.each(data, function(i, value) {
 	            $('#modelId').append($('<option>').text(value).attr('value', value));
 	        });

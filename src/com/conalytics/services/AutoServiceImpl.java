@@ -58,8 +58,8 @@ public class AutoServiceImpl implements AutoService {
 	    }
 
 	@Override
-	public Map<String, String> getAutoDetails(int autoYear, String searchText) {
-		List<Auto> autoList = autodao.getAutoDetails(autoYear, searchText);
+	public Map<String, String> getAutoDetails(int autoYear) {
+		List<Auto> autoList = autodao.getAutoDetails(autoYear);
 		Map<String, String> autoDetails = new HashMap<String, String>();
 		for(Auto auto : autoList) {
 			autoDetails.put(auto.getAutoId().toString(), auto.getYearBuilt() + "-" + auto.getAutoName() + "-" + auto.getCompanyName() + "-" + auto.getModel() + "-" + auto.getVersion());
