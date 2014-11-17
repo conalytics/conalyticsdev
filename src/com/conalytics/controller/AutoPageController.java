@@ -1,14 +1,20 @@
 package com.conalytics.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -95,5 +101,12 @@ public class AutoPageController {
 		System.out.println("id = " + id);
 		autoService.deleteData(id);
 		return "redirect:/getAutoList";
+	}
+	
+	@RequestMapping(value="/getautoDetails/{autoYear}/{searchText}")
+	public @ResponseBody String getUserImage(HttpServletResponse response , @PathVariable("autoYear") int autoYear, 
+															@PathVariable("searchText") String searchText) throws IOException{
+		Map<String, String> autoDetails = autoService.getAutoDetails(autoYear, searchText);
+		return JSONValue.toJSONString(autoDetails);
 	}
 }

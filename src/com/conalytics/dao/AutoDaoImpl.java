@@ -86,4 +86,21 @@ public class AutoDaoImpl implements AutoDao {
 		return autoList.get(0);
 	}
 
+	@Override
+	public List<Auto> getAutoDetails(int autoYear, String searchText) {
+		String sql = "SELECT AUTO_ID, C.COMPANY_ID, C.COMPANY_NAME,  AUTO_NAME ,  AUTO_DESC ,  MODEL ,  VERSION ,  YEAR_BUILT "
+				+ "FROM AUTO A, COMPANY C "
+				+ "WHERE A.COMPANY_ID = C.COMPANY_ID "
+					+ " AND A.YEAR_BUILT = " + autoYear
+					+ " AND ("
+					+ " 	A.AUTO_NAME LIKE '" + searchText + "'"
+					+ " OR  A.AUTO_DESC LIKE '" + searchText + "'"
+					+ " OR  A.MODEL LIKE '" + searchText + "'"
+					+ " OR  A.VERSION LIKE '" + searchText + "'"
+					+ ")";
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		return jdbcTemplate.query(sql, new AutoRowMapper());
+	}
+
 }

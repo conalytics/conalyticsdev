@@ -49,6 +49,8 @@
 <link href="<c:url value="/resources/css/jquery.idealforms.css"/>"
 	rel="stylesheet">
 	
+<link href="<c:url value="/resources/css/select2.css"/>"
+	rel="stylesheet">
 	
 <script type="text/javascript"
 	src="http://oss.maxcdn.com/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -65,6 +67,10 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&region=IN"></script>
 
 <script src="<c:url value="/resources/js/googlemapapi.js" />"></script>
+
+<script src="<c:url value="/resources/js/select2.js" />"></script>
+
+
 
 <script>
 	$(document).ready(function() {

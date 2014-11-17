@@ -1,7 +1,9 @@
 package com.conalytics.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -54,5 +56,15 @@ public class AutoServiceImpl implements AutoService {
 	        }
 	        return matched;
 	    }
+
+	@Override
+	public Map<String, String> getAutoDetails(int autoYear, String searchText) {
+		List<Auto> autoList = autodao.getAutoDetails(autoYear, searchText);
+		Map<String, String> autoDetails = new HashMap<String, String>();
+		for(Auto auto : autoList) {
+			autoDetails.put(auto.getAutoId().toString(), auto.getYearBuilt() + "-" + auto.getAutoName() + "-" + auto.getCompanyName() + "-" + auto.getModel() + "-" + auto.getVersion());
+		}
+		return autoDetails;
+	}
 	
 }

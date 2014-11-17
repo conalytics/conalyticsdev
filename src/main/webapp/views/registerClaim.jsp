@@ -17,8 +17,15 @@
 					<span class="error"></span>
 				</div>
 				<div class="field">
+					<label class="main">Year:</label>
+					<form:input path="color" />
+					<span class="error"></span>
+				</div>
+				<div class="field">
 					<label class="main">Vehicle Model</label>
-					<form:input path="modelId" />
+
+					<form:select path="modelId" cssStyle="width : 200px;">
+					</form:select>
 					<span class="error"></span>
 				</div>
 
@@ -42,7 +49,16 @@
 	function updateMenuSelection() {
 		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Add New Claim');
+		$.getJSON("<%=request.getContextPath()%>/getautoDetails/2015/Alto", function(data){
+			$.each(data, function(i, value) {
+	            $('#modelId').append($('<option>').text(value).attr('value', value));
+	        });
+			//alert(data);
+		});
 	}
 
-
+	$("#modelId").select2({
+		placeholder: "Select a Model",
+		allowClear: true
+	});
 </script>
