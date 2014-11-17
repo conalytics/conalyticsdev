@@ -48,7 +48,11 @@
 					<td>${sp.RTL_PRICE_PER_UNIT }</td>
 					<td>${sp.distance} KM</td>
 					<td><a href="selectShop?shopid=${sp.SHOP_ID}&repairid=${ritem.repairId}">select this shop</a></td>
-					<td><img src="getUserImage/${sp.PART_ID}" height="100px" width="115px" border="0"></td>
+					<td>
+					<%-- <a href="1.jpg" class="preview" title="${sp.PART_ID}"> --%>
+						<img src="getUserImage/${sp.PART_ID}" alt="${sp.PART_ID}" height="100px" width="115px" border="0">
+					<!-- </a> -->
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -57,8 +61,8 @@
 <script>
 //google.maps.event.addDomListener(window, 'load', setgmap);
 	function updateMenuSelection() {
-		setgmap();
 		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Claim List');
+		//imagePreview();
 	}
 </script>
