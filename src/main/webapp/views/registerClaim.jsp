@@ -1,7 +1,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <center>
-	<form:form method="post" class="idealforms" autocomplete="off" action="/insertClaim" modelAttribute="claim" >
+	<form:form method="POST" class="idealforms" autocomplete="off" action="/insertClaim" modelAttribute="claim" >
 		<div style="width: 100%;">
 
 			<div style="float: left; width: 49%;">
@@ -18,14 +18,14 @@
 				</div>
 				<div class="field">
 					<label class="main">Year:</label>
-					<input id="autoYear" value="2015" onblur="alert('change drop down');"/>
+					<input id="autoYear" onblur="loadModelDropdown()"/>
 					<span class="error"></span>
 				</div>
 				<div class="field">
 					<label class="main">Vehicle Model</label>
-
-					<form:select path="modelId" cssStyle="width : 200px;">
+					<form:select path="modelId">
 					</form:select>
+					
 					<span class="error"></span>
 				</div>
 
@@ -49,17 +49,25 @@
 	function updateMenuSelection() {
 		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Add New Claim');
-		alert($('#autoYear').val());
-		$.getJSON("<%=request.getContextPath()%>/getautoDetails/" + $('#autoYear').val(), function(data){
-			$.each(data, function(i, value) {
-	            $('#modelId').append($('<option>').text(value).attr('value', value));
-	        });
-			//alert(data);
-		});
 	}
 
-	$("#modelId").select2({
+	function loadModelDropdown() {
+		if($("#autoYear").val()){
+			$.getJSON("<%=request.getContextPath()%>/getautoDetails/" + $('#autoYear').val(), function(data){
+				$.each(data, function(value, text) {
+		            $('#modelId').append($('<option>').text(text).attr('value', value));
+		        });
+			});
+		} else {
+			alert('Enter vehicle year before selecting the model');
+			$('#autoYear').focus();
+		}
+	}
+	var modelIdList = $('#modelId');
+	$(modelIdList).select2({
 		placeholder: "Select a Model",
-		allowClear: true
+		allowClear: true,
+		minimumInputLength: 2,
+	    width: "300px"
 	});
 </script>
