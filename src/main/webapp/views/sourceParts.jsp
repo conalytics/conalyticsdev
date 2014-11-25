@@ -41,7 +41,7 @@
 		<tbody>
 			<c:forEach var="sp" items="${sourceParts}">
 				<tr>
-					<td>${sp.SHOP_ID}</td>
+					<td>${sp.shopdesc}</td>
 					<td>${sp.PART_ID}</td>
 					<td>${sp.QTY_AVAILABLE }</td>
 					<td>${sp.PRICE_PER_UNIT }</td>

@@ -18,9 +18,10 @@ function setgmap() {
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-      showMarker(map, results[0].geometry.location, true);
+      showMarker(map, results[0].geometry.location, true ,"vehicle");
       $.each(shopsPosArray, function(i, item) {
-    	 showMarker(map, new google.maps.LatLng(item.lat, item.lon), false);
+    	 
+    	 showMarker(map, new google.maps.LatLng(item.lat, item.lon), false, '"'+item.rid+'"');
       });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -30,7 +31,7 @@ function setgmap() {
   
 }
 
-function showMarker(map, location, setCenter) {
+function showMarker(map, location, setCenter , rid) {
 	var bounds = new google.maps.LatLngBounds();
 	bounds.extend(location); 
 	if(setCenter) {
@@ -38,6 +39,7 @@ function showMarker(map, location, setCenter) {
 	}
     new google.maps.Marker({
         map: map,
-        position: location
+        position: location,
+        title: rid
     });
 }

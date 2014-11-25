@@ -21,10 +21,17 @@ public class Inventory implements java.io.Serializable {
 	private Blob image;
 		//non table data
 	private String distance;
+	private String shopdesc;
 	
 	
 
 
+	public String getShopdesc() {
+		return shopdesc;
+	}
+	public void setShopdesc(String shopdesc) {
+		this.shopdesc = shopdesc;
+	}
 	public Blob getImage() {
 		return image;
 	}

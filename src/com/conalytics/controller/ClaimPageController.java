@@ -148,9 +148,18 @@ public class ClaimPageController {
 			ppClaim_Cost= ppClaim_Cost + (inv1.getPRICE_PER_UNIT()*repairList.get(i).getQuantity()) ;
 			rpClaim_Cost= rpClaim_Cost + (inv1.getRTL_PRICE_PER_UNIT()*repairList.get(i).getQuantity()) ;
 			
+			//String lat=shopService.getShopbyId(r.getShopid()).getGclat();
+            //String lon=shopService.getShopbyId(r.getShopid()).getGclong();
+			//String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+"}";
+			
+			
+			int rpId= r.getRepairId().intValue();
+			//String rpId = r.getShopName();
 			String lat=shopService.getShopbyId(r.getShopid()).getGclat();
             String lon=shopService.getShopbyId(r.getShopid()).getGclong();
-			String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+"}";
+			//String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+"}";
+            String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+","+"\"rid\":"+rpId+"}";
+			
 	        geocodelist.add(i, latlon);
 	        if(i < repairList.size()-1)
 	        {
@@ -223,6 +232,7 @@ public class ClaimPageController {
 			  {
 				  
 				  sourceParts.get(i).setDistance(ds);
+				  sourceParts.get(i).setShopdesc(sl.getShopName());
 				  
 			  }
 		  }
@@ -282,11 +292,14 @@ public class ClaimPageController {
 				ppClaim_Cost= ppClaim_Cost + (inv1.getPRICE_PER_UNIT()*repairList.get(i).getQuantity()) ;
 				rpClaim_Cost= rpClaim_Cost + (inv1.getRTL_PRICE_PER_UNIT()*repairList.get(i).getQuantity()) ;
 		
-				
+				int rpId= r.getRepairId().intValue();
+				//String rpId = r.getShopName();
 				String lat=shopService.getShopbyId(r.getShopid()).getGclat();
 	            String lon=shopService.getShopbyId(r.getShopid()).getGclong();
-				String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+"}";
-		        geocodelist.add(i, latlon);
+				//String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+"}";
+	           // String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+","+"\"rid\":'"+rpId+"'}";
+	            String latlon="{\"lat\":"+lat+","+"\"lon\":"+lon+","+"\"rid\":"+rpId+"}";
+	            geocodelist.add(i, latlon);
 		        if(i < repairList.size()-1)
 		        {
 		        	jsongeocode=jsongeocode+latlon+",";
