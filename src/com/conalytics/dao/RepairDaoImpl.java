@@ -19,7 +19,7 @@ public class RepairDaoImpl implements RepairDao {
 	@Override
 	public void insertRepair(Repair repair) {
 
-		String sql = "INSERT INTO REPAIR_LIST (REPAIR_DESC, CLAIM_ID, PART_ID, PARTS_DESC, QUANTITY , SHOP_ID) VALUES ( ?, ?, ?, ?, ? , ?)";
+		String sql = "INSERT INTO REPAIR_LIST (REPAIR_DESC, CLAIM_ID, PART_ID, PARTS_DESC, QUANTITY) VALUES ( ?, ?, ?, ?, ?)";
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
@@ -30,8 +30,7 @@ public class RepairDaoImpl implements RepairDao {
 						repair.getClaimId(),
 						repair.getPartId(),
 						repair.getPartDesc(),
-						repair.getQuantity(),
-						null
+						repair.getQuantity()
 				 });
 
 	}
