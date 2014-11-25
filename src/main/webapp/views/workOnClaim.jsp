@@ -25,6 +25,7 @@
 		<table id="repairTable" class="display" cellspacing="0" width="100%">
 			<thead>
 				<tr>
+				    <th>Repair number</th>
 					<th>Repair Desc</th>
 					<th>Parts Id</th>
 					<th>Parts Desc</th>
@@ -42,6 +43,7 @@
 			<tbody>
 				<c:forEach var="repair" items="${repairList}">
 					<tr>
+					    <td>${repair.repairId}</td>
 						<td>${repair.repairDesc}</td>
 						<td>${repair.partId}</td>
 						<td>${repair.partDesc }</td>

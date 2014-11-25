@@ -40,6 +40,7 @@ public class ShopPageController {
 		
 		ModelAndView modelAndView = new ModelAndView("registerShop", "stateMap", getStateMap());
 		//ModelAndView modelAndView = new ModelAndView("registerAuto", "companyMap", getCompanyMap());
+		//ModelAndView modelAndView = new ModelAndView("registerShop");
 		return modelAndView;
 	}
 

@@ -5,11 +5,6 @@
 		<div style="width: 100%;">
 
 			<div style="float: left; width: 49%;">
-				<div class="field">
-					<label class="main">State Id:</label>
-					<form:input path="id" />
-					<span class="error"></span>
-				</div>
 
 				<div class="field">
 					<label class="main">State Name</label>

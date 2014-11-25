@@ -8,7 +8,7 @@
 			<div style="float: left; width: 49%;">
 				<div class="idealforms-field-select-one">
 					<label class="main">State*:</label>
-					<form:select path="stateId">
+					<form:select path="shopId">
 						<form:options items="${stateMap}" />
 					</form:select>
 					<span class="error"></span>
