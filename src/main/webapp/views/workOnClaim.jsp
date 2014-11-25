@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <center>
@@ -18,14 +19,16 @@
 			</tbody>
 		</table>
 	</div>
-	<div id="map-canvas" style="height: 400px; width: 80%; margin-top: 30px; position: absolute !important"></div>
+	<div id="map-canvas" style="height: 400px; width: 80%; margin-top: 30px; position: absolute !important;"></div>
+	
+
+	
 
 	<div id="secondDivistion" style="position: absolute !important; margin-top: 500px;">
 		Total Retail Cost:${rpc} Total Price Per Unit:${ppc}
 		<table id="repairTable" class="display" cellspacing="0" width="100%">
 			<thead>
 				<tr>
-				    <th>Repair number</th>
 					<th>Repair Desc</th>
 					<th>Parts Id</th>
 					<th>Parts Desc</th>
@@ -43,7 +46,6 @@
 			<tbody>
 				<c:forEach var="repair" items="${repairList}">
 					<tr>
-					    <td>${repair.repairId}</td>
 						<td>${repair.repairDesc}</td>
 						<td>${repair.partId}</td>
 						<td>${repair.partDesc }</td>
@@ -60,6 +62,42 @@
 				</c:forEach>
 			</tbody>
 		</table>
+	
+	<div id="newRepairDiv" style="width: 100%;">	
+		<form:form method="POST" class="idealforms" autocomplete="off" action="/insertRepair" modelAttribute="repair" >
+		<div style="float: left; width: 49%;">
+				<div class="field">
+					<label class="main">Repair Description:</label>
+					<form:input path="repairDesc" />
+					<span class="error"></span>
+				</div>
+				<div class="field">
+					<label class="main">Part Id:</label>
+					<form:input path="partId" />
+					<span class="error"></span>
+				</div>
+				</div>
+				<div style="float: right; width: 50%; margin-left: 10px;">
+				<div class="field">
+					<label class="main">Year:</label>
+					<form:input path="partDesc"/>
+					<span class="error"></span>
+				</div>
+				<div class="field">
+					<label class="main">Quantity</label>
+					<form:input path="quantity"/>
+					<span class="error"></span>
+				</div>
+				</div>
+				<div>
+				<div class="field button">
+					<label class="main">&nbsp;</label>
+					<button type="submit">Add Repair</button>
+				</div>
+				</div>
+				<input id="claimId" name="claimId" type="hidden" value="${map.claim.claimId}"/>
+			</form:form>
+		</div>
 	</div>
 </center>
 <script>
@@ -69,4 +107,6 @@
 		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Claim List');
 	}
+
+	
 </script>
