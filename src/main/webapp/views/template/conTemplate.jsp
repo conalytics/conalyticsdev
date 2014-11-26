@@ -75,9 +75,7 @@
 		//$('form').idealforms();
 		$('#conTable').dataTable();
 		$('#menu').multilevelpushmenu({
-			menu :
-<%=Menu.getMenuItems(request.getContextPath())%>
-	,
+			menu :<%=Menu.getMenuItems(request.getContextPath())%>,
 			containersToPush : [ $('#conBody') ],
 			// Just for fun also changing the look of the menu
 			wrapperClass : 'mlpm_w',
@@ -93,6 +91,16 @@
 				}
 
 			}
+		});
+		$.ajaxSetup({
+		    beforeSend:function(){
+		        // show image here
+		        $("#ajaxBusy").show();
+		    },
+		    complete:function(){
+		        // hide image here
+		        $("#ajaxBusy").hide();
+		    }
 		});
 		updateMenuLinks();
 		updateMenuSelection();

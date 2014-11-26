@@ -190,7 +190,7 @@ public class InventoryDaoImpl implements InventoryDao {
 	 			{
 		
 		 			//String sql ="select * from SHOP_PARTS_INFO where 
-		 			String sql = "select part_id from PART where AUTO_ID = PART_DESC like '%"+token+"%'";
+		 			String sql = "select part_id from PART where UPPER(PART_DESC) = like '%" + token.toUpperCase() + "%'";
 		 			
 	 			}
 
