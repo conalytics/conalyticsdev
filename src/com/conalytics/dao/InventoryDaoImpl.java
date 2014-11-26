@@ -4,11 +4,16 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+
+
+
 
 
 
@@ -170,6 +175,29 @@ public class InventoryDaoImpl implements InventoryDao {
 		invList = jdbcTemplate.query(sql, new InventoryRowMapper());
 		return invList;		
 	
+	}
+
+	@Override
+	public List<Inventory> getInventorybyShopListandPartDesc(List<Shop> shopl,String pdesc) {
+		// TODO Auto-generated method stub
+		
+		//parse pdesc
+		 StringTokenizer st = new StringTokenizer(pdesc);
+		 while(st.hasMoreTokens())
+		 {
+			 String token = st.nextToken(" ");
+		 		if (! token.equalsIgnoreCase("the") || !token.equalsIgnoreCase("and") || !token.equalsIgnoreCase("it") || !token.equalsIgnoreCase("of"))
+	 			{
+		
+		 			//String sql ="select * from SHOP_PARTS_INFO where 
+		 			String sql = "select part_id from PART where AUTO_ID = PART_DESC like '%"+token+"%'";
+		 			
+	 			}
+
+	      }
+		
+		String sql ="select * from SHOP_PARTS_INFO";
+		return null;
 	}
 
 	

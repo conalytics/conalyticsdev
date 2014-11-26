@@ -22,5 +22,7 @@ public interface InventoryService {
 	public byte[] getImagebyInvId(Double invId);
 	
 	public List<Inventory> getShopPartsdata();
+	
+	public List<Inventory> getInventorybyShopListandPartDesc(List<Shop> shopl,String pdesc);
 
 }

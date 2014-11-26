@@ -104,7 +104,7 @@ public class ShopDaoImpl implements ShopDao {
 	@Override
 	public List<Shop> getShopListwithinGC(String lat, String lon, String distanceinKM) {
 		List<Shop> shopList = new ArrayList<Shop>();
-		String sql = "select * ,"
+		String sql = "select * ,Round("
 				 + " ATAN2( " 
 				 +        " SQRT( "
 				 +            "POW(COS(RADIANS("+lat+")) * "
@@ -115,7 +115,7 @@ public class ShopDaoImpl implements ShopDao {
 				 +              "(SIN(RADIANS(GCLAT)) * SIN(RADIANS("+lat+")) + "
 				 +              "COS(RADIANS(GCLAT)) * COS(RADIANS("+lat+")) * "
 				 +              "COS(RADIANS(GCLONG -"+lon+"))) "
-				 +              ") * 6372.795 AS distance "
+				 +              ") * 6372.795 ) AS distance "
 				 + "from SHOP HAVING distance < "+  distanceinKM;
 		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

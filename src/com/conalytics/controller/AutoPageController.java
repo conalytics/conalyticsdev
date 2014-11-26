@@ -104,7 +104,7 @@ public class AutoPageController {
 	}
 	
 	@RequestMapping(value="/getautoDetails/{autoYear}")
-	public @ResponseBody String getUserImage(HttpServletResponse response , @PathVariable("autoYear") int autoYear
+	public @ResponseBody String getautoDetails(HttpServletResponse response , @PathVariable("autoYear") int autoYear
 															) throws IOException{
 		Map<String, String> autoDetails = autoService.getAutoDetails(autoYear);
 		return JSONValue.toJSONString(autoDetails);

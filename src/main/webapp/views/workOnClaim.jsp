@@ -29,11 +29,11 @@
 		<table id="repairTable" class="display" cellspacing="0" width="100%">
 			<thead>
 				<tr>
+				    <th>Repair Id</th>
 					<th>Repair Desc</th>
 					<th>Parts Id</th>
 					<th>Parts Desc</th>
 					<th>Quantity Required</th>
-					<th>Edit</th>
 					<th>Delete</th>
 					<th>Source parts</th>
 					<th>Shop Name</th>
@@ -46,11 +46,11 @@
 			<tbody>
 				<c:forEach var="repair" items="${repairList}">
 					<tr>
+					    <td>${repair.repairId}</td>
 						<td>${repair.repairDesc}</td>
 						<td>${repair.partId}</td>
 						<td>${repair.partDesc }</td>
 						<td>${repair.quantity }</td>
-						<td><a href="editRepair?repairId=${repair.repairId}">Edit</a></td>
 						<td><a href="deleteRepair?repairId=${repair.repairId}">Delete</a></td>
 						<td><a href="sourceParts?repairId=${repair.repairId}">Source Parts</a></td>
 						<td>${repair.shopName}</td>
@@ -76,10 +76,9 @@
 					<form:input path="partId" />
 					<span class="error"></span>
 				</div>
-				</div>
-				<div style="float: right; width: 50%; margin-left: 10px;">
+
 				<div class="field">
-					<label class="main">Year:</label>
+					<label class="main">Part Description:</label>
 					<form:input path="partDesc"/>
 					<span class="error"></span>
 				</div>
@@ -88,8 +87,7 @@
 					<form:input path="quantity"/>
 					<span class="error"></span>
 				</div>
-				</div>
-				<div>
+
 				<div class="field button">
 					<label class="main">&nbsp;</label>
 					<button type="submit">Add Repair</button>

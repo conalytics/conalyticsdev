@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -140,10 +142,13 @@ public class ClaimPageController {
 			if (null != r.getShopid() && r.getShopid() > 0) {
 				Shop shop = shopService.getShopbyId(r.getShopid());
 				repairList.get(i).setAddress(shop.getAddress());
-				repairList.get(i).setShopName(shop.getAddress());
+				repairList.get(i).setShopName(shop.getShopName());
 				JSONObject latlon = new JSONObject();
 				latlon.put("lat", shop.getGclat());
 				latlon.put("lon", shop.getGclong());
+				//repair id to show on map
+				
+				latlon.put("rid",shop.getShopName());
 				geocodelist.add(latlon.toJSONString());
 				latlonArray.add(latlon);
 
@@ -153,6 +158,11 @@ public class ClaimPageController {
 				repairList.get(i).setShRPU(inv1.getRTL_PRICE_PER_UNIT());
 				ppClaim_Cost = ppClaim_Cost + (inv1.getPRICE_PER_UNIT() * repairList.get(i).getQuantity());
 				rpClaim_Cost = rpClaim_Cost + (inv1.getRTL_PRICE_PER_UNIT() * repairList.get(i).getQuantity());
+				
+				//calculate the max distance between vehicle and a repair shop
+				
+				
+				
 			} else {
 				geocodelist.add(null);
 			}
@@ -184,6 +194,11 @@ public class ClaimPageController {
 		// double prQuan = ritem.getQuantity();
 		// Get geoCode of the vehicle location
 		Double partId = ritem.getPartId();
+		
+		// check if partId exists in database
+		
+		
+		
 		Claim claim = claimService.getClaimbyId(ritem.getClaimId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("claim", claim);
@@ -193,16 +208,17 @@ public class ClaimPageController {
 		// proximity service
 		int radius = 5;
 		List<Inventory> sourceParts = null;
+		List<Inventory> sourceParts2 = null;
 		List<Shop> shopl = null;
 		for (int i = 1; i <= 5; i++) {
 			// check for shops within geocode location
-			shopl = shopService.getShopListwithinGC(lat, lon,
-					Integer.toString(radius));
+			shopl = shopService.getShopListwithinGC(lat, lon,Integer.toString(radius));
 			System.out.println(shopl.toString());
 			if (shopl.size() > 0) {
 
-				// check for shops inventory
+				// check for shops inventory by part ID
 				sourceParts = invService.getInventorybyShopList(shopl, partId);
+			//	sourceParts2 = invService.getInventorybyShopListandPartDesc(shopl, ritem.getPartDesc());
 				if (sourceParts.size() > 0) {
 					break;
 				}
@@ -221,6 +237,7 @@ public class ClaimPageController {
 				if (sl.getShopId() == inv.getSHOP_ID()) {
 
 					sourceParts.get(i).setDistance(ds);
+					sourceParts.get(i).setShopdesc(sl.getShopName());
 
 				}
 			}
@@ -255,4 +272,18 @@ public class ClaimPageController {
 		InputStream in1 = new ByteArrayInputStream(buffer);
 		IOUtils.copy(in1, response.getOutputStream());
 	}
+	
+	
+	
+	@RequestMapping("deleteRepair")
+	public String deleteRepair(@RequestParam Double repairId) {
+	
+	Repair ritem = repairService.getRepairListbyId(repairId);
+	repairService.deleteRepair(repairId);
+	return "redirect:/workOnClaim?id=" + ritem.getClaimId();
+
+	}
+
+	
+	
 }

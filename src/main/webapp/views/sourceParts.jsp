@@ -27,7 +27,7 @@
 		<table id="inventoryTable" class="display" cellspacing="0" width="100%">
 		<thead>
 			<tr>
-				<th>Shop Desc</th>
+				<th>Shop Name</th>
 				<th>Parts Id</th>
 				<th>Quantity</th>
 				<th>Price</th>
