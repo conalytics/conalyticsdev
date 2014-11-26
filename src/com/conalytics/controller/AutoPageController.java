@@ -103,8 +103,13 @@ public class AutoPageController {
 		return "redirect:/getAutoList";
 	}
 	
+	@RequestMapping(value="/getautoDetails")
+	public @ResponseBody String getAutoDetails(HttpServletResponse response) throws IOException{
+		return getAutoDetails(response, null);
+	}
+	
 	@RequestMapping(value="/getautoDetails/{autoYear}")
-	public @ResponseBody String getautoDetails(HttpServletResponse response , @PathVariable("autoYear") int autoYear
+	public @ResponseBody String getAutoDetails(HttpServletResponse response , @PathVariable("autoYear") Integer autoYear
 															) throws IOException{
 		Map<String, String> autoDetails = autoService.getAutoDetails(autoYear);
 		return JSONValue.toJSONString(autoDetails);

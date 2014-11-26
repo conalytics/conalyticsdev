@@ -87,11 +87,13 @@ public class AutoDaoImpl implements AutoDao {
 	}
 
 	@Override
-	public List<Auto> getAutoDetails(int autoYear) {
+	public List<Auto> getAutoDetails(Integer autoYear) {
 		String sql = "SELECT AUTO_ID, C.COMPANY_ID, C.COMPANY_NAME,  AUTO_NAME ,  AUTO_DESC ,  MODEL ,  VERSION ,  YEAR_BUILT "
 				+ "FROM AUTO A, COMPANY C "
-				+ "WHERE A.COMPANY_ID = C.COMPANY_ID "
-					+ " AND A.YEAR_BUILT = " + autoYear;
+				+ "WHERE A.COMPANY_ID = C.COMPANY_ID ";
+				if(null != autoYear) {
+					sql = sql + " AND A.YEAR_BUILT = " + autoYear;
+				}
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		return jdbcTemplate.query(sql, new AutoRowMapper());

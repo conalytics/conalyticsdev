@@ -18,5 +18,5 @@ public interface AutoService {
 
 	public List<String> getAutoname(String query);
 
-	public Map<String, String> getAutoDetails(int autoYear);
+	public Map<String, String> getAutoDetails(Integer autoYear);
 }

@@ -25,7 +25,7 @@
 					<label class="main">Vehicle Model</label>
 					<form:select path="modelId">
 					</form:select>
-					
+					<span id="ajaxBusy">Please wait...</span>
 					<span class="error"></span>
 				</div>
 
@@ -49,18 +49,27 @@
 	function updateMenuSelection() {
 		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Add New Claim');
+		$.getJSON("<%=request.getContextPath()%>/getautoDetails/", function(data){
+			$.each(data, function(value, text) {
+	            $('#modelId').append($('<option>').text(text).attr('value', value));
+	        });
+		});
 	}
 
 	function loadModelDropdown() {
 		if($("#autoYear").val()){
+			$('#modelId').empty();
 			$.getJSON("<%=request.getContextPath()%>/getautoDetails/" + $('#autoYear').val(), function(data){
 				$.each(data, function(value, text) {
 		            $('#modelId').append($('<option>').text(text).attr('value', value));
 		        });
 			});
 		} else {
-			alert('Enter vehicle year before selecting the model');
-			$('#autoYear').focus();
+			$.getJSON("<%=request.getContextPath()%>/getautoDetails", function(data){
+				$.each(data, function(value, text) {
+		            $('#modelId').append($('<option>').text(text).attr('value', value));
+		        });
+			});
 		}
 	}
 	var modelIdList = $('#modelId');
