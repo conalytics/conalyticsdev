@@ -28,9 +28,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 
 
+
 import com.conalytics.domain.Inventory;
+import com.conalytics.domain.Part;
 import com.conalytics.domain.Shop;
 import com.conalytics.jdbc.InventoryRowMapper;
+import com.conalytics.jdbc.PartRowMapper;
 
 
 public class InventoryDaoImpl implements InventoryDao {
@@ -180,25 +183,87 @@ public class InventoryDaoImpl implements InventoryDao {
 	@Override
 	public List<Inventory> getInventorybyShopListandPartDesc(List<Shop> shopl,String pdesc) {
 		// TODO Auto-generated method stub
-		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		//parse pdesc
 		 StringTokenizer st = new StringTokenizer(pdesc);
+		 List<Inventory> masterList=null;
+		 String sql = "";
 		 while(st.hasMoreTokens())
 		 {
 			 String token = st.nextToken(" ");
 		 		if (! token.equalsIgnoreCase("the") || !token.equalsIgnoreCase("and") || !token.equalsIgnoreCase("it") || !token.equalsIgnoreCase("of"))
 	 			{
 		
+		 			String temp="select * from PART where PART_DESC like '%" + token.toUpperCase() + "%' OR PART_NAME LIKE '%"+ token.toUpperCase() +"%' OR OEM_NUMBER LIKE '%"+ token.toUpperCase() +"%'";
+		 			if(sql.length() == 0)
+		 			{
+		 			
 		 			//String sql ="select * from SHOP_PARTS_INFO where 
-		 			String sql = "select part_id from PART where UPPER(PART_DESC) = like '%" + token.toUpperCase() + "%'";
+		 			 sql = temp;
+		 			}
+		 			else
+		 			{
+		 				
+		 			sql = sql + " union " + temp;
+
+		 			
+		 			}
 		 			
 	 			}
+		 }
+		 			List<Part> invPart = new ArrayList<Part>();
+		 			
+		 		      System.out.println(sql);
+		 			invPart = jdbcTemplate.query(sql, new PartRowMapper());
+		 			
+		 			if(!invPart.isEmpty()) {
 
-	      }
-		
-		String sql ="select * from SHOP_PARTS_INFO";
-		return null;
+		 				masterList = getInventorybyShopListPartList(shopl, invPart);
+
+		 			}
+
+
+		return masterList;
 	}
 
-	
+	@Override
+	public List<Inventory> getInventorybyShopListPartList(List<Shop> shopl,List<Part> partl) {
+		// TODO Auto-generated method stub
+		String pinClause="";
+		for (int i = 0; i < partl.size(); i++) {
+			Part p=partl.get(i);
+			if(i ==0)
+			{
+				pinClause=p.getPartId().toString();
+			}
+			else
+			{
+			pinClause = pinClause +","+p.getPartId();
+		    }
+			
+		}
+		pinClause =" IN ("+pinClause+")";
+		
+		String sinClause="";
+		for (int i = 0; i < shopl.size(); i++) {
+			Shop s=shopl.get(i);
+			if(i ==0)
+			{
+				sinClause=s.getShopId().toString();
+			}
+			else
+			{
+			sinClause = sinClause +","+s.getShopId();
+		    }
+			
+		}
+		sinClause =" IN ("+sinClause+")";
+		
+		String sql ="select * from SHOP_PARTS_INFO where PART_ID " + pinClause +" and SHOP_ID "+sinClause;
+            System.out.println(sql);
+			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+			List<Inventory> invList = new ArrayList<Inventory>();
+			invList = jdbcTemplate.query(sql, new InventoryRowMapper());
+			return invList;
+	       }
 }	

@@ -20,7 +20,14 @@ public class Repair implements java.io.Serializable {
 	private Double quantityav;
 	private Double shPPU;
 	private Double shRPU;
+	private Double catId;
 	
+	public Double getCatId() {
+		return catId;
+	}
+	public void setCatId(Double catId) {
+		this.catId = catId;
+	}
 	public Double getQuantityav() {
 		return quantityav;
 	}

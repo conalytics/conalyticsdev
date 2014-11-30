@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 
 
+
 import com.conalytics.domain.Shop;
 import com.conalytics.jdbc.ShopRowMapper;
 
@@ -122,6 +123,31 @@ public class ShopDaoImpl implements ShopDao {
 		System.out.println(sql);
 		shopList = jdbcTemplate.query(sql, new ShopRowMapper());
 		return shopList;	
+	}
+
+	@Override
+	public List<Shop> getShopListbetweenradius(String lat, String lon,
+			String maxdistanceinKM, String mindistanceinKM) {
+		// TODO Auto-generated method stub
+		List<Shop> shopList = new ArrayList<Shop>();
+		String sql = "select * ,Round("
+				 + " ATAN2( " 
+				 +        " SQRT( "
+				 +            "POW(COS(RADIANS("+lat+")) * "
+				 +                "SIN(RADIANS(GCLONG - "+lon+")),2) + "
+				 +             "POW(COS(RADIANS(GCLAT)) * SIN(RADIANS("+lat+")) - "
+				 + 				   "SIN(RADIANS(GCLAT)) * COS(RADIANS("+lat+")) * " 
+				 +                 "COS(RADIANS(GCLONG - "+lon+")), 2)), "
+				 +              "(SIN(RADIANS(GCLAT)) * SIN(RADIANS("+lat+")) + "
+				 +              "COS(RADIANS(GCLAT)) * COS(RADIANS("+lat+")) * "
+				 +              "COS(RADIANS(GCLONG -"+lon+"))) "
+				 +              ") * 6372.795 ) AS distance "
+				 + "from SHOP HAVING distance < "+  maxdistanceinKM +" and distance > "+mindistanceinKM;
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		System.out.println(sql);
+		shopList = jdbcTemplate.query(sql, new ShopRowMapper());
+		return shopList;
 	}
 
 

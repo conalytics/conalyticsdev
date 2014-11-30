@@ -4,6 +4,7 @@ package com.conalytics.dao;
 import java.util.List;
 
 import com.conalytics.domain.Inventory;
+import com.conalytics.domain.Part;
 import com.conalytics.domain.Shop;
 
 public interface InventoryDao {
@@ -24,5 +25,7 @@ public interface InventoryDao {
 	public List<Inventory> getShopPartsdata();
 	
 	public List<Inventory> getInventorybyShopListandPartDesc(List<Shop> shopl,String pdesc);
+
+	public List<Inventory> getInventorybyShopListPartList(List<Shop> shopl,List<Part> partl);
 
 }

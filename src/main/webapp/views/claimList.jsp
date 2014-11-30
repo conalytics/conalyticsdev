@@ -16,7 +16,7 @@
 		<tbody>
 			<c:forEach var="claim" items="${claimList}">
 				<tr>
-					<td><a href="workOnClaim?id=${claim.claimId}">${claim.claimId}</a></td>
+					<td><a href="workOnClaim?id=${claim.claimId}&catId=">${claim.claimId}</a></td>
 					<td>${claim.date}</td>
 					<td>${claim.VIN }</td>
 					<td>${claim.modelId }</td>

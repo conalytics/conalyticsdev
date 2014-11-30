@@ -24,13 +24,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.conalytics.domain.Category;
 import com.conalytics.domain.Claim;
 import com.conalytics.domain.Inventory;
 import com.conalytics.domain.Repair;
 import com.conalytics.domain.Shop;
+import com.conalytics.domain.State;
+import com.conalytics.services.CategoryService;
 import com.conalytics.services.ClaimService;
 import com.conalytics.services.InventoryService;
-import com.conalytics.services.InventoryServiceImpl;
 import com.conalytics.services.MapService;
 import com.conalytics.services.RepairService;
 import com.conalytics.services.ShopService;
@@ -52,8 +54,8 @@ public class ClaimPageController {
 	InventoryService invService;
 
 	@Autowired
-	InventoryServiceImpl inventoryService;
-
+	CategoryService catService;
+	
 	@RequestMapping("registerClaim")
 	public ModelAndView registerClaim(@ModelAttribute Claim claim) {
 		ModelAndView modelAndView = new ModelAndView("registerClaim",
@@ -114,8 +116,8 @@ public class ClaimPageController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping("workOnClaim")
-	public ModelAndView workOnClaim(@RequestParam Double id,
-			@ModelAttribute Claim claim, @ModelAttribute Repair repair) {
+	public ModelAndView workOnClaim(@RequestParam Double id,@RequestParam Double catId,
+			@ModelAttribute Claim claim, @ModelAttribute Repair repair ) {
 
 		claim = claimService.getClaimbyId(id);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -172,14 +174,36 @@ public class ClaimPageController {
 		modelAndView.addObject("ppc", ppClaim_Cost);
 		modelAndView.addObject("rpc", rpClaim_Cost);
 
+		//check if repair item category is selected
+		List<Category> catList = null;
+		if(catId == null)
+		{
+			catList = catService.getCategoryList();
+					}
+		else
+		{
+		catList = catService.getCategoryList(catId);
+		}
+		
+		modelAndView.addObject("category", getCategoryMap(catList));
+		
+		
 		return modelAndView;
 
 	}
 
 	@RequestMapping("insertRepair")
 	public String insertRepair(@ModelAttribute Repair repair) {
-		repairService.insertRepair(repair);
-		return "redirect:/workOnClaim?id=" + repair.getClaimId();
+		
+		if(repair.getPartId() !=null )
+		{
+			repairService.insertRepair(repair);
+			return "redirect:/workOnClaim?id=" + repair.getClaimId();
+		}
+		else
+		{
+			return "redirect:/workOnClaim?id=" + repair.getClaimId();			
+		}
 		// workOnClaim
 
 	}
@@ -194,11 +218,7 @@ public class ClaimPageController {
 		// double prQuan = ritem.getQuantity();
 		// Get geoCode of the vehicle location
 		Double partId = ritem.getPartId();
-		
-		// check if partId exists in database
-		
-		
-		
+				// check if partId exists in database
 		Claim claim = claimService.getClaimbyId(ritem.getClaimId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("claim", claim);
@@ -206,20 +226,22 @@ public class ClaimPageController {
 		String lon = claim.getGclong();
 		// Search for shops where
 		// proximity service
-		int radius = 5;
+		int radius = 50;
+		int radiusInc = 50;
 		List<Inventory> sourceParts = null;
 		List<Inventory> sourceParts2 = null;
 		List<Shop> shopl = null;
-		for (int i = 1; i <= 5; i++) {
+		while(radius < 4000) {
 			// check for shops within geocode location
-			shopl = shopService.getShopListwithinGC(lat, lon,Integer.toString(radius));
-			System.out.println(shopl.toString());
-			if (shopl.size() > 0) {
+
+			shopl = shopService.getShopListbetweenradius(lat, lon,Integer.toString(radius), Integer.toString(radius-radiusInc));
+			System.out.println("shops found :"+shopl.size());
+			if (shopl !=null && shopl.size() > 0) {
 
 				// check for shops inventory by part ID
 				sourceParts = invService.getInventorybyShopList(shopl, partId);
-			//	sourceParts2 = invService.getInventorybyShopListandPartDesc(shopl, ritem.getPartDesc());
-				if (sourceParts.size() > 0) {
+			    sourceParts2 = invService.getInventorybyShopListandPartDesc(shopl, ritem.getPartDesc());
+				if ((sourceParts !=null && sourceParts.size() > 0) || (sourceParts2 !=null  && sourceParts2.size() > 0)) {
 					break;
 				}
 
@@ -227,7 +249,17 @@ public class ClaimPageController {
 			radius = radius + 50;
 
 		}
-
+		if(sourceParts2 !=null)
+		{
+			for(int i=0; i< sourceParts2.size();i++)
+			{
+				Inventory e = sourceParts2.get(i);
+				sourceParts.add(e);
+			}
+		}
+			
+         if(sourceParts !=null)
+         {
 		for (int i = 0; i < sourceParts.size(); i++) {
 			Inventory inv = sourceParts.get(i);
 
@@ -243,7 +275,10 @@ public class ClaimPageController {
 			}
 			System.out.println("distance" + inv.getDistance());
 		}
-
+         }
+         
+         
+         
 		// build inventory with shop information list object
 		ModelAndView modelAndView = new ModelAndView("sourceParts",
 				"sourceParts", sourceParts);
@@ -267,7 +302,7 @@ public class ClaimPageController {
 	public void getUserImage(HttpServletResponse response,
 			@PathVariable("id") int shopPartId) throws IOException {
 		response.setContentType("image/jpeg");
-		byte[] buffer = inventoryService
+		byte[] buffer = invService
 				.getImagebyInvId(new Double(shopPartId));
 		InputStream in1 = new ByteArrayInputStream(buffer);
 		IOUtils.copy(in1, response.getOutputStream());
@@ -284,6 +319,23 @@ public class ClaimPageController {
 
 	}
 
+	@RequestMapping("getCategoryList")
+	public String getCategoryList(@RequestParam Double id ,@ModelAttribute Repair repair) {
+
+
+		//List<Category> catList = catService.getCategoryList(id);
+		
+	return "redirect:/workOnClaim?id=" + repair.getClaimId()+"&catId=" +id;
+
+	}
 	
 	
+	private Map<Double, String> getCategoryMap(List<Category> catList) {
+		Map<Double, String> categoryMap = new HashMap<Double, String>();
+	
+		for(Category cat : catList) {
+			categoryMap.put(cat.getID(), cat.getCATEGORY_CODE());
+		}
+		return categoryMap;
+	}
 }

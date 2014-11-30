@@ -17,5 +17,7 @@ public interface ShopDao {
 	public List<Shop> getShopList();
 	
 	public List<Shop> getShopListwithinGC(String lat, String lon, String distanceinKM);
+	
+	public List<Shop> getShopListbetweenradius(String lat, String lon,String maxdistanceinKM, String mindistanceinKM);
 
 }

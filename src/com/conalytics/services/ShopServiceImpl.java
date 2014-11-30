@@ -46,4 +46,11 @@ public class ShopServiceImpl implements ShopService {
 		return shopDao.getShopListwithinGC(lat, lon, distanceinKM);
 	}
 
+	@Override
+	public List<Shop> getShopListbetweenradius(String lat, String lon,
+			String maxdistanceinKM, String mindistanceinKM) {
+		// TODO Auto-generated method stub
+		return shopDao.getShopListbetweenradius(lat,lon,maxdistanceinKM,mindistanceinKM);
+	}
+
 }

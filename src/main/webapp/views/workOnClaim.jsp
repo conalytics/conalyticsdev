@@ -66,11 +66,20 @@
 	<div id="newRepairDiv" style="width: 100%;">	
 		<form:form method="POST" class="idealforms" autocomplete="off" action="/insertRepair" modelAttribute="repair" >
 		<div style="float: left; width: 49%;">
+
 				<div class="field">
 					<label class="main">Repair Description:</label>
 					<form:input path="repairDesc" />
 					<span class="error"></span>
+				</div>	
+				<div class="idealforms-field-select-one">
+					<label class="main">Part Category*:</label>
+					<form:select path="catId">
+						<form:options items="${category}" />
+					</form:select>
+					<span class="error"></span>
 				</div>
+
 				<div class="field">
 					<label class="main">Part Id:</label>
 					<form:input path="partId" />
