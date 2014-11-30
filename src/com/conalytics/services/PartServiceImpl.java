@@ -46,6 +46,12 @@ public class PartServiceImpl implements PartService {
 		return 	partdao.getPartsdata();
 	}
 
+	@Override
+	public List<Part> getPartsdata(Double catId, Double AutoId) {
+		// TODO Auto-generated method stub
+		return partdao.getPartsdata(catId,AutoId);
+	}
+
 
 	
 }

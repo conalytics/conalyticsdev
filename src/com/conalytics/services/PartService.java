@@ -16,4 +16,6 @@ public interface PartService {
 	public void updateData(Part part);
 	
 	public List<Part> getPartsdata();
+	
+	public List<Part> getPartsdata(Double catId, Double AutoId);
 }

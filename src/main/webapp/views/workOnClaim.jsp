@@ -68,21 +68,15 @@
 		<div style="float: left; width: 49%;">
 
 				<div class="field">
-					<label class="main">Repair Description:</label>
+					<label class="main">Repair Description*:</label>
 					<form:input path="repairDesc" />
 					<span class="error"></span>
 				</div>	
 				<div class="idealforms-field-select-one">
 					<label class="main">Part Category*:</label>
-					<form:select path="catId">
+					<form:select  id="catId" path="catId" onchange="loadDescDropdown()"> 
 						<form:options items="${category}" />
 					</form:select>
-					<span class="error"></span>
-				</div>
-
-				<div class="field">
-					<label class="main">Part Id:</label>
-					<form:input path="partId" />
 					<span class="error"></span>
 				</div>
 
@@ -115,5 +109,24 @@
 		$('#currentAction').text('Claim List');
 	}
 
+	function loadDescDropdown() {
+		
+		if($("#catId").val()){
+			$('#partDesc').empty();
+			$.getJSON("<%=request.getContextPath()%>/getPartDesc/" + $('#catId').val()&$('#claimId').val(), function(data){
+				$.each(data, function(value, text) {
+		            $('#partDesc').append($('<option>').text(text).attr('value', value));
+		        });
+			});
+		} 
+		
+	}
+	var partDescIdList = $('#partDesc');
+	$(partDescIdList).select2({
+		placeholder: "Select a Part Desc",
+		allowClear: true,
+		minimumInputLength: 2,
+	    width: "300px"
+	});
 	
 </script>

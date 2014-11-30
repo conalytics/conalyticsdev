@@ -17,4 +17,5 @@ public interface PartDao {
 
 	public List<Part> getPartsdata();
 
+	public List<Part> getPartsdata(Double catId, Double AutoId);
 }

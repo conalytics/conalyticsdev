@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.conalytics.domain.Auto;
 import com.conalytics.domain.Category;
 import com.conalytics.domain.Claim;
 import com.conalytics.domain.Inventory;
+import com.conalytics.domain.Part;
 import com.conalytics.domain.Repair;
 import com.conalytics.domain.Shop;
 import com.conalytics.domain.State;
@@ -34,6 +36,7 @@ import com.conalytics.services.CategoryService;
 import com.conalytics.services.ClaimService;
 import com.conalytics.services.InventoryService;
 import com.conalytics.services.MapService;
+import com.conalytics.services.PartService;
 import com.conalytics.services.RepairService;
 import com.conalytics.services.ShopService;
 
@@ -55,6 +58,9 @@ public class ClaimPageController {
 
 	@Autowired
 	CategoryService catService;
+	
+	@Autowired
+	PartService partService;
 	
 	@RequestMapping("registerClaim")
 	public ModelAndView registerClaim(@ModelAttribute Claim claim) {
@@ -329,7 +335,6 @@ public class ClaimPageController {
 
 	}
 	
-	
 	private Map<Double, String> getCategoryMap(List<Category> catList) {
 		Map<Double, String> categoryMap = new HashMap<Double, String>();
 	
@@ -338,4 +343,19 @@ public class ClaimPageController {
 		}
 		return categoryMap;
 	}
+	
+	@RequestMapping(value="/getPartDesc/{catId}{claimId}")
+	public @ResponseBody String getPartDesc(HttpServletResponse response , @PathVariable("catId") Double catId,
+			@PathVariable("claimId") Double claimId									) throws IOException{
+		System.out.println("here in get partDesc");
+		Claim claim = claimService.getClaimbyId(claimId);
+	    List<Part> pList=partService.getPartsdata(catId, claim.getModelId());
+		Map<String, String> partsDetails = new HashMap<String, String>();
+		for(Part part : pList) {
+			partsDetails.put(part.getPartId().toString(), part.getPartDesc());
+		}
+	
+		return JSONValue.toJSONString(partsDetails);
+	}
+	
 }
