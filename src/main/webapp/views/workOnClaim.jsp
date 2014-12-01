@@ -19,8 +19,47 @@
 			</tbody>
 		</table>
 	</div>
-	<div id="map-canvas" style="height: 400px; width: 80%; margin-top: 30px; position: absolute !important;"></div>
-	
+	<div>
+	<div id="map-canvas" style="float: left; height: 400px; width: 68%; margin-top: 30px; position: absolute !important;"></div>
+		<div id="newRepairDiv" style="float: right; width: 32%;">	
+		<form:form method="POST" class="idealforms" autocomplete="off" action="/insertRepair" modelAttribute="repair" >
+		<div style="float: left;">
+
+				<div class="field">
+					<label class="main">Repair Description*:</label>
+					<form:input path="repairDesc" cssStyle="width:190px" />
+					<span class="error"></span>
+				</div>	
+				<div class="idealforms-field-select-one">
+					<label class="main">Part Category*:</label>
+					<form:select  path="catId" onchange="loadDescDropdown()" cssStyle="width:190px"> 
+						<form:options items="${category}" />
+					</form:select>
+					<span class="error"></span>
+				</div>
+
+				<div class="field">
+					<label class="main">Part Description:</label>
+					<form:select path="partId" cssStyle="width:190px">
+					</form:select>
+					<span class="error"></span>
+				</div>
+				<div class="field">
+					<label class="main">Quantity</label>
+					<form:input path="quantity" cssStyle="width:190px"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="field button">
+					<label class="main">&nbsp;</label>
+					<button type="submit">Add Repair</button>
+				</div>
+				</div>
+				<input id="claimId" name="claimId" type="hidden" value="${map.claim.claimId}"/>
+				<form:hidden path="partDesc"/>
+			</form:form>
+		</div>
+	</div>
 
 	
 
@@ -63,44 +102,7 @@
 			</tbody>
 		</table>
 	
-	<div id="newRepairDiv" style="width: 100%;">	
-		<form:form method="POST" class="idealforms" autocomplete="off" action="/insertRepair" modelAttribute="repair" >
-		<div style="float: left; width: 49%;">
 
-				<div class="field">
-					<label class="main">Repair Description*:</label>
-					<form:input path="repairDesc" />
-					<span class="error"></span>
-				</div>	
-				<div class="idealforms-field-select-one">
-					<label class="main">Part Category*:</label>
-					<form:select  path="catId" onchange="loadDescDropdown()"> 
-						<form:options items="${category}" />
-					</form:select>
-					<span class="error"></span>
-				</div>
-
-				<div class="field">
-					<label class="main">Part Description:</label>
-					<form:select path="partId">
-					</form:select>
-					<span class="error"></span>
-				</div>
-				<div class="field">
-					<label class="main">Quantity</label>
-					<form:input path="quantity"/>
-					<span class="error"></span>
-				</div>
-
-				<div class="field button">
-					<label class="main">&nbsp;</label>
-					<button type="submit">Add Repair</button>
-				</div>
-				</div>
-				<input id="claimId" name="claimId" type="hidden" value="${map.claim.claimId}"/>
-				<form:hidden path="partDesc"/>
-			</form:form>
-		</div>
 	</div>
 </center>
 <script>
@@ -109,6 +111,7 @@
 		setgmap();
 		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Claim List');
+		$('#conBody').css('border', 'none');
 	}
 
 	function loadDescDropdown() {
@@ -127,7 +130,7 @@
 		placeholder: "Select a Part Desc",
 		allowClear: true,
 		minimumInputLength: 2,
-	    width: "300px"
+	    width: "190px"
 	});
 
 </script>
