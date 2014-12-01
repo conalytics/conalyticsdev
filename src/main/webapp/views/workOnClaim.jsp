@@ -74,7 +74,7 @@
 				</div>	
 				<div class="idealforms-field-select-one">
 					<label class="main">Part Category*:</label>
-					<form:select  id="catId" path="catId" onchange="loadDescDropdown()"> 
+					<form:select  path="catId" onchange="loadDescDropdown()"> 
 						<form:options items="${category}" />
 					</form:select>
 					<span class="error"></span>
@@ -82,7 +82,8 @@
 
 				<div class="field">
 					<label class="main">Part Description:</label>
-					<form:input path="partDesc"/>
+					<form:select path="partId">
+					</form:select>
 					<span class="error"></span>
 				</div>
 				<div class="field">
@@ -97,6 +98,7 @@
 				</div>
 				</div>
 				<input id="claimId" name="claimId" type="hidden" value="${map.claim.claimId}"/>
+				<form:hidden path="partDesc"/>
 			</form:form>
 		</div>
 	</div>
@@ -112,21 +114,20 @@
 	function loadDescDropdown() {
 		
 		if($("#catId").val()){
-			$('#partDesc').empty();
-			$.getJSON("<%=request.getContextPath()%>/getPartDesc/" + $('#catId').val()&$('#claimId').val(), function(data){
+			$('#partId').empty();
+			$.getJSON("<%=request.getContextPath()%>/getPartDesc/" + $('#catId').val() + "/" + $('#claimId').val(), function(data){
 				$.each(data, function(value, text) {
-		            $('#partDesc').append($('<option>').text(text).attr('value', value));
+		            $('#partId').append($('<option>').text(text).attr('value', value));
 		        });
 			});
 		} 
-		
 	}
-	var partDescIdList = $('#partDesc');
+	var partDescIdList = $('#partId');
 	$(partDescIdList).select2({
 		placeholder: "Select a Part Desc",
 		allowClear: true,
 		minimumInputLength: 2,
 	    width: "300px"
 	});
-	
+
 </script>

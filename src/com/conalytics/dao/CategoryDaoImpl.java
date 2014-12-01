@@ -22,7 +22,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
 			List categoryList = new ArrayList();
 
-			String sql = "SELECT * FROM CATEGORY ";
+			String sql = "SELECT * FROM CATEGORY order by CATEGORY_DESC";
 
 			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 			categoryList = jdbcTemplate.query(sql, new CategoryRowMapper());

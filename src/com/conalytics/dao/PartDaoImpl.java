@@ -96,7 +96,7 @@ public class PartDaoImpl implements PartDao {
 	public List<Part> getPartsdata()
 	{
 		// TODO Auto-generated method stub
-		String sql ="select * from PARTS"; 
+		String sql ="select * from PART"; 
         System.out.println(sql);
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -109,7 +109,7 @@ public class PartDaoImpl implements PartDao {
 	@Override
 	public List<Part> getPartsdata(Double catId, Double AutoId) {
 		// TODO Auto-generated method stub
-		String sql ="select * from PARTS where CATEGORY_ID="+catId+" and AUTO_ID="+AutoId; 
+		String sql ="select * from PART where CATEGORY_ID="+catId+" and AUTO_ID="+AutoId; 
         System.out.println(sql);
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

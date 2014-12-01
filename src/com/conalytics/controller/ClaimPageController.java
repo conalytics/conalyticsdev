@@ -24,14 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.conalytics.domain.Auto;
 import com.conalytics.domain.Category;
 import com.conalytics.domain.Claim;
 import com.conalytics.domain.Inventory;
 import com.conalytics.domain.Part;
 import com.conalytics.domain.Repair;
 import com.conalytics.domain.Shop;
-import com.conalytics.domain.State;
 import com.conalytics.services.CategoryService;
 import com.conalytics.services.ClaimService;
 import com.conalytics.services.InventoryService;
@@ -344,9 +342,8 @@ public class ClaimPageController {
 		return categoryMap;
 	}
 	
-	@RequestMapping(value="/getPartDesc/{catId}{claimId}")
-	public @ResponseBody String getPartDesc(HttpServletResponse response , @PathVariable("catId") Double catId,
-			@PathVariable("claimId") Double claimId									) throws IOException{
+	@RequestMapping(value="/getPartDesc/{catId}/{claimId}")
+	public @ResponseBody String getPartDesc(HttpServletResponse response , @PathVariable("catId") Double catId, @PathVariable("claimId") Double claimId									) throws IOException{
 		System.out.println("here in get partDesc");
 		Claim claim = claimService.getClaimbyId(claimId);
 	    List<Part> pList=partService.getPartsdata(catId, claim.getModelId());
