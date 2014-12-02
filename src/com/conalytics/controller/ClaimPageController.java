@@ -56,10 +56,10 @@ public class ClaimPageController {
 
 	@Autowired
 	CategoryService catService;
-	
+
 	@Autowired
 	PartService partService;
-	
+
 	@RequestMapping("registerClaim")
 	public ModelAndView registerClaim(@ModelAttribute Claim claim) {
 		ModelAndView modelAndView = new ModelAndView("registerClaim",
@@ -118,10 +118,14 @@ public class ClaimPageController {
 		return "redirect:/getClaimList";
 	}
 
+	@RequestMapping("showClaim")
+	public ModelAndView showClaim(@RequestParam Double id, @ModelAttribute Claim claim, @ModelAttribute Repair repair) {
+		return workOnClaim(id, null, claim, repair);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping("workOnClaim")
-	public ModelAndView workOnClaim(@RequestParam Double id,@RequestParam Double catId,
-			@ModelAttribute Claim claim, @ModelAttribute Repair repair ) {
+	public ModelAndView workOnClaim(@RequestParam Double id, @RequestParam Double catId, @ModelAttribute Claim claim, @ModelAttribute Repair repair) {
 
 		claim = claimService.getClaimbyId(id);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -152,23 +156,26 @@ public class ClaimPageController {
 				JSONObject latlon = new JSONObject();
 				latlon.put("lat", shop.getGclat());
 				latlon.put("lon", shop.getGclong());
-				//repair id to show on map
-				
-				latlon.put("rid",shop.getShopName());
+				// repair id to show on map
+
+				latlon.put("rid", shop.getShopName());
 				geocodelist.add(latlon.toJSONString());
 				latlonArray.add(latlon);
 
-				Inventory inv1 = invService.getInventorybyShopandPartId(r.getShopid(), r.getPartId());
+				Inventory inv1 = invService.getInventorybyShopandPartId(
+						r.getShopid(), r.getPartId());
 				repairList.get(i).setQuantityav(inv1.getQTY_AVAILABLE());
 				repairList.get(i).setShPPU(inv1.getPRICE_PER_UNIT());
 				repairList.get(i).setShRPU(inv1.getRTL_PRICE_PER_UNIT());
-				ppClaim_Cost = ppClaim_Cost + (inv1.getPRICE_PER_UNIT() * repairList.get(i).getQuantity());
-				rpClaim_Cost = rpClaim_Cost + (inv1.getRTL_PRICE_PER_UNIT() * repairList.get(i).getQuantity());
-				
-				//calculate the max distance between vehicle and a repair shop
-				
-				
-				
+				ppClaim_Cost = ppClaim_Cost
+						+ (inv1.getPRICE_PER_UNIT() * repairList.get(i)
+								.getQuantity());
+				rpClaim_Cost = rpClaim_Cost
+						+ (inv1.getRTL_PRICE_PER_UNIT() * repairList.get(i)
+								.getQuantity());
+
+				// calculate the max distance between vehicle and a repair shop
+
 			} else {
 				geocodelist.add(null);
 			}
@@ -178,38 +185,24 @@ public class ClaimPageController {
 		modelAndView.addObject("ppc", ppClaim_Cost);
 		modelAndView.addObject("rpc", rpClaim_Cost);
 
-		//check if repair item category is selected
+		// check if repair item category is selected
 		List<Category> catList = null;
-		if(catId == null)
-		{
+		if (catId == null) {
 			catList = catService.getCategoryList();
-					}
-		else
-		{
-		catList = catService.getCategoryList(catId);
+		} else {
+			catList = catService.getCategoryList(catId);
 		}
-		
+
 		modelAndView.addObject("category", getCategoryMap(catList));
-		
-		
+
 		return modelAndView;
 
 	}
 
 	@RequestMapping("insertRepair")
 	public String insertRepair(@ModelAttribute Repair repair) {
-		
-		if(repair.getPartId() !=null )
-		{
-			repairService.insertRepair(repair);
-			return "redirect:/workOnClaim?id=" + repair.getClaimId();
-		}
-		else
-		{
-			return "redirect:/workOnClaim?id=" + repair.getClaimId();			
-		}
-		// workOnClaim
-
+		repairService.insertRepair(repair);
+		return "redirect:/showClaim?id=" + repair.getClaimId();
 	}
 
 	@RequestMapping("sourceParts")
@@ -222,7 +215,7 @@ public class ClaimPageController {
 		// double prQuan = ritem.getQuantity();
 		// Get geoCode of the vehicle location
 		Double partId = ritem.getPartId();
-				// check if partId exists in database
+		// check if partId exists in database
 		Claim claim = claimService.getClaimbyId(ritem.getClaimId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("claim", claim);
@@ -235,17 +228,21 @@ public class ClaimPageController {
 		List<Inventory> sourceParts = null;
 		List<Inventory> sourceParts2 = null;
 		List<Shop> shopl = null;
-		while(radius < 4000) {
+		while (radius < 4000) {
 			// check for shops within geocode location
 
-			shopl = shopService.getShopListbetweenradius(lat, lon,Integer.toString(radius), Integer.toString(radius-radiusInc));
-			System.out.println("shops found :"+shopl.size());
-			if (shopl !=null && shopl.size() > 0) {
+			shopl = shopService.getShopListbetweenradius(lat, lon,
+					Integer.toString(radius),
+					Integer.toString(radius - radiusInc));
+			System.out.println("shops found :" + shopl.size());
+			if (shopl != null && shopl.size() > 0) {
 
 				// check for shops inventory by part ID
 				sourceParts = invService.getInventorybyShopList(shopl, partId);
-			    sourceParts2 = invService.getInventorybyShopListandPartDesc(shopl, ritem.getPartDesc());
-				if ((sourceParts !=null && sourceParts.size() > 0) || (sourceParts2 !=null  && sourceParts2.size() > 0)) {
+				sourceParts2 = invService.getInventorybyShopListandPartDesc(
+						shopl, ritem.getPartDesc());
+				if ((sourceParts != null && sourceParts.size() > 0)
+						|| (sourceParts2 != null && sourceParts2.size() > 0)) {
 					break;
 				}
 
@@ -253,36 +250,31 @@ public class ClaimPageController {
 			radius = radius + 50;
 
 		}
-		if(sourceParts2 !=null)
-		{
-			for(int i=0; i< sourceParts2.size();i++)
-			{
+		if (sourceParts2 != null) {
+			for (int i = 0; i < sourceParts2.size(); i++) {
 				Inventory e = sourceParts2.get(i);
 				sourceParts.add(e);
 			}
 		}
-			
-         if(sourceParts !=null)
-         {
-		for (int i = 0; i < sourceParts.size(); i++) {
-			Inventory inv = sourceParts.get(i);
 
-			for (int j = 0; j < shopl.size(); j++) {
-				Shop sl = shopl.get(j);
-				String ds = shopl.get(j).getDistance();
-				if (sl.getShopId() == inv.getSHOP_ID()) {
+		if (sourceParts != null) {
+			for (int i = 0; i < sourceParts.size(); i++) {
+				Inventory inv = sourceParts.get(i);
 
-					sourceParts.get(i).setDistance(ds);
-					sourceParts.get(i).setShopdesc(sl.getShopName());
+				for (int j = 0; j < shopl.size(); j++) {
+					Shop sl = shopl.get(j);
+					String ds = shopl.get(j).getDistance();
+					if (sl.getShopId() == inv.getSHOP_ID()) {
 
+						sourceParts.get(i).setDistance(ds);
+						sourceParts.get(i).setShopdesc(sl.getShopName());
+
+					}
 				}
+				System.out.println("distance" + inv.getDistance());
 			}
-			System.out.println("distance" + inv.getDistance());
 		}
-         }
-         
-         
-         
+
 		// build inventory with shop information list object
 		ModelAndView modelAndView = new ModelAndView("sourceParts",
 				"sourceParts", sourceParts);
@@ -306,53 +298,54 @@ public class ClaimPageController {
 	public void getUserImage(HttpServletResponse response,
 			@PathVariable("id") int shopPartId) throws IOException {
 		response.setContentType("image/jpeg");
-		byte[] buffer = invService
-				.getImagebyInvId(new Double(shopPartId));
+		byte[] buffer = invService.getImagebyInvId(new Double(shopPartId));
 		InputStream in1 = new ByteArrayInputStream(buffer);
 		IOUtils.copy(in1, response.getOutputStream());
 	}
-	
-	
-	
+
 	@RequestMapping("deleteRepair")
 	public String deleteRepair(@RequestParam Double repairId) {
-	
-	Repair ritem = repairService.getRepairListbyId(repairId);
-	repairService.deleteRepair(repairId);
-	return "redirect:/workOnClaim?id=" + ritem.getClaimId();
+
+		Repair ritem = repairService.getRepairListbyId(repairId);
+		repairService.deleteRepair(repairId);
+		return "redirect:/workOnClaim?id=" + ritem.getClaimId();
 
 	}
 
 	@RequestMapping("getCategoryList")
-	public String getCategoryList(@RequestParam Double id ,@ModelAttribute Repair repair) {
+	public String getCategoryList(@RequestParam Double id,
+			@ModelAttribute Repair repair) {
 
+		// List<Category> catList = catService.getCategoryList(id);
 
-		//List<Category> catList = catService.getCategoryList(id);
-		
-	return "redirect:/workOnClaim?id=" + repair.getClaimId()+"&catId=" +id;
+		return "redirect:/workOnClaim?id=" + repair.getClaimId() + "&catId="
+				+ id;
 
 	}
-	
+
 	private Map<Double, String> getCategoryMap(List<Category> catList) {
 		Map<Double, String> categoryMap = new HashMap<Double, String>();
-	
-		for(Category cat : catList) {
+
+		for (Category cat : catList) {
 			categoryMap.put(cat.getID(), cat.getCATEGORY_CODE());
 		}
 		return categoryMap;
 	}
-	
-	@RequestMapping(value="/getPartDesc/{catId}/{claimId}")
-	public @ResponseBody String getPartDesc(HttpServletResponse response , @PathVariable("catId") Double catId, @PathVariable("claimId") Double claimId									) throws IOException{
+
+	@RequestMapping(value = "/getPartDesc/{catId}/{claimId}")
+	public @ResponseBody
+	String getPartDesc(HttpServletResponse response,
+			@PathVariable("catId") Double catId,
+			@PathVariable("claimId") Double claimId) throws IOException {
 		System.out.println("here in get partDesc");
 		Claim claim = claimService.getClaimbyId(claimId);
-	    List<Part> pList=partService.getPartsdata(catId, claim.getModelId());
+		List<Part> pList = partService.getPartsdata(catId, claim.getModelId());
 		Map<String, String> partsDetails = new HashMap<String, String>();
-		for(Part part : pList) {
+		for (Part part : pList) {
 			partsDetails.put(part.getPartId().toString(), part.getPartDesc());
 		}
-	
+
 		return JSONValue.toJSONString(partsDetails);
 	}
-	
+
 }

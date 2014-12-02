@@ -38,12 +38,21 @@
 					<span class="error"></span>
 				</div>
 
-				<div class="field">
+				<div id="partIdDescDiv" class="field">
 					<label class="main">Part Description:</label>
 					<form:select path="partId" cssStyle="width:190px">
 					</form:select>
+					<span><a title="If you dont see the part description in the list, click here to enter new part description." href="#" onclick="showNewPartDesc()">New part description</a> </span>
 					<span class="error"></span>
 				</div>
+				
+				<div id="newDescDiv" class="field">
+					<label class="main">Part Description:</label>
+					<form:input path="partDesc" cssStyle="width:190px"/>
+					<span><a title="Click here to select the part description from the list." href="#" onclick="showPartDescList()">Select from list</a> </span>
+					<span class="error"></span>
+				</div>
+				
 				<div class="field">
 					<label class="main">Quantity</label>
 					<form:input path="quantity" cssStyle="width:190px"/>
@@ -112,6 +121,18 @@
 		$('#menu').multilevelpushmenu('expand', 'Claims');
 		$('#currentAction').text('Claim List');
 		$('#conBody').css('border', 'none');
+		$('#newDescDiv').hide();
+	}
+
+	function showNewPartDesc() {
+		$('#partIdDescDiv').hide();
+		$('#newDescDiv').show();
+	}
+
+	function showPartDescList() {
+		$('#partIdDescDiv').show();
+		$('#newDescDiv').hide();
+		loadDescDropdown();
 	}
 
 	function loadDescDropdown() {
