@@ -19,6 +19,13 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
 		return catDao.getCategoryList();
 	}
+	
+	@Override
+	public List<Category> getParentCategoryList() {
+		// TODO Auto-generated method stub
+		return catDao.getParentCategoryList();
+	}
+	
 
 	@Override
 	public List<Category> getCategoryList(Double id) {

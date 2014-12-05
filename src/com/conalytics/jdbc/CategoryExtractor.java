@@ -15,10 +15,10 @@ public class CategoryExtractor implements ResultSetExtractor<Category> {
 		
 		Category cat = new Category();
 		
-		cat.setID(resultSet.getDouble(1));
-		cat.setCATEGORY_CODE(resultSet.getString(2));
-		cat.setCATEGORY_DESC(resultSet.getString(3));
-		cat.setPARENT_CATEGORYID(resultSet.getDouble(4));
+		cat.setId(resultSet.getDouble(1));
+		cat.setCategoryCode(resultSet.getString(2));
+		cat.setCategoryDesc(resultSet.getString(3));
+		cat.setParentCategoryId(resultSet.getDouble(4));
 		
 		
 		return cat;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -59,6 +59,9 @@ public class ClaimPageController {
 
 	@Autowired
 	PartService partService;
+	
+	@Autowired
+	CategoryService categoryService;
 
 	@RequestMapping("registerClaim")
 	public ModelAndView registerClaim(@ModelAttribute Claim claim) {
@@ -327,11 +330,42 @@ public class ClaimPageController {
 		Map<Double, String> categoryMap = new HashMap<Double, String>();
 
 		for (Category cat : catList) {
-			categoryMap.put(cat.getID(), cat.getCATEGORY_CODE());
+			categoryMap.put(cat.getId(), cat.getCategoryCode());
 		}
 		return categoryMap;
 	}
-
+	
+	
+	@RequestMapping(value = "/getAllCategories")
+	public @ResponseBody
+	String getAllCategories(HttpServletResponse response) throws IOException {
+		List<Category> parentCategoryList = categoryService.getParentCategoryList();
+		List<Category> categoryList = categoryService.getCategoryList();
+		Map<String, Map<String, String>> allCatDetails = new HashMap<String, Map<String, String>>();
+		Map<String, String> parentCategories = new HashMap<String, String>();
+		
+		for(Category category: parentCategoryList){
+			parentCategories.put(category.getId().toString(),  category.getCategoryCode());
+		}
+		
+		for(Category category: categoryList){
+			if(null != category.getParentCategoryId()) {
+				String parentCategoryCode = parentCategories.get(category.getParentCategoryId().toString());
+				if(null == parentCategoryCode) {
+					parentCategoryCode = "Others";
+					
+				}
+				if(null == allCatDetails.get(parentCategoryCode)) {
+					allCatDetails.put(parentCategoryCode, new HashMap<String,String>());
+				}
+				allCatDetails.get(parentCategoryCode).put(category.getId().toString(), category.getCategoryCode());				
+			}
+		}
+		String jsonString = getJsonArrayForDropdown(allCatDetails).toJSONString();
+		System.out.println(jsonString);
+		return jsonString;
+	}
+	
 	@RequestMapping(value = "/getPartDesc/{catId}/{claimId}")
 	public @ResponseBody
 	String getPartDesc(HttpServletResponse response,
@@ -340,12 +374,42 @@ public class ClaimPageController {
 		System.out.println("here in get partDesc");
 		Claim claim = claimService.getClaimbyId(claimId);
 		List<Part> pList = partService.getPartsdata(catId, claim.getModelId());
-		Map<String, String> partsDetails = new HashMap<String, String>();
+		Map<String, Map<String, String>> partsCatDetails = new HashMap<String, Map<String, String>>();
 		for (Part part : pList) {
-			partsDetails.put(part.getPartId().toString(), part.getPartDesc());
+			if(null == partsCatDetails.get(part.getCategoryName())) {
+				partsCatDetails.put(part.getCategoryName(), new HashMap<String,String>());
+			}
+			partsCatDetails.get(part.getCategoryName()).put(part.getPartId().toString(), part.getPartDesc());
 		}
-
-		return JSONValue.toJSONString(partsDetails);
+		String jsonString = getJsonArrayForDropdown(partsCatDetails).toJSONString();
+		System.out.println(jsonString);
+		return jsonString;
 	}
 
+	private JSONArray getJsonArrayForDropdown(Map<String, Map<String, String>> partsCatDetails) {
+		JSONArray jsonCatArray = new JSONArray();
+		JSONArray jsonPartsArray = new JSONArray();
+		JSONObject partJsonObj = new JSONObject();
+		JSONObject catJsonObj = new JSONObject();
+		Iterator<String> catItr = partsCatDetails.keySet().iterator();
+		while(catItr.hasNext()) {
+			String category = catItr.next();
+			Map<String, String> catParts = partsCatDetails.get(category);
+			Iterator<String> catPartsItr = catParts.keySet().iterator();
+			jsonPartsArray = new JSONArray();
+			while(catPartsItr.hasNext()) {
+				String partId = catPartsItr.next();
+				String partName = catParts.get(partId);
+				partJsonObj = new JSONObject();
+				catJsonObj = new JSONObject();
+				partJsonObj.put("name", partId);
+				partJsonObj.put("label", partName);
+				jsonPartsArray.add(partJsonObj);
+			}
+			catJsonObj.put("category", category);
+			catJsonObj.put("parts", jsonPartsArray);
+			jsonCatArray.add(catJsonObj);
+		}
+		return jsonCatArray;
+	}
 }

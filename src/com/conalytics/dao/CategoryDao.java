@@ -7,6 +7,8 @@ import com.conalytics.domain.Category;
 public interface CategoryDao {
 
 	public List<Category> getCategoryList();
+	public List<Category> getParentCategoryList();
+	
 	
 	public List<Category> getCategoryList(Double id);
 	

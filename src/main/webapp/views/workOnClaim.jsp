@@ -33,7 +33,6 @@
 				<div class="idealforms-field-select-one">
 					<label class="main">Part Category*:</label>
 					<form:select  path="catId" onchange="loadDescDropdown()" cssStyle="width:190px"> 
-						<form:options items="${category}" />
 					</form:select>
 					<span class="error"></span>
 				</div>
@@ -115,37 +114,6 @@
 	</div>
 </center>
 <script>
-	//google.maps.event.addDomListener(window, 'load', setgmap);
-	function updateMenuSelection() {
-		setgmap();
-		$('#menu').multilevelpushmenu('expand', 'Claims');
-		$('#currentAction').text('Claim List');
-		$('#conBody').css('border', 'none');
-		$('#newDescDiv').hide();
-	}
-
-	function showNewPartDesc() {
-		$('#partIdDescDiv').hide();
-		$('#newDescDiv').show();
-	}
-
-	function showPartDescList() {
-		$('#partIdDescDiv').show();
-		$('#newDescDiv').hide();
-		loadDescDropdown();
-	}
-
-	function loadDescDropdown() {
-		
-		if($("#catId").val()){
-			$('#partId').empty();
-			$.getJSON("<%=request.getContextPath()%>/getPartDesc/" + $('#catId').val() + "/" + $('#claimId').val(), function(data){
-				$.each(data, function(value, text) {
-		            $('#partId').append($('<option>').text(text).attr('value', value));
-		        });
-			});
-		} 
-	}
 	var partDescIdList = $('#partId');
 	$(partDescIdList).select2({
 		placeholder: "Select a Part Desc",
@@ -153,5 +121,62 @@
 		minimumInputLength: 2,
 	    width: "190px"
 	});
+	
+	var allCatList = $('#catId');
+	$(allCatList).select2({
+		placeholder: "Select a Category",
+		allowClear: true,
+		minimumInputLength: 2,
+	    width: "190px"
+	});
+	//google.maps.event.addDomListener(window, 'load', setgmap);
+	function updateMenuSelection() {
+		setgmap();
+		$('#menu').multilevelpushmenu('expand', 'Claims');
+		$('#currentAction').text('Claim List');
+		$('#conBody').css('border', 'none');
+		$('#newDescDiv').hide();
+		$.getJSON("<%=request.getContextPath()%>/getAllCategories", function(data){
+			data.forEach(function(group){
+			var $optgroup = $('<optgroup label="' + group.category + '">');
+			group.parts.forEach(function(option){
+				$optgroup.append('<option value="' + option.name + '">' + 
+				option.label + '</option>');
+				});
+				$('#catId').append($optgroup);
+			});
+		});
+	}
+
+	function showNewPartDesc() {
+		$('#partIdDescDiv').hide();
+		$('#newDescDiv').show();
+		$('#partId').val("");
+	}
+
+	function showPartDescList() {
+		$('#partIdDescDiv').show();
+		$('#newDescDiv').hide();
+		loadDescDropdown();
+		$('#partDesc').val("");
+	}
+
+	function loadDescDropdown() {
+		var catId = $(allCatList).select2('val');
+		if(catId){
+			$('#partId').empty();
+			$.getJSON("<%=request.getContextPath()%>/getPartDesc/" + catId  + "/" + $('#claimId').val(), function(data){
+				data.forEach(function(group){
+					var $optgroup = $('<optgroup label="' + group.category + '">');
+					group.parts.forEach(function(option){
+						$optgroup.append('<option value="' + option.name + '">' + 
+						option.label + '</option>');
+					});
+					$('#partId').append($optgroup);
+				});
+			});
+		} 
+	}
+	
 
 </script>

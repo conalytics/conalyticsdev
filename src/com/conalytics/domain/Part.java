@@ -25,6 +25,10 @@ public class Part implements java.io.Serializable {
 	
 	private String color;
 	
+	private Double categoryId;
+	
+	private String categoryName;
+	
 	private Double msrp;
 	
 	private Part selectedPart = null;
@@ -161,7 +165,21 @@ public class Part implements java.io.Serializable {
 		this.msrp = msrp;
 	}
 
+	public Double getCategoryId() {
+		return categoryId;
+	}
 
+	public void setCategoryId(Double categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
 	@Override
 	public String toString() {

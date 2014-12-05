@@ -24,6 +24,10 @@ public class PartExtractor implements ResultSetExtractor<Part> {
 		part.setOemNumber(resultSet.getString(8));
 		part.setColor(resultSet.getString(9));
 		part.setMsrp(resultSet.getDouble(10));
+		part.setCategoryId(resultSet.getDouble(11));
+		if(resultSet.getMetaData().getColumnCount() > 11) {
+			part.setCategoryName(resultSet.getString(12));
+		}
 		return part;
 	}
 }

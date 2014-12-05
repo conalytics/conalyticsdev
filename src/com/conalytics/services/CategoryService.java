@@ -10,7 +10,10 @@ public interface CategoryService {
 	
 
 	public List<Category> getCategoryList();
+	
+	public List<Category> getParentCategoryList();
 
 	public List<Category> getCategoryList(Double id);
+	
 	
 }

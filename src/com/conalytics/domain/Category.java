@@ -7,36 +7,36 @@ public class Category implements java.io.Serializable {
 	 * 
 	 */
 	
-	private Double ID;
-	private String CATEGORY_CODE;
-	private String CATEGORY_DESC;
-	private Double PARENT_CATEGORYID;
+	private Double id;
+	private String categoryCode;
+	private String categoryDesc;
+	private Double parentCategoryId;
 	
 	private static final long serialVersionUID = -6013600035254850771L;
 
-	public Double getID() {
-		return ID;
+	public Double getId() {
+		return this.id;
 	}
-	public void setID(Double iD) {
-		ID = iD;
+	public void setId(Double id) {
+		this.id = id;
 	}
-	public String getCATEGORY_CODE() {
-		return CATEGORY_CODE;
+	public String getCategoryCode() {
+		return categoryCode;
 	}
-	public void setCATEGORY_CODE(String cATEGORY_CODE) {
-		CATEGORY_CODE = cATEGORY_CODE;
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
 	}
-	public String getCATEGORY_DESC() {
-		return CATEGORY_DESC;
+	public String getCategoryDesc() {
+		return this.categoryDesc;
 	}
-	public void setCATEGORY_DESC(String cATEGORY_DESC) {
-		CATEGORY_DESC = cATEGORY_DESC;
+	public void setCategoryDesc(String categoryDesc) {
+		this.categoryDesc = categoryDesc;
 	}
-	public Double getPARENT_CATEGORYID() {
-		return PARENT_CATEGORYID;
+	public Double getParentCategoryId() {
+		return this.parentCategoryId;
 	}
-	public void setPARENT_CATEGORYID(Double pARENT_CATEGORYID) {
-		PARENT_CATEGORYID = pARENT_CATEGORYID;
+	public void setParentCategoryId(Double parentCategoryId) {
+		this.parentCategoryId = parentCategoryId;
 	}
 
 

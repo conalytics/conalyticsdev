@@ -8,9 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.conalytics.domain.Inventory;
 import com.conalytics.domain.Part;
-import com.conalytics.jdbc.InventoryRowMapper;
 import com.conalytics.jdbc.PartRowMapper;
 
 public class PartDaoImpl implements PartDao {
@@ -93,26 +91,25 @@ public class PartDaoImpl implements PartDao {
 	
 	
 	@Override
-	public List<Part> getPartsdata()
-	{
-		// TODO Auto-generated method stub
-		String sql ="select * from PART"; 
-        System.out.println(sql);
-
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		List<Part> invPart = new ArrayList<Part>();
-		invPart = jdbcTemplate.query(sql, new PartRowMapper());
-		return invPart;		
-	
+	public List<Part> getPartsdata() {
+		return getPartsdata(null, null);
 	}
 
 	@Override
-	public List<Part> getPartsdata(Double catId, Double AutoId) {
+	public List<Part> getPartsdata(Double catId, Double autoId) {
 		// TODO Auto-generated method stub
-		String sql ="select * from PART where CATEGORY_ID="+catId+" and AUTO_ID="+AutoId; 
+		// String sql ="select * from PART where CATEGORY_ID="+catId+" and AUTO_ID="+AutoId;
+		String sql ="select `PART_ID`, `AUTO_ID`, `PART_NAME`, `PART_DESC`, `MODEL`, `VERSION`, `YEAR_BUILT`, `OEM_NUMBER`, `COLOUR`, `MSRP`, `CATEGORY_ID`, C.`CATEGORY_DESC` "
+				+ " from PART P, CATEGORY C "
+				+ " where C.ID = P.CATEGORY_ID";
+		if(null != catId) {
+			sql =  sql + " and P.CATEGORY_ID=" + catId;
+		}
+		if(null != autoId) {
+			sql = sql +  " and P.AUTO_ID="+autoId;
+		}
         System.out.println(sql);
-
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Part> invPart = new ArrayList<Part>();
 		invPart = jdbcTemplate.query(sql, new PartRowMapper());
 		return invPart;	

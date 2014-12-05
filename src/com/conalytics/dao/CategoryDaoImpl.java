@@ -16,34 +16,29 @@ public class CategoryDaoImpl implements CategoryDao {
 	@Autowired
 	DataSource dataSource;
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Category> getCategoryList() {
-		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM CATEGORY order by CATEGORY_DESC";
+		return getList(sql);
+	}
 
-			List categoryList = new ArrayList();
+	public List<Category> getParentCategoryList() {
+		String sql = "SELECT * FROM CATEGORY where PARENT_CATEGORYID is NULL order by CATEGORY_DESC";
+		return getList(sql);
+	}
 
-			String sql = "SELECT * FROM CATEGORY order by CATEGORY_DESC";
-
-			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-			categoryList = jdbcTemplate.query(sql, new CategoryRowMapper());
-			return categoryList;
-		}
-
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<Category> getCategoryList(Double id) {
-		
-		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM CATEGORY WHERE ID ='" + id + "'";
+		return getList(sql);
 
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private List<Category> getList(String sql) {
 		List categoryList = new ArrayList();
-
-		String sql = "SELECT * FROM CATEGORY WHERE ID ='"+id+"'";
-
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		categoryList = jdbcTemplate.query(sql, new CategoryRowMapper());
 		return categoryList;
-	}
 
-	
+	}
 }
