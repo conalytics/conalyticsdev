@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -341,8 +342,8 @@ public class ClaimPageController {
 	String getAllCategories(HttpServletResponse response) throws IOException {
 		List<Category> parentCategoryList = categoryService.getParentCategoryList();
 		List<Category> categoryList = categoryService.getCategoryList();
-		Map<String, Map<String, String>> allCatDetails = new HashMap<String, Map<String, String>>();
-		Map<String, String> parentCategories = new HashMap<String, String>();
+		Map<String, TreeMap<String, String>> allCatDetails = new TreeMap<String, TreeMap<String, String>>();
+		Map<String, String> parentCategories = new TreeMap<String, String>();
 		
 		for(Category category: parentCategoryList){
 			parentCategories.put(category.getId().toString(),  category.getCategoryCode());
@@ -356,7 +357,7 @@ public class ClaimPageController {
 					
 				}
 				if(null == allCatDetails.get(parentCategoryCode)) {
-					allCatDetails.put(parentCategoryCode, new HashMap<String,String>());
+					allCatDetails.put(parentCategoryCode, new TreeMap<String,String>());
 				}
 				allCatDetails.get(parentCategoryCode).put(category.getId().toString(), category.getCategoryCode());				
 			}
@@ -374,19 +375,20 @@ public class ClaimPageController {
 		System.out.println("here in get partDesc");
 		Claim claim = claimService.getClaimbyId(claimId);
 		List<Part> pList = partService.getPartsdata(catId, claim.getModelId());
-		Map<String, Map<String, String>> partsCatDetails = new HashMap<String, Map<String, String>>();
+		Map<String, TreeMap<String, String>> partsCatDetails = new HashMap<String, TreeMap<String, String>>();
 		for (Part part : pList) {
 			if(null == partsCatDetails.get(part.getCategoryName())) {
-				partsCatDetails.put(part.getCategoryName(), new HashMap<String,String>());
+				partsCatDetails.put(part.getCategoryName(), new TreeMap<String,String>());
 			}
-			partsCatDetails.get(part.getCategoryName()).put(part.getPartId().toString(), part.getPartDesc());
+			partsCatDetails.get(part.getCategoryName()).put(part.getPartId().toString(), part.getYearBuilt() +  "_" + part.getPartDesc());
 		}
 		String jsonString = getJsonArrayForDropdown(partsCatDetails).toJSONString();
 		System.out.println(jsonString);
 		return jsonString;
 	}
 
-	private JSONArray getJsonArrayForDropdown(Map<String, Map<String, String>> partsCatDetails) {
+	@SuppressWarnings("unchecked")
+	private JSONArray getJsonArrayForDropdown(Map<String, TreeMap<String, String>> partsCatDetails) {
 		JSONArray jsonCatArray = new JSONArray();
 		JSONArray jsonPartsArray = new JSONArray();
 		JSONObject partJsonObj = new JSONObject();
@@ -412,4 +414,6 @@ public class ClaimPageController {
 		}
 		return jsonCatArray;
 	}
+	
+
 }
