@@ -40,9 +40,14 @@ public class ClaimDaoImpl implements ClaimDao {
 
 	@Override
 	public void deleteClaim(Double id) {
-		String sql = "delete from CLAIM where CLAIM_ID=" + id.doubleValue();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql2 = "delete from REPAIR_LIST where CLAIM_ID=" + id.doubleValue();
+		jdbcTemplate.update(sql2);
+		
+		String sql = "delete from CLAIM where CLAIM_ID=" + id.doubleValue();
+		
 		jdbcTemplate.update(sql);
+
 
 	}
 

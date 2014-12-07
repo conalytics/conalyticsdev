@@ -194,7 +194,7 @@ public class InventoryDaoImpl implements InventoryDao {
 		 		if (! token.equalsIgnoreCase("the") || !token.equalsIgnoreCase("and") || !token.equalsIgnoreCase("it") || !token.equalsIgnoreCase("of"))
 	 			{
 		
-		 			String temp="select * from PART where PART_DESC like '%" + token.toUpperCase() + "%' OR PART_NAME LIKE '%"+ token.toUpperCase() +"%' OR OEM_NUMBER LIKE '%"+ token.toUpperCase() +"%'";
+		 			String temp="select * from PART where UPPER(PART_DESC) like UPPER('%" + token.toUpperCase() + "%') OR UPPER(PART_NAME) LIKE UPPER('%"+ token.toUpperCase() +"%') OR UPPER(OEM_NUMBER) LIKE UPPER('%"+ token.toUpperCase() +"%')";
 		 			if(sql.length() == 0)
 		 			{
 		 			

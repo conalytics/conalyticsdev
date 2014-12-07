@@ -6,12 +6,12 @@
 		<table id="conTable2" class="display" cellspacing="0" width="100%">
 			<tbody>
 				<tr>
-					<td>CLAIM ID:${map.claim.claimId}</td>
-					<td>DATE:${map.claim.date}</td>
-					<td>VIN:${map.claim.VIN }</td>
-					<td>AUTO ID:${map.claim.modelId }</td>
-					<td>COLOR:${map.claim.color }</td>
-					<td>Vehicle City:${map.claim.location }<input id="address"
+					<td><b>Claim Id:</b>${map.claim.claimId}</td>
+					<td><b>Date:</b>${map.claim.date}</td>
+					<td><b>VIN:</b>${map.claim.VIN }</td>
+					<td><b>Vehicle :</b>${auto.yearBuilt } ${comp.companyName}  ${auto.autoName } ${auto.model } </td>
+					<td><b>Color:</b>${map.claim.color }</td>
+					<td><b>Vehicle Location:</b>${map.claim.location }<input id="address"
 						type="hidden" value=${map.claim.location }> <input
 						id="shops" type="hidden" value='${jsongeocode}'>
 					</td>
@@ -114,6 +114,7 @@
 	</div>
 </center>
 <script>
+loadDescDropdown();
 	var partDescIdList = $('#partId');
 	$(partDescIdList).select2({
 		placeholder: "Select a Part Desc",
@@ -126,7 +127,7 @@
 	$(allCatList).select2({
 		placeholder: "Select a Category",
 		allowClear: true,
-		minimumInputLength: 2,
+		minimumInputLength: 0,
 	    width: "190px"
 	});
 	//google.maps.event.addDomListener(window, 'load', setgmap);

@@ -9,7 +9,7 @@
 				<th>AUTO ID</th>
 				<th>COLOR</th>
 				<th>REPAIR LOCATION</th>
-				<th>Edit</th>
+				
 				<th>Delete</th>
 			</tr>
 		</thead>
@@ -22,7 +22,7 @@
 					<td>${claim.modelId }</td>
 					<td>${claim.color }</td>
 					<td>${claim.location }</td>
-					<td><a href="editClaim?id=${claim.claimId}">Edit</a></td>
+		
 					<td><a href="deleteClaim?id=${claim.claimId}">Delete</a></td>
 				</tr>
 			</c:forEach>

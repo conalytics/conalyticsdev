@@ -18,4 +18,6 @@ public interface RepairService {
 	
 	public void updateShopIdRepair(Double repairId, Double shopId);
 
+	public void updateShopIdRepair(Double repairId, Double shopId, Double partId);
+
 }

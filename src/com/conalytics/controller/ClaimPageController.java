@@ -25,14 +25,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.conalytics.domain.Auto;
 import com.conalytics.domain.Category;
 import com.conalytics.domain.Claim;
+import com.conalytics.domain.Company;
 import com.conalytics.domain.Inventory;
 import com.conalytics.domain.Part;
 import com.conalytics.domain.Repair;
 import com.conalytics.domain.Shop;
+import com.conalytics.services.AutoService;
 import com.conalytics.services.CategoryService;
 import com.conalytics.services.ClaimService;
+import com.conalytics.services.CompanyService;
 import com.conalytics.services.InventoryService;
 import com.conalytics.services.MapService;
 import com.conalytics.services.PartService;
@@ -63,6 +67,12 @@ public class ClaimPageController {
 	
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	AutoService autoService;
+	
+	@Autowired
+	CompanyService companyService;
 
 	@RequestMapping("registerClaim")
 	public ModelAndView registerClaim(@ModelAttribute Claim claim) {
@@ -91,7 +101,7 @@ public class ClaimPageController {
 		ModelAndView modelAndView = new ModelAndView("claimList", "claimList",
 				claimList);
 		modelAndView.addObject("currentMenuItem", "Claim List");
-
+		
 		return modelAndView;
 	}
 
@@ -134,7 +144,8 @@ public class ClaimPageController {
 		claim = claimService.getClaimbyId(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("claim", claim);
-
+        Auto auto=autoService.getAuto(claim.getModelId());
+        Company comp= companyService.getCompany(auto.getCompanyId());
 		List<Repair> repairList = repairService.getRepairList(id);
 
 		// get shop details / price to show on screen
@@ -143,6 +154,9 @@ public class ClaimPageController {
 		ModelAndView modelAndView = new ModelAndView("workOnClaim");
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("repairList", repairList);
+		modelAndView.addObject("auto", auto);
+		modelAndView.addObject("comp", comp);
+		
 		System.out.println("in work on claim view with repairs "
 				+ repairList.size());
 
@@ -205,6 +219,12 @@ public class ClaimPageController {
 
 	@RequestMapping("insertRepair")
 	public String insertRepair(@ModelAttribute Repair repair) {
+
+		if(repair.getPartDesc().length() > 1)
+		{
+			repair.setPartId(null);
+		}
+		repair.setPartDesc(repair.getPartDesc().replaceAll(",", ""));
 		repairService.insertRepair(repair);
 		return "redirect:/showClaim?id=" + repair.getClaimId();
 	}
@@ -223,6 +243,9 @@ public class ClaimPageController {
 		Claim claim = claimService.getClaimbyId(ritem.getClaimId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("claim", claim);
+        Auto auto=autoService.getAuto(claim.getModelId());
+        Company comp= companyService.getCompany(auto.getCompanyId());
+
 		String lat = claim.getGclat();
 		String lon = claim.getGclong();
 		// Search for shops where
@@ -242,22 +265,37 @@ public class ClaimPageController {
 			if (shopl != null && shopl.size() > 0) {
 
 				// check for shops inventory by part ID
+				if(partId !=null && partId > 0 )
+				{
 				sourceParts = invService.getInventorybyShopList(shopl, partId);
+				}
+				System.out.println("ritem.getPartDesc()"+ritem.getPartDesc()+"dddd");
+				if(ritem.getPartDesc() != null && ritem.getPartDesc().length() > 1 )
+				{
 				sourceParts2 = invService.getInventorybyShopListandPartDesc(
 						shopl, ritem.getPartDesc());
+				}
 				if ((sourceParts != null && sourceParts.size() > 0)
 						|| (sourceParts2 != null && sourceParts2.size() > 0)) {
 					break;
 				}
 
 			}
-			radius = radius + 50;
+			radius = radius + 100;
 
 		}
 		if (sourceParts2 != null) {
+			
+			if(sourceParts !=null)
+			{
 			for (int i = 0; i < sourceParts2.size(); i++) {
 				Inventory e = sourceParts2.get(i);
 				sourceParts.add(e);
+			}
+			}
+			else
+			{
+				sourceParts = sourceParts2;
 			}
 		}
 
@@ -284,6 +322,8 @@ public class ClaimPageController {
 				"sourceParts", sourceParts);
 		modelAndView.addObject("ritem", ritem);
 		modelAndView.addObject("map", map);
+		modelAndView.addObject("auto", auto);
+		modelAndView.addObject("comp", comp);
 
 		return modelAndView;
 
@@ -291,11 +331,19 @@ public class ClaimPageController {
 
 	@RequestMapping("selectShop")
 	public String selectShop(@RequestParam Double shopid,
-			@RequestParam Double repairid) {
+			@RequestParam Double repairid ,@RequestParam Double partid) {
 		Repair ritem = repairService.getRepairListbyId(repairid);
 		// update shop id
+		System.out.println("repair id"+ritem.getPartId());
+		if(ritem.getPartId() == 0)
+		{
+			repairService.updateShopIdRepair(repairid, shopid,partid);
+		}
+		else
+		{
 		repairService.updateShopIdRepair(repairid, shopid);
-		return "redirect:/workOnClaim?id=" + ritem.getClaimId();
+		}
+		return "redirect:/workOnClaim?id=" + ritem.getClaimId()+ "&catId=";
 	}
 
 	@RequestMapping(value = "/getUserImage/{id}")
@@ -312,7 +360,7 @@ public class ClaimPageController {
 
 		Repair ritem = repairService.getRepairListbyId(repairId);
 		repairService.deleteRepair(repairId);
-		return "redirect:/workOnClaim?id=" + ritem.getClaimId();
+		return "redirect:/workOnClaim?id=" + ritem.getClaimId()+ "&catId=";
 
 	}
 

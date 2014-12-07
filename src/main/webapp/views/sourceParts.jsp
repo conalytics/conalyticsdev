@@ -5,14 +5,20 @@
 
 		<tbody>
 
+
 				<tr>
-					<td>CLAIM ID:${map.claim.claimId}</td>
-					<td>DATE:${map.claim.date}</td>
-					<td>VIN:${map.claim.VIN }</td>
-					<td>AUTO ID:${map.claim.modelId }</td>
-					<td>COLOR:${map.claim.color }</td>
-					<td>Vehicle City:${map.claim.location }<input id="address" type="hidden" value=${map.claim.location }></td>
+					<td><b>Claim Id:</b>${map.claim.claimId}</td>
+					<td><b>Date:</b>${map.claim.date}</td>
+					<td><b>VIN:</b>${map.claim.VIN }</td>
+					<td><b>Vehicle :</b>${auto.yearBuilt } ${comp.companyName}  ${auto.autoName } ${auto.model } </td>
+					<td><b>Color:</b>${map.claim.color }</td>
+					<td><b>Vehicle Location:</b>${map.claim.location }<input id="address"
+						type="hidden" value=${map.claim.location }> <input
+						id="shops" type="hidden" value='${jsongeocode}'>
+					</td>
 				</tr>
+
+	
 				<tr>	
 					<td>Repair:${ritem.repairDesc}</td>
 					<td>Part:${ritem.partId}</td>
@@ -47,10 +53,10 @@
 					<td>${sp.PRICE_PER_UNIT }</td>
 					<td>${sp.RTL_PRICE_PER_UNIT }</td>
 					<td>${sp.distance} KM</td>
-					<td><a href="selectShop?shopid=${sp.SHOP_ID}&repairid=${ritem.repairId}">select this shop</a></td>
+					<td><a href="selectShop?shopid=${sp.SHOP_ID}&repairid=${ritem.repairId}&partid=${sp.PART_ID}">select this shop</a></td>
 					<td>
 					<%-- <a href="1.jpg" class="preview" title="${sp.PART_ID}"> --%>
-						<img src="getUserImage/${sp.PART_ID}" alt="${sp.PART_ID}" height="100px" width="115px" border="0">
+						<img src="getUserImage/${sp.SHOP_PART_ID}" alt="${sp.SHOP_PART_ID}" height="100px" width="115px" border="0">
 					<!-- </a> -->
 					</td>
 				</tr>

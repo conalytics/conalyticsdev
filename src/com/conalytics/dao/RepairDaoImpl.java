@@ -44,7 +44,13 @@ public class RepairDaoImpl implements RepairDao {
 		jdbcTemplate.update(sql);
 	}
 
-
+	@Override
+	public void deleteRepairbyClaim(Double claimid) {
+		// TODO Auto-generated method stub
+		String sql = "delete from REPAIR_LIST where CLAIM_ID=" + claimid.doubleValue();
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(sql);
+	}
 
 	@Override
 	public void updateRepair(Repair repair) {
@@ -75,6 +81,19 @@ public class RepairDaoImpl implements RepairDao {
 		
 	}
 
+	@Override
+	public void updateShopIdRepair(Double repairId, Double shopId , Double partId) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE REPAIR_LIST set  SHOP_ID=?,PART_ID=? where ID = ?";
+		System.out.println(sql);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+		jdbcTemplate.update(
+				sql,
+				new Object[] { shopId ,partId, repairId });
+		
+	}
+	
 	@Override
 	public List<Repair> getRepairList(Double id) {
 		// TODO Auto-generated method stub

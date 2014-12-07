@@ -50,6 +50,10 @@ public class RepairServiceImpl implements RepairService {
 		
 	}
 	
-	
+	@Override
+	public void updateShopIdRepair(Double repairId, Double shopId , Double partId) 
+	{
+		repairDao.updateShopIdRepair(repairId, shopId , partId);
+	}
 	
 }
