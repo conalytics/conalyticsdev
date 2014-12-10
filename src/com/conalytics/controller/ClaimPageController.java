@@ -98,6 +98,24 @@ public class ClaimPageController {
 	@RequestMapping("getClaimList")
 	public ModelAndView getClaimList() {
 		List<Claim> claimList = claimService.getClaimList();
+
+
+		
+		for (int i = 0; i < claimList.size(); i++) {
+			Claim cl = claimList.get(i);
+           Claim cl2= new Claim();
+           cl2.setClaimId(cl.getClaimId());
+           cl2.setColor(cl.getColor());
+           cl2.setDate(cl.getDate());
+           cl2.setVIN(cl.getVIN());
+           cl2.setLocation(cl.getLocation());
+           
+        Auto auto=autoService.getAuto(claimList.get(i).getModelId());
+        Company comp= companyService.getCompany(auto.getCompanyId());
+        cl2.setVinfo(auto.getYearBuilt()+" "+comp.getCompanyName()+" "+auto.getAutoName()+" "+auto.getModel());
+        claimList.set(i, cl2);
+		}
+		//System.out.println(claimList.toString());
 		ModelAndView modelAndView = new ModelAndView("claimList", "claimList",
 				claimList);
 		modelAndView.addObject("currentMenuItem", "Claim List");

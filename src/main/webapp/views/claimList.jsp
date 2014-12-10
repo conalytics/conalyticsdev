@@ -6,7 +6,7 @@
 				<th>CLAIM ID</th>
 				<th>DATE</th>
 				<th>VIN</th>
-				<th>AUTO ID</th>
+				<th>AUTO</th>
 				<th>COLOR</th>
 				<th>REPAIR LOCATION</th>
 				
@@ -19,7 +19,7 @@
 					<td><a href="workOnClaim?id=${claim.claimId}&catId=">${claim.claimId}</a></td>
 					<td>${claim.date}</td>
 					<td>${claim.VIN }</td>
-					<td>${claim.modelId }</td>
+					<td>${claim.vinfo }</td>
 					<td>${claim.color }</td>
 					<td>${claim.location }</td>
 		

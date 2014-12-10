@@ -24,8 +24,24 @@ public class Claim implements java.io.Serializable {
 	
 	private String gclong;
 	
+	private String vinfo;
+	
 
 
+
+
+
+
+
+
+	public String getVinfo() {
+		return vinfo;
+	}
+
+
+	public void setVinfo(String vinfo) {
+		this.vinfo = vinfo;
+	}
 
 
 	@Override
@@ -33,7 +49,7 @@ public class Claim implements java.io.Serializable {
 		return "Claim [claimId=" + claimId + ", VIN=" + VIN + ", modelId="
 				+ modelId + ", location=" + location + ", color=" + color
 				+ ", date=" + date + ", gclat=" + gclat + ", gclong=" + gclong
-				+ "]";
+				+ ", Vehicle_info=" + vinfo + "]";
 	}
 
 
